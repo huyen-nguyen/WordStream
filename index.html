@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WordStream</title>
+    <script src="./lib/d3.min.js"></script>
+    <script src="./lib/loaddata.js"></script>
+    <script src="./lib/d3.layout.wordstream.js"></script>
+    <script src="./test/testutil.js"></script>
+    <script src="javascripts/jquery/jquery-1.9.0.min.js"></script>
+    <script src="javascripts/msdropdown/jquery.dd.js"></script>
+    <script src="javascripts/msdropdown/select.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/msdropdown/dd.css" />
+    <link rel="stylesheet" type="text/css" href="styles/main.css" media="screen"/>
+</head>
+<body>
+<div id="loadingSpinner">
+    <!-- <span id="progressText"> -->
+</div>
+<div id="holder1"  class="holder1">
+    <select id="datasetsSelect" class="styled-select" onchange="loadNewData.call(this, event)"></select>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script> <!-- Spinner when loading -->
+<script src="./javascripts/main.js"></script>
+<script type='text/javascript' src="https://code.jquery.com/ui/1.11.0/jquery-ui.min.js"> </script>
+<link href="styles/jquery-ui.css" rel="stylesheet" type="text/css" />
+</body>
+</html>
