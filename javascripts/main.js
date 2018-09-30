@@ -83,7 +83,7 @@ function draw(data){
     let dataWidth = data.length*100;
     let width = (dataWidth > minWidth) ? dataWidth:minWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
-    let font = "Monaco";
+    let font = "Monospace";
     let interpolation = "linear";
     let bias = 50;
     let offsetLegend = 50;
