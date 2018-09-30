@@ -83,7 +83,7 @@ function draw(data){
     let dataWidth = data.length*100;
     let width = (dataWidth > minWidth) ? dataWidth:minWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
-    let font = "Arial";
+    let font = "Monaco";
     let interpolation = "cardinal";
     let bias = 50;
     let offsetLegend = 50;
@@ -93,8 +93,8 @@ function draw(data){
         .size([width, height])
         .interpolate(interpolation)
         .fontScale(d3.scale.linear())
-        .minFontSize(7)
-        .maxFontSize(40)
+        .minFontSize(8)
+        .maxFontSize(42)
         .data(data)
         .font(font);
     let boxes = ws.boxes(),
@@ -116,12 +116,12 @@ function draw(data){
         .y0(function(d){return d.y0;})
         .y1(function(d){return (d.y0 + d.y); });
 
-    // function color(n) {
-    //     var colores_g = ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"];
-    //     return colores_g[n % colores_g.length];
-    // }
+    function color(n) {
+        var colores = ["#008fd0", "#FC660F", "#489d4c", "#E00D37", "#8D6BB8", "#85584E" , "#8d6bb8", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"];
+        return colores[n % colores.length];
+    }
 
-    let color = d3.scale.category10();
+    // let color = d3.scale.category10();
     //Display time axes
     let dates = [];
     boxes.data.forEach(row =>{
@@ -218,20 +218,20 @@ function draw(data){
     //     height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend+bias/2) + ')').append("text").attr('transform','translate (0,20)').text("Display Rate: " + displayRate.toFixed(2) + "%");
 
    // Total placed freqs / total words => Freq cua nhung tu dc hien thi / tong so tu
-    let totalFreq = 0,
-        totalDisplay = 0;
-
-    allWords.forEach(function (d) {
-        if (d.placed){
-            totalDisplay += 1;
-            totalFreq += d.frequency;
-        }
-    });
-    let displayRate =  totalFreq / totalDisplay;
-
-    d3.select('svg').append('g').attr({
-        width: 200,
-        height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend+bias/2) + ')').append("text").attr('transform','translate (0,20)').text("Display Rate: " + displayRate.toFixed(2));
+   //  let totalFreq = 0,
+   //      totalDisplay = 0;
+   //
+   //  allWords.forEach(function (d) {
+   //      if (d.placed){
+   //          totalDisplay += 1;
+   //          totalFreq += d.fontSize;
+   //      }
+   //  });
+   //  let displayRate =  ((totalFreq / totalDisplay) - minFreq) / (maxFreq - minFreq);
+   //
+   //  d3.select('svg').append('g').attr({
+   //      width: 200,
+   //      height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend+bias/2) + ')').append("text").attr('transform','translate (0,20)').text("Display Rate: " + displayRate.toFixed(2));
 
     // FREQ ^ 2 / ALLWORDS
     // let placedWord = 0,
