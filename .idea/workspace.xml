@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="140e1f28-6c0b-46d1-b831-903931873018" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/d3.layout.wordstream.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/d3.layout.wordstream.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,29 +21,33 @@
         <counts>
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.24" value="2" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.27" value="2" />
+          <entry key="project.open.time.35" value="1" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="html" value="1" />
           <entry key="js" value="3" />
+          <entry key="ts" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="1" />
           <entry key="JavaScript" value="3" />
+          <entry key="TypeScript" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="401" />
+          <entry key="js" value="686" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="401" />
+          <entry key="JavaScript" value="686" />
         </counts>
       </usages-collector>
     </session>
@@ -51,7 +57,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-263">
+            <state relative-caret-position="408">
               <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
             </state>
           </provider>
@@ -60,41 +66,42 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/d3.layout.wordstream.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4912">
-              <caret line="497" column="35" selection-start-line="497" selection-start-column="35" selection-end-line="497" selection-end-column="35" />
+            <state relative-caret-position="331">
+              <caret line="80" column="19" selection-start-line="80" selection-start-column="19" selection-end-line="80" selection-end-column="19" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="e#794#1845#0" />
-                <element signature="e#1976#3058#0" />
-                <element signature="e#3098#3783#0" />
-                <element signature="e#3844#5445#0" />
-                <element signature="e#5477#6626#0" />
-                <element signature="e#6775#7383#0" />
-                <element signature="e#7426#7875#0" />
-                <element signature="e#7912#9195#0" />
-                <element signature="e#9234#9728#0" />
-                <element signature="e#9766#10373#0" />
-                <element signature="e#10406#10675#0" />
-                <element signature="e#10702#12013#0" />
+                <element signature="n#!!block;n#draw#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/d3.layout.wordstream.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1216">
+              <caret line="362" column="58" lean-forward="true" selection-start-line="362" selection-start-column="58" selection-end-line="362" selection-end-column="58" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#3097#3782#0" />
+                <element signature="e#3843#5444#0" />
+                <element signature="e#5476#6625#0" />
+                <element signature="e#6774#7382#0" />
+                <element signature="e#7425#7874#0" />
+                <element signature="e#7911#9194#0" />
+                <element signature="e#9233#9727#0" />
+                <element signature="e#9765#10372#0" />
+                <element signature="e#10405#10674#0" />
+                <element signature="e#10701#12012#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+            <state relative-caret-position="672">
+              <caret line="28" column="3" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -104,6 +111,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>topicindex</find>
+      <find>layer</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -113,8 +121,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/lib/loaddata.js" />
-        <option value="$PROJECT_DIR$/lib/d3.layout.wordstream.js" />
         <option value="$PROJECT_DIR$/javascripts/main.js" />
+        <option value="$PROJECT_DIR$/lib/d3.layout.wordstream.js" />
       </list>
     </option>
   </component>
@@ -125,9 +133,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="41" />
     <option name="y" value="23" />
-    <option name="width" value="1197" />
+    <option name="width" value="1374" />
     <option name="height" value="1350" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -193,12 +200,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.index.html">
+    <configuration name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/WordStream/index.html">
+      <method v="2" />
+    </configuration>
     <configuration name="main.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="main.js" working-dir="$PROJECT_DIR$/javascripts">
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Node.js.main.js" />
+      <item itemvalue="JavaScript Debug.index.html" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="Node.js.main.js" />
       </list>
     </recent_temporary>
@@ -215,24 +230,27 @@
       <updated>1538193736485</updated>
       <workItem from="1538193738256" duration="1727000" />
       <workItem from="1538237466633" duration="6609000" />
-      <workItem from="1538330526087" duration="6966000" />
+      <workItem from="1538330526087" duration="12026000" />
+      <workItem from="1538405394081" duration="2213000" />
+      <workItem from="1538492531358" duration="598000" />
+      <workItem from="1538578314574" duration="5375000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15302000" />
+    <option name="totallyTimeSpent" value="28548000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="41" y="23" width="1197" height="1350" extended-state="0" />
+    <frame x="0" y="23" width="1374" height="1350" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19132653" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.19132653" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3993559" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.23832528" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -252,46 +270,54 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/d3.layout.wordstream.js">
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4912">
-          <caret line="497" column="35" selection-start-line="497" selection-start-column="35" selection-end-line="497" selection-end-column="35" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#794#1845#0" />
-            <element signature="e#1976#3058#0" />
-            <element signature="e#3098#3783#0" />
-            <element signature="e#3844#5445#0" />
-            <element signature="e#5477#6626#0" />
-            <element signature="e#6775#7383#0" />
-            <element signature="e#7426#7875#0" />
-            <element signature="e#7912#9195#0" />
-            <element signature="e#9234#9728#0" />
-            <element signature="e#9766#10373#0" />
-            <element signature="e#10406#10675#0" />
-            <element signature="e#10702#12013#0" />
-          </folding>
+        <state relative-caret-position="905">
+          <caret line="3257" column="4" selection-start-line="3257" selection-start-column="4" selection-end-line="3257" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-263">
+        <state relative-caret-position="408">
           <caret line="17" column="30" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/javascripts/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="85" column="25" selection-start-line="85" selection-start-column="25" selection-end-line="85" selection-end-column="25" />
+        <state relative-caret-position="331">
+          <caret line="80" column="19" selection-start-line="80" selection-start-column="19" selection-end-line="80" selection-end-column="19" />
+          <folding>
+            <element signature="n#!!block;n#draw#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="28" column="1" selection-start-line="28" selection-start-column="1" selection-end-line="28" selection-end-column="1" />
+        <state relative-caret-position="672">
+          <caret line="28" column="3" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/d3.layout.wordstream.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1216">
+          <caret line="362" column="58" lean-forward="true" selection-start-line="362" selection-start-column="58" selection-end-line="362" selection-end-column="58" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#3097#3782#0" />
+            <element signature="e#3843#5444#0" />
+            <element signature="e#5476#6625#0" />
+            <element signature="e#6774#7382#0" />
+            <element signature="e#7425#7874#0" />
+            <element signature="e#7911#9194#0" />
+            <element signature="e#9233#9727#0" />
+            <element signature="e#9765#10372#0" />
+            <element signature="e#10405#10674#0" />
+            <element signature="e#10701#12012#0" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -83,9 +83,9 @@ function draw(data){
     let dataWidth = data.length*100;
     let width = (dataWidth > minWidth) ? dataWidth:minWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
-    let font = "Monospace";
+    let font = "Arial";
     let interpolation = "linear";
-    let bias = 50;
+    let bias = 200;
     let offsetLegend = 50;
     let axisPadding = 10;
     let margins = {left: 20, top: 20, right: 10, bottom: 30};
@@ -94,7 +94,7 @@ function draw(data){
         .interpolate(interpolation)
         .fontScale(d3.scale.linear())
         .minFontSize(8)
-        .maxFontSize(42)
+        .maxFontSize(40)
         .data(data)
         .font(font);
     let boxes = ws.boxes(),
@@ -144,7 +144,37 @@ function draw(data){
     let mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
     let wordStreamG = mainGroup.append('g');
 
-    // DRAW CURVES
+    // =============== Get BOUNDARY and LAYERPATH ===============
+    let lineCardinal = d3.svg.line()
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; })
+        .interpolate("cardinal");
+
+    let boundary = [];
+    for (let i = 0; i < boxes.layers[0].length; i ++){
+        let tempPoint = Object.assign({}, boxes.layers[0][i]);
+        tempPoint.y = tempPoint.y0;
+        boundary.push(tempPoint);
+    }
+
+    for (let i = boxes.layers[boxes.layers.length-1].length-1; i >= 0; i --){
+        let tempPoint2 = Object.assign({}, boxes.layers[boxes.layers.length-1][i]);
+        tempPoint2.y = tempPoint2.y + tempPoint2.y0;
+        boundary.push(tempPoint2);
+    }       // Add next (8) elements
+
+    let lenb = boundary.length;
+
+    // Get the string for path
+
+    let combined = lineCardinal( boundary.slice(0,lenb/2))
+        + "L"
+        + lineCardinal( boundary.slice(lenb/2, lenb))
+            .substring(1,lineCardinal( boundary.slice(lenb/2, lenb)).length)
+        + "Z";
+
+
+    // ============== DRAW CURVES =================
     let topics = boxes.topics;
     mainGroup.selectAll('path')
         .data(boxes.layers)
@@ -160,8 +190,15 @@ function draw(data){
             'stroke-width': 0.3,
             topic: function(d, i){return topics[i];}
         });
+    // ============= Get LAYER PATH ==============
+    let layerPath = mainGroup.selectAll("path").append("path")
+        .attr("d", combined )
+        .attr({
+            'fill-opacity': 0.1,
+            'stroke-opacity': 0,
+        });
 
-    // ARRAY OF ALL WORDS (1080)
+    // ARRAY OF ALL WORDS
     let allWords = [];
     d3.map(boxes.data, function(row){
         boxes.topics.forEach(topic=>{
@@ -174,7 +211,6 @@ function draw(data){
         terms.concat(allWords[i].text);
     }
 
-    // TODO: Khi edit lai se ko dung toan bo c20.range() cho Color map, ma interpolate de to mau
     // Unique term de to mau cho cac chu  cung noi dung co cung mau
 
 
@@ -199,54 +235,6 @@ function draw(data){
             topic: function(d){return d.topic;},
             visibility: function(d){ return d.placed ? (placed? "visible": "hidden"): (placed? "hidden": "visible");}
         });
-
-    // Count freq of placeds / (total Freq * number of words)
-
-    // let placedWord = 0,
-    //     total = 0;
-    //
-    // allWords.forEach(function (d) {
-    //     total += d.frequency;
-    //     if (d.placed){
-    //         placedWord += d.frequency;
-    //     }
-    // });
-    // let displayRate =  placedWord * 100 / total;
-    //
-    // d3.select('svg').append('g').attr({
-    //     width: 200,
-    //     height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend+bias/2) + ')').append("text").attr('transform','translate (0,20)').text("Display Rate: " + displayRate.toFixed(2) + "%");
-
-   // Total placed freqs / total words => Freq cua nhung tu dc hien thi / tong so tu
-   //  let totalFreq = 0,
-   //      totalDisplay = 0;
-   //
-   //  allWords.forEach(function (d) {
-   //      if (d.placed){
-   //          totalDisplay += 1;
-   //          totalFreq += d.fontSize;
-   //      }
-   //  });
-   //  let displayRate =  ((totalFreq / totalDisplay) - minFreq) / (maxFreq - minFreq);
-   //
-   //  d3.select('svg').append('g').attr({
-   //      width: 200,
-   //      height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend+bias/2) + ')').append("text").attr('transform','translate (0,20)').text("Display Rate: " + displayRate.toFixed(2));
-
-    // FREQ ^ 2 / ALLWORDS
-    // let placedWord = 0,
-    //     total = allWords.length;
-    //
-    // allWords.forEach(function (d) {
-    //     if (d.placed){
-    //         placedWord += (d.frequency)*(d.frequency);
-    //     }
-    // });
-    // let displayRate =  placedWord / total;
-    //
-    // d3.select('svg').append('g').attr({
-    //     width: 200,
-    //     height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend+bias/2) + ')').append("text").attr('transform','translate (0,20)').text("Display Rate: " + displayRate.toFixed(2));
 
     // When click a term
     //Try
@@ -386,17 +374,131 @@ function draw(data){
         dx: 8
     });
 
-    let legendGroup2 = svg.append('g').attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom) + ')').attr({
+    //  =========== COMPACTNESS ==============
+
+    let usedArea = 0, allWordsArea = 0,
+        totalArea, compactness,
+        ratio;
+
+    let threshold = 1;        // ignore this size of area
+
+    allWords.forEach(function (d) {
+        allWordsArea += (d.heightBBox * d.widthBBox);
+        if (d.placed){
+            usedArea += (d.heightBBox * d.widthBBox);
+        }
+    });
+
+    let poly = pathToPolygonViaSubdivision(layerPath,threshold);
+
+    totalArea = polyArea(poly);
+    compactness = usedArea/totalArea;
+    ratio = allWordsArea/totalArea;
+
+    d3.select('svg').append('g').attr({
         width: 200,
-        height: 200});;
-    let legendNodes2 = legendGroup.selectAll('g').data(boxes.topics).enter().append('g')
-        .attr('transform', function(d, i){return 'translate(' + 10 + ',' + (i*legendFontSize) + ')';});
-    legendNodes.append('circle');
+        height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)')
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Used Area: " + usedArea)
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Total Area: " + totalArea.toFixed(0))
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Compactness: " + compactness.toFixed(2))
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of all words: " + allWordsArea + " = " + ratio.toFixed(2) + " × Total Area" );
+
+    // ============ Get APPROXIMATE AREA ============
+
+    let aveX = 0, aveY1, aveY2,
+        sumY1 = 0, sumY2 = 0;
+
+    for (let q = 0; q < boundary.length; q++){
+        if (boundary[q].x > aveX) {aveX = boundary[q].x};
+        if (q < lenb/2) {sumY1 += boundary[q].y}
+        else (sumY2 += boundary[q].y)
+    };
+    aveY1 = sumY1 / (lenb / 2);
+    aveY2 = sumY2 / (lenb / 2);
+
+    console.log("Area of grey region: " +totalArea);
+    console.log("Area aprx: " + (aveY2 - aveY1)*aveX);
+    console.log("Area within black border: "+getArea(boundary));
 
     spinner.stop();
 
 
 };
+// path:      an SVG <path> element
+// threshold: a 'close-enough' limit (ignore subdivisions with area less than this)
+// segments:  (optional) how many segments to subdivisions to create at each level
+// returns:   a new SVG <polygon> element
+function pathToPolygonViaSubdivision(path,threshold,segments){
+    if (!threshold) threshold = 0.0001; // Get really, really close
+    if (!segments)  segments = 3;       // 2 segments creates 0-area triangles
+
+    var points = subdivide( ptWithLength(0), ptWithLength( path.node().getTotalLength() ) );
+    for (var i=points.length;i--;) points[i] = [points[i].x,points[i].y];
+
+    var poly = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+    poly.setAttribute('points',points.join(' '));
+    return poly;
+
+    // Record the distance along the path with the point for later reference
+    function ptWithLength(d) {
+        var pt = path.node().getPointAtLength(d); pt.d = d; return pt;
+    }
+
+    // Create segments evenly spaced between two points on the path.
+    // If the area of the result is less than the threshold return the endpoints.
+    // Otherwise, keep the intermediary points and subdivide each consecutive pair.
+    function subdivide(p1,p2){
+        let pts=[p1];
+        for (let i=1,step=(p2.d-p1.d)/segments;i<segments;i++){
+            pts[i] = ptWithLength(p1.d + step*i);
+        }
+        pts.push(p2);
+        if (polyArea(pts)<=threshold) return [p1,p2];
+        else {
+            let result = [];
+            for (let j=1;j<pts.length;++j){
+                let mids = subdivide(pts[j-1], pts[j]);
+                mids.pop(); // We'll get the last point as the start of the next pair
+                result = result.concat(mids)
+            }
+            result.push(p2);
+            return result;
+        }
+    }
+
+    // Calculate the area of an polygon represented by an array of points
+    function polyArea(points){
+        var p1,p2;
+        for(var area=0,len=points.length,i=0;i<len;++i){
+            p1 = points[i];
+            p2 = points[(i-1+len)%len]; // Previous point, with wraparound
+            area += (p2.x+p1.x) * (p2.y-p1.y);
+        }
+        return Math.abs(area/2);
+    }
+}
+
+
+// Return the area for an SVG <polygon> or <polyline>
+// Self-crossing polys reduce the effective 'area'
+function polyArea(poly){
+    var area=0,pts=poly.points,len=pts.numberOfItems;
+    for(var i=0;i<len;++i){
+        var p1 = pts.getItem(i), p2=pts.getItem((i+len-1)%len);
+        area += (p2.x+p1.x) * (p2.y-p1.y);
+    }
+    return Math.abs(area/2);
+}
+
+function getArea(points){       // duplicate of polyArea(points)
+    var p1,p2;
+    for(var area=0,len=points.length,i=0;i<len;++i){
+        p1 = points[i];
+        p2 = points[(i-1+len)%len]; // Previous point, with wraparound
+        area += (p2.x+p1.x) * (p2.y-p1.y);
+    }
+    return Math.abs(area/2);
+}
 function styleAxis(axisNodes){
     axisNodes.selectAll('.domain').attr({
         fill: 'none'
