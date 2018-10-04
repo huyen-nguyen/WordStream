@@ -10,7 +10,7 @@ let svg = d3.select("body").append('svg').attr({
 
 let fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"]
 
-let initialDataset = "EmptyWheel";
+let initialDataset = "WikiNews";
 let categories = ["person","location","organization","miscellaneous"];
 
 var fileName;
@@ -84,7 +84,7 @@ function draw(data){
     let width = (dataWidth > minWidth) ? dataWidth:minWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
     let font = "Arial";
-    let interpolation = "linear";
+    let interpolation = "cardinal";
     let bias = 200;
     let offsetLegend = 50;
     let axisPadding = 10;
@@ -395,30 +395,54 @@ function draw(data){
     compactness = usedArea/totalArea;
     ratio = allWordsArea/totalArea;
 
+    // ======== DISPLAY RATES ===========
+    let displayFreq_1 = 0,        // sum of Display Freqs
+        totalFreq_1 = 0;          // total of freq for top 30
+
+    let displayNormFreq_2 = 0,    // sum of Normalized Display Freqs
+        numbers_2 = 0;       // number of words displayed
+
+    let norm = d3.scale.linear().domain([minFreq, maxFreq]).range([0,1]);
+    allWords.forEach(function (d) {
+        totalFreq_1 += d.frequency;
+        if (d.placed){
+            displayFreq_1 += d.frequency;
+
+            numbers_2 += 1;
+            displayNormFreq_2 += norm(d.frequency);
+        }
+    });
+
+    let weightedRate = displayFreq_1 / totalFreq_1;
+    let averageNormFreq = displayNormFreq_2 / numbers_2;
+
+    // ========== WRITE ==============
     d3.select('svg').append('g').attr({
         width: 200,
         height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)')
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Used Area: " + usedArea)
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Total Area: " + totalArea.toFixed(0))
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Used Area: " + usedArea
+        + "  |  Total Area: " + totalArea.toFixed(0) + "  |  Area of all words: " + allWordsArea)
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Compactness: " + compactness.toFixed(2))
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of all words: " + allWordsArea + " = " + ratio.toFixed(2) + " × Total Area" );
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of all words = " + ratio.toFixed(2) + " × Total Area" )
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted display Rate: " + weightedRate.toFixed(2))
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Average Normalized Frequency: " + averageNormFreq.toFixed(3) );
 
     // ============ Get APPROXIMATE AREA ============
 
-    let aveX = 0, aveY1, aveY2,
-        sumY1 = 0, sumY2 = 0;
+    // let aveX = 0, aveY1, aveY2,
+    //     sumY1 = 0, sumY2 = 0;
+    //
+    // for (let q = 0; q < boundary.length; q++){
+    //     if (boundary[q].x > aveX) {aveX = boundary[q].x};
+    //     if (q < lenb/2) {sumY1 += boundary[q].y}
+    //     else (sumY2 += boundary[q].y)
+    // };
+    // aveY1 = sumY1 / (lenb / 2);
+    // aveY2 = sumY2 / (lenb / 2);
 
-    for (let q = 0; q < boundary.length; q++){
-        if (boundary[q].x > aveX) {aveX = boundary[q].x};
-        if (q < lenb/2) {sumY1 += boundary[q].y}
-        else (sumY2 += boundary[q].y)
-    };
-    aveY1 = sumY1 / (lenb / 2);
-    aveY2 = sumY2 / (lenb / 2);
-
-    console.log("Area of grey region: " +totalArea);
-    console.log("Area aprx: " + (aveY2 - aveY1)*aveX);
-    console.log("Area within black border: "+getArea(boundary));
+    // console.log("Area of grey region: " +totalArea);
+    // console.log("Area aprx: " + (aveY2 - aveY1)*aveX);
+    // console.log("Area within black border: "+getArea(boundary));
 
     spinner.stop();
 
