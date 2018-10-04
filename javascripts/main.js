@@ -49,27 +49,27 @@ function loadData(){
     fileName = "data/"+fileName+".tsv"; // Add data folder path
     if (fileName.indexOf("Cards_Fries")>=0){
         categories = ["increases_activity", "decreases_activity"];
-        loadAuthorData(draw);
+        loadAuthorData(draw, 100);
     }
     else if (fileName.indexOf("Cards_PC")>=0){
         categories = ["adds_modification", "removes_modification", "increases","decreases", "binds", "translocation"];
-        loadAuthorData(draw);
+        loadAuthorData(draw, 100);
     }
     else if (fileName.indexOf("PopCha")>=0){
         categories = ["Comedy","Drama","Action", "Fantasy", "Horror"];
-        loadAuthorData(draw);
+        loadAuthorData(draw, 1000);
     }
     else if (fileName.indexOf("IMDB")>=0){
         categories = ["Comedy","Drama","Action", "Family"];
-        loadAuthorData(draw);
+        loadAuthorData(draw, 20);
     }
     else if (fileName.indexOf("VIS")>=0){
         categories = categories = ["Vis","VAST","InfoVis","SciVis"];
-        loadAuthorData(draw);
+        loadAuthorData(draw, 20);
     }
     else{
         categories = ["person","location","organization","miscellaneous"];
-        loadBlogPostData(draw);
+        loadBlogPostData(draw, 30);
     }
 }
 function loadNewData(event) {
@@ -77,10 +77,20 @@ function loadNewData(event) {
     fileName = this.options[this.selectedIndex].text;
     loadData();
 }
+// function drawpop(data){
+//     draw(data, 1);
+// };
+//
+// function draw(data, pop){
+//     //Layout data
+//     let dataWidth;
+//     if (pop) {dataWidth = data.length*20}
+//     else {dataWidth = data.length*100;}
 
 function draw(data){
     //Layout data
     let dataWidth = data.length*100;
+
     let width = (dataWidth > minWidth) ? dataWidth:minWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
     let font = "Arial";
@@ -448,6 +458,8 @@ function draw(data){
 
 
 };
+
+
 // path:      an SVG <path> element
 // threshold: a 'close-enough' limit (ignore subdivisions with area less than this)
 // segments:  (optional) how many segments to subdivisions to create at each level
