@@ -10,7 +10,7 @@ let svg = d3.select("body").append('svg').attr({
 
 let fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"]
 
-let initialDataset = "WikiNews";
+let initialDataset = "Huffington";
 let categories = ["person","location","organization","miscellaneous"];
 
 var fileName;
@@ -66,6 +66,22 @@ function loadData(){
     else if (fileName.indexOf("VIS")>=0){
         categories = categories = ["Vis","VAST","InfoVis","SciVis"];
         loadAuthorData(draw, 20);
+    }
+    else if (fileName.indexOf("Huffington")>=0){
+        categories = categories = ["person","location","organization","miscellaneous"];
+        loadBlogPostData(draw, 45);
+    }
+    else if (fileName.indexOf("CrooksAndLiars")>=0){
+        categories = categories = ["person","location","organization","miscellaneous"];
+        loadBlogPostData(draw, 40);
+    }
+    else if (fileName.indexOf("EmptyWheel")>=0) {
+        categories = categories = ["person", "location", "organization", "miscellaneous"];
+        loadBlogPostData(draw, 40);
+    }
+    else if (fileName.indexOf("Esquire")>=0) {
+        categories = categories = ["person", "location", "organization", "miscellaneous"];
+        loadBlogPostData(draw, 40);
     }
     else{
         categories = ["person","location","organization","miscellaneous"];
@@ -412,7 +428,7 @@ function draw(data, pop){
     let displayNormFreq_2 = 0,    // sum of Normalized Display Freqs
         numbers_2 = 0;       // number of words displayed
 
-    let norm = d3.scale.linear().domain([minFreq, maxFreq]).range([0,1]);
+    let norm = d3.scale.linear().domain([0, maxFreq]).range([0,1]);
     allWords.forEach(function (d) {
         totalFreq_1 += d.frequency;
         if (d.placed){
@@ -420,6 +436,7 @@ function draw(data, pop){
 
             numbers_2 += 1;
             displayNormFreq_2 += norm(d.frequency);
+            console.log(maxFreq);
         }
     });
 
@@ -436,6 +453,8 @@ function draw(data, pop){
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of all words = " + ratio.toFixed(2) + " × Total Area" )
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted display Rate: " + weightedRate.toFixed(2))
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Average Normalized Frequency: " + averageNormFreq.toFixed(3) );
+
+    console.log(compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3));
 
     // ============ Get APPROXIMATE AREA ============
 
