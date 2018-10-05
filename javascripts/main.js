@@ -57,7 +57,7 @@ function loadData(){
     }
     else if (fileName.indexOf("PopCha")>=0){
         categories = ["Comedy","Drama","Action", "Fantasy", "Horror"];
-        loadAuthorData(draw, 1000);
+        loadAuthorData(drawpop, 1000);
     }
     else if (fileName.indexOf("IMDB")>=0){
         categories = ["Comedy","Drama","Action", "Family"];
@@ -77,19 +77,19 @@ function loadNewData(event) {
     fileName = this.options[this.selectedIndex].text;
     loadData();
 }
-// function drawpop(data){
-//     draw(data, 1);
-// };
-//
-// function draw(data, pop){
-//     //Layout data
-//     let dataWidth;
-//     if (pop) {dataWidth = data.length*20}
-//     else {dataWidth = data.length*100;}
+function drawpop(data){
+    draw(data, 1);
+};
 
-function draw(data){
+function draw(data, pop){
     //Layout data
-    let dataWidth = data.length*100;
+    let dataWidth;
+    if (pop) {dataWidth = data.length*20}
+    else {dataWidth = data.length*100;}
+
+// function draw(data){
+//     //Layout data
+//     let dataWidth = data.length*100;
 
     let width = (dataWidth > minWidth) ? dataWidth:minWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
