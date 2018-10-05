@@ -436,7 +436,7 @@ function draw(data, pop){
 
             numbers_2 += 1;
             displayNormFreq_2 += norm(d.frequency);
-            console.log(maxFreq);
+
         }
     });
 
@@ -447,8 +447,9 @@ function draw(data, pop){
     d3.select('svg').append('g').attr({
         width: 200,
         height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)')
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Used Area: " + usedArea
-        + "  |  Total Area: " + totalArea.toFixed(0) + "  |  Area of all words: " + allWordsArea)
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text(compactness.toFixed(2) +"  "+ ratio.toFixed(2) +"  "+ weightedRate.toFixed(2) +"  "+ averageNormFreq.toFixed(3))
+        // .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Used Area: " + usedArea
+        // + "  |  Total Area: " + totalArea.toFixed(0) + "  |  Area of all words: " + allWordsArea)
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Compactness: " + compactness.toFixed(2))
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of all words = " + ratio.toFixed(2) + " × Total Area" )
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted display Rate: " + weightedRate.toFixed(2))
