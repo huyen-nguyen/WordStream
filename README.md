@@ -1,4 +1,3 @@
 # WordStream
 
-https://nnhuyen.github.io/WordStream/
-
+https://wordstreamviz.github.io/

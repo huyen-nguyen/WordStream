@@ -1,4 +1,4 @@
-let minWidth = screen.availWidth, height = 800;
+let minWidth = screen.availWidth, height = 1000;
 let svg = d3.select("body").append('svg').attr({
     width: minWidth,
     height: height,
@@ -8,9 +8,9 @@ let svg = d3.select("body").append('svg').attr({
 // let fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
 
-let fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"]
+let fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries","CS_TTU"]
 
-let initialDataset = "Huffington";
+let initialDataset = "CS_TTU";
 let categories = ["person","location","organization","miscellaneous"];
 
 var fileName;
@@ -50,6 +50,10 @@ function loadData(){
     if (fileName.indexOf("Cards_Fries")>=0){
         categories = ["increases_activity", "decreases_activity"];
         loadAuthorData(draw, 100);
+    }
+    else if (fileName.indexOf("CS_TTU")>=0){
+        categories = ["Data Science", "High Performance Computing", "Software Engineering","Artificial Intelligence", "Security"];
+        loadCS(drawCS, 100);
     }
     else if (fileName.indexOf("Cards_PC")>=0){
         categories = ["adds_modification", "removes_modification", "increases","decreases", "binds", "translocation"];
@@ -97,30 +101,35 @@ function drawpop(data){
     draw(data, 1);
 };
 
+function drawCS(data){
+    draw(data, 2)
+}
 function draw(data, pop){
     //Layout data
     let dataWidth;
-    if (pop) {dataWidth = data.length*20}
+    if (pop === 1) {dataWidth = data.length*20;}
+    else if (pop === 2) {dataWidth = data.length*160;}
     else {dataWidth = data.length*100;}
 
 // function draw(data){
 //     //Layout data
 //     let dataWidth = data.length*100;
 
-    let width = (dataWidth > minWidth) ? dataWidth:minWidth;
+    // let width = (dataWidth > minWidth) ? dataWidth:minWidth;
+    let width = dataWidth ;
     document.getElementById("mainsvg").setAttribute("width",width);
     let font = "Arial";
     let interpolation = "cardinal";
     let bias = 200;
-    let offsetLegend = 50;
+    let offsetLegend = 100;
     let axisPadding = 10;
     let margins = {left: 20, top: 20, right: 10, bottom: 30};
     let ws = d3.layout.wordStream()
         .size([width, height])
         .interpolate(interpolation)
         .fontScale(d3.scale.linear())
-        .minFontSize(8)
-        .maxFontSize(40)
+        .minFontSize(10)
+        .maxFontSize(38)
         .data(data)
         .font(font);
     let boxes = ws.boxes(),
@@ -143,7 +152,7 @@ function draw(data, pop){
         .y1(function(d){return (d.y0 + d.y); });
 
     function color(n) {
-        var colores = ["#008fd0", "#FC660F", "#489d4c", "#E00D37", "#8D6BB8", "#85584E" , "#8d6bb8", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"];
+        var colores = ["#008fd0", "#FC660F", "#489d4c", "#E00D37", "#8D6BB8", "#85584E" , "#8d6bb8", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eae"];
         return colores[n % colores.length];
     }
 
@@ -303,8 +312,10 @@ function draw(data, pop){
         let allTexts = mainGroup.selectAll('text').filter(t =>{
             return t && t.text === text &&  t.topic === topic;
         });
+        // get the word out
         //Select the data for the stream layers
         let streamLayer = d3.select("path[topic='"+ topic+"']" )[0][0].__data__;
+
         //Push all points
         let points = Array();
         //Initialize all points
@@ -383,22 +394,22 @@ function draw(data, pop){
 
     });
 
-    //Build the legends
-    let legendGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + (height+margins.top+offsetLegend) + ')');
-    let legendNodes = legendGroup.selectAll('g').data(boxes.topics).enter().append('g')
-        .attr('transform', function(d, i){return 'translate(' + 10 + ',' + (i*legendFontSize) + ')';});
-    legendNodes.append('circle').attr({
-        r: 5,
-        fill: function(d, i){return color(i);},
-        'fill-opacity': 1,
-        stroke: 'black',
-        'stroke-width': .5,
-    });
-    legendNodes.append('text').text(function(d){return d;}).attr({
-        'font-size': legendFontSize,
-        'alignment-baseline': 'middle',
-        dx: 8
-    });
+    // //Build the legends
+    // let legendGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + (height+margins.top+offsetLegend) + ')');
+    // let legendNodes = legendGroup.selectAll('g').data(boxes.topics).enter().append('g')
+    //     .attr('transform', function(d, i){return 'translate(' + 10 + ',' + (i*legendFontSize) + ')';});
+    // legendNodes.append('circle').attr({
+    //     r: 5,
+    //     fill: function(d, i){return color(i);},
+    //     'fill-opacity': 1,
+    //     stroke: 'black',
+    //     'stroke-width': .5,
+    // });
+    // legendNodes.append('text').text(function(d){return d;}).attr({
+    //     'font-size': legendFontSize,
+    //     'alignment-baseline': 'middle',
+    //     dx: 8
+    // });
 
     //  =========== COMPACTNESS ==============
 
@@ -447,12 +458,12 @@ function draw(data, pop){
     d3.select('svg').append('g').attr({
         width: 200,
         height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)')
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text(compactness.toFixed(2) +"  "+ ratio.toFixed(2) +"  "+ weightedRate.toFixed(2) +"  "+ averageNormFreq.toFixed(3))
+        // .append("svg:tspan").attr('x', 0).attr('dy', 20).text(compactness.toFixed(2) +"  "+ ratio.toFixed(2) +"  "+ weightedRate.toFixed(2) +"  "+ averageNormFreq.toFixed(3))
         // .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Used Area: " + usedArea
         // + "  |  Total Area: " + totalArea.toFixed(0) + "  |  Area of all words: " + allWordsArea)
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Compactness: " + compactness.toFixed(2))
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of all words = " + ratio.toFixed(2) + " × Total Area" )
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted display Rate: " + weightedRate.toFixed(2))
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted Display Rate: " + weightedRate.toFixed(2))
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Average Normalized Frequency: " + averageNormFreq.toFixed(3) );
 
     console.log(compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3));
