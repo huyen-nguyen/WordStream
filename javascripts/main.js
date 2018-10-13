@@ -1,4 +1,4 @@
-let minWidth = screen.availWidth, height = 1000;
+let minWidth = screen.availWidth, height = 800;
 let svg = d3.select("body").append('svg').attr({
     width: minWidth,
     height: height,
