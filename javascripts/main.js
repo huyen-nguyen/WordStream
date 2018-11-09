@@ -3,12 +3,13 @@ let svg = d3.select("body").append('svg').attr({
     width: minWidth,
     height: height,
     id: "mainsvg"
+
 });
 
 // let fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
 
-let fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries","CS_TTU"]
+let fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries","CS_TTU"];
 
 let initialDataset = "CS_TTU";
 let categories = ["person","location","organization","miscellaneous"];
