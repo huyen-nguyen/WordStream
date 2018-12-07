@@ -1,4 +1,4 @@
-let minWidth = screen.availWidth, height = 800;
+let minWidth = screen.availWidth, height = 900, gdata;
 let svg = d3.select("body").append('svg').attr({
     width: minWidth,
     height: height,
@@ -9,9 +9,11 @@ let svg = d3.select("body").append('svg').attr({
 // let fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
 
-let fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries","CS_TTU"];
+let fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"
+    // ,"CS_TTU"
+];
 
-let initialDataset = "CS_TTU";
+let initialDataset = "Esquire";
 let categories = ["person","location","organization","miscellaneous"];
 
 var fileName;
@@ -108,9 +110,9 @@ function drawCS(data){
 function draw(data, pop){
     //Layout data
     let dataWidth;
-    if (pop === 1) {dataWidth = data.length*20;}
+    if (pop === 1) {dataWidth = data.length*50;}
     else if (pop === 2) {dataWidth = data.length*160;}
-    else {dataWidth = data.length*100;}
+    else {dataWidth = data.length*200;}
 
 // function draw(data){
 //     //Layout data
@@ -241,6 +243,8 @@ function draw(data, pop){
             allWords = allWords.concat(row.words[topic]);
         });
     });
+    console.log("allWords:");
+    console.log(JSON.parse(JSON.stringify(allWords)));
     //Color based on term
     let terms = [];
     for(i=0; i< allWords.length; i++){
@@ -410,6 +414,34 @@ function draw(data, pop){
 
     });
 
+    console.log("final data:");
+    gdata = JSON.parse(JSON.stringify(data));
+    console.log(gdata);
+
+    //  =========== TF-IDF ==============
+    let sumTfidfDisplayed = 0;
+    let sumTfidf = 0;
+    allWords.forEach(function (d) {
+        sumTfidf += d.tf_idf;
+        if (d.placed){
+            sumTfidfDisplayed += d.tf_idf;
+        }
+    });
+
+    let avgTfidf = sumTfidfDisplayed/sumTfidf;
+
+
+    //  =========== Display ==============
+    let countall = 0;
+    let countDisplay = 0;
+    allWords.forEach(function (d) {
+        countall += 1;
+        if (d.placed){
+            countDisplay += 1;
+        }
+    });
+
+
     //  =========== COMPACTNESS ==============
 
     let usedArea = 0, allWordsArea = 0,
@@ -427,7 +459,7 @@ function draw(data, pop){
 
     let poly = pathToPolygonViaSubdivision(layerPath,threshold);
 
-    totalArea = polyArea(poly);
+    totalArea = polyArea(poly);         // area of stream
     compactness = usedArea/totalArea;
     ratio = allWordsArea/totalArea;
 
@@ -457,15 +489,18 @@ function draw(data, pop){
     d3.select('svg').append('g').attr({
         width: 200,
         height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)').attr("class","axis")
-        // .append("svg:tspan").attr('x', 0).attr('dy', 20).text(compactness.toFixed(2) +"  "+ ratio.toFixed(2) +"  "+ weightedRate.toFixed(2) +"  "+ averageNormFreq.toFixed(3))
-        // .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Used Area: " + usedArea
-        // + "  |  Total Area: " + totalArea.toFixed(0) + "  |  Area of all words: " + allWordsArea)
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Importance value (tf-idf ratio): " + avgTfidf)
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Compactness: " + compactness.toFixed(2))
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of all words = " + ratio.toFixed(2) + " × Total Area" )
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of Displayed Words = " + ratio.toFixed(2) + " ×" +
+        " Stream Area" )
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Display: " + countDisplay + " All: " + countall + " Ratio: " + (countDisplay/countall))
+
+
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted Display Rate: " + weightedRate.toFixed(2))
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Average Normalized Frequency: " + averageNormFreq.toFixed(3) );
 
-    console.log(compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3));
+    // console.log(compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3))
+    ;
 
     // ============ Get APPROXIMATE AREA ============
 
