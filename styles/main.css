@@ -21,3 +21,98 @@
     top:-10px;
     left: 205px;
 }
+.axis{font: 18px sans-serif;}
+.navi ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+}
+
+.navi li {
+    float: left;
+}
+
+.navi li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navi li a:hover {
+    background-color: #a9a9a9;
+}
+
+.navi li a:visited {
+    background-color: #fbde7c;
+}
+
+.nodeText {
+    background: #91877b;
+    text-shadow: 0 11px 10 rgba(255, 255, 255, 1);
+}
+
+.node {
+    stroke: #fff;
+    stroke-width: 1px;
+    stroke-opacity: 0.6;
+}
+.link {
+    stroke: #555;
+    stroke-opacity: .9;
+}
+.linkArc {
+    fill: none;
+    stroke: #000;
+}
+
+.node text {
+    font: 9px helvetica;
+}
+
+<!-- For the slider -->
+.axis {
+    font: 5 sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.axis .domain {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .25;
+    stroke-width: 5px;
+    stroke-linecap: round;
+}
+
+.axis .halo {
+    fill: none;
+    stroke: #ddd;
+    stroke-width: 3px;
+    stroke-linecap: round;
+}
+
+.slider .handle {
+    fill: #666;
+    stroke: #000;
+    stroke-opacity: .25;
+    stroke-width: 1px;
+    cursor: crosshair;
+}
+
+
+h3 {
+    color: #1ABC9C;
+    text-align:center;
+    font-style: italic;
+    font-size: 14px;
+    font-family: "Helvetica";
+}
+
+.ticky {
+    font-size: 10px;
+}

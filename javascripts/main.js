@@ -13,7 +13,7 @@ let fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquir
     // ,"CS_TTU"
 ];
 
-let initialDataset = "Esquire";
+let initialDataset = "Huffington";
 let categories = ["person","location","organization","miscellaneous"];
 
 var fileName;
@@ -49,6 +49,7 @@ function loadData(){
     let target = document.getElementById('loadingSpinner');
     spinner = new Spinner(opts).spin(target);
     // END: loader spinner settings ****************************
+
     fileName = "data/"+fileName+".tsv"; // Add data folder path
     if (fileName.indexOf("Cards_Fries")>=0){
         categories = ["increases_activity", "decreases_activity"];
@@ -154,12 +155,12 @@ function draw(data, pop){
         .y0(function(d){return d.y0;})
         .y1(function(d){return (d.y0 + d.y); });
 
-    function color(n) {
-        var colores = ["#008fd0", "#FC660F", "#489d4c", "#E00D37", "#8D6BB8", "#85584E" , "#8d6bb8", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eae"];
-        return colores[n % colores.length];
-    }
+    // function color(n) {
+    //     var colores = ["#008fd0", "#FC660F", "#489d4c", "#E00D37", "#8D6BB8", "#85584E" , "#8d6bb8", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eae"];
+    //     return colores[n % colores.length];
+    // }
 
-    // let color = d3.scale.category10();
+    let color = d3.scale.category10();
     //Display time axes
     let dates = [];
     boxes.data.forEach(row =>{
