@@ -16,7 +16,7 @@ function addSearchBox() {
    treeSearch = d3.layout.tree()
       .size([height, width]);
 
-   diagonal = d3.svg.diagonal()
+   diagonal = d3.svg3.diagonal()
       .projection(function(d) { return [d.y, d.x]; });
 
     rootSearch = root;
@@ -160,7 +160,7 @@ function updateSearch(source) {
   nodesSeach.forEach(function(d) { d.y = d.depth * 180; });
 
   // Update the nodes…
-  var nodeSearch = svg.selectAll("g.nodeSearch")
+  var nodeSearch = svg3.selectAll("g.nodeSearch")
       .data(nodesSeach, function(d) { return d.id || (d.id = ++i); });
 
   // Enter any new nodes at the parent's previous position.
@@ -218,7 +218,7 @@ function updateSearch(source) {
       .style("fill-opacity", 1e-6);
 
   // Update the links…
-  var linkSearch = svg.selectAll("path.linkSearch")
+  var linkSearch = svg3.selectAll("path.linkSearch")
       .data(linksSearch, function(d) { return d.target.id; });
 
   // Enter any new links at the parent's previous position.

@@ -13,11 +13,16 @@
     <script src="javascripts/msdropdown/select.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/msdropdown/dd.css" />
     <link rel="stylesheet" type="text/css" href="styles/main.css" media="screen"/>
-    <style>
 
+    <script src="./lib/fisheye.js"></script>
+    <script src="./lib/select2.min.js"></script>
+    <script src="javascripts/util.js"></script>
+    <script src="javascripts/sliderRelationship.js"></script>
+    <script src="javascripts/streamGraph.js"></script>
+    <script src="javascripts/stopList.js"></script>
+    <link href="styles/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="javascripts/saveFriesCards.js"></script>
 
-
-    </style>
 </head>
 
 <div id="loadingSpinner">
@@ -36,8 +41,32 @@
     <select id="datasetsSelect" class="styled-select" onchange="loadNewData.call(this, event)"></select>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script> <!-- Spinner when loading -->
-<script src="./javascripts/main.js"></script>
+
 <script type='text/javascript' src="https://code.jquery.com/ui/1.11.0/jquery-ui.min.js"> </script>
 <link href="styles/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<!--Time arcs-->
+<input type="checkbox" id="checkbox1" value="value2" class="check" onclick="update()">
+<label for="checkbox1">Area graph only</label>
+
+<input id="search">
+<button type="button" onclick="searchNode()">Search</button>
+
+<progress value="0" max="100" id="progBar">
+    <span id="downloadProgress">
+        <!-- Your fallback goes here -->
+    </span>
+</progress>
+<label id="progUpdate">
+    <!-- Success Message -->
+</label>
+<script src="javascripts/main.js"></script>
+<script type='text/javascript' src="javascripts/mainTA.js"></script>
+
+<button onclick="saveTimeArcsData()">Save data for TimeArcs</button>
+
+<script src="javascripts/searchBox.js"></script>
+Time axis goes from left (2005) to right (2014)<br>
+Terms often appeared together in a blog are connected by a thicker link.<br>
 </body>
 </html>

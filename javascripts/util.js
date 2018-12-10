@@ -14,14 +14,14 @@ function drawColorLegend() {
       var y4 = 62;
       var rr = 6;
 
-      svg.append("circle")
+      svg3.append("circle")
         .attr("class", "nodeLegend")
         .attr("cx", xx)
         .attr("cy", y1)
         .attr("r", rr)
         .style("fill", color(0));
       
-      svg.append("text")
+      svg3.append("text")
         .attr("class", "nodeLegend")
         .attr("x", xx+10)
         .attr("y", y1+1)
@@ -32,14 +32,14 @@ function drawColorLegend() {
         .style("text-anchor", "left")
         .style("fill", color(0));
    
-      svg.append("circle")
+      svg3.append("circle")
         .attr("class", "nodeLegend")
         .attr("cx", xx)
         .attr("cy", y2)
         .attr("r", rr)
         .style("fill", color(1));
 
-      svg.append("text")
+      svg3.append("text")
         .attr("class", "nodeLegend")
         .attr("x", xx+10)
         .attr("y", y2+1)
@@ -50,14 +50,14 @@ function drawColorLegend() {
         .style("text-anchor", "left")
         .style("fill", color(1));
 
-       svg.append("circle")
+       svg3.append("circle")
         .attr("class", "nodeLegend")
         .attr("cx", xx)
         .attr("cy", y3)
         .attr("r", rr)
         .style("fill", color(2));
 
-      svg.append("text")
+      svg3.append("text")
         .attr("class", "nodeLegend")
         .attr("x", xx+10)
         .attr("y", y3+1)
@@ -68,14 +68,14 @@ function drawColorLegend() {
         .style("text-anchor", "left")
         .style("fill", color(2));
         
-       svg.append("circle")
+       svg3.append("circle")
         .attr("class", "nodeLegend")
         .attr("cx", xx)
         .attr("cy", y4)
         .attr("r", rr)
         .style("fill", color(3));
 
-      svg.append("text")
+      svg3.append("text")
         .attr("class", "nodeLegend")
         .attr("x", xx+10)
         .attr("y", y4+1)
@@ -87,11 +87,11 @@ function drawColorLegend() {
         .style("fill", color(3));
 
       // number of input terms  
-      svg.append("text")
+      svg3.append("text")
         .attr("class", "nodeLegend")
         .attr("x", xx-6)
         .attr("y", y4+20)
-        .text(numberInputTerms+" terms of "+ data.length +" blogs" )
+        .text(numberInputTerms+" terms of "+ data1.length +" blogs" )
         .attr("dy", ".21em")
         .attr("font-family", "sans-serif")
         .attr("font-size", "11px")
@@ -100,7 +100,7 @@ function drawColorLegend() {
 }
 
 function removeColorLegend() {
- svg.selectAll(".nodeLegend").remove();
+ svg3.selectAll(".nodeLegend").remove();
 }
 
 function drawTimeLegend() {
@@ -115,7 +115,7 @@ function drawTimeLegend() {
     }  
   }
 
-  svg.selectAll(".timeLegendLine").data(listX)
+  svg3.selectAll(".timeLegendLine").data(listX)
     .enter().append("line")
       .attr("class", "timeLegendLine")
       .style("stroke", "000") 
@@ -126,7 +126,7 @@ function drawTimeLegend() {
       .attr("x2", function(d){ return d.x; })
       .attr("y1", function(d){ return 0; })
       .attr("y2", function(d){ return height; });
-  svg.selectAll(".timeLegendText").data(listX)
+  svg3.selectAll(".timeLegendText").data(listX)
     .enter().append("text")
       .attr("class", "timeLegendText")
       .style("fill", "#000000")   
@@ -163,7 +163,7 @@ function updateTimeLegend() {
     }  
   }
 
-  svg.selectAll(".timeLegendLine").data(listX).transition().duration(250)
+  svg3.selectAll(".timeLegendLine").data(listX).transition().duration(250)
       .style("stroke-dasharray",  function(d,i){ 
         if (!isLensing)
           return "1, 2";
@@ -181,7 +181,7 @@ function updateTimeLegend() {
       }) 
       .attr("x1", function(d){return d.x; })
       .attr("x2", function(d){ return d.x; });
-  svg.selectAll(".timeLegendText").data(listX).transition().duration(250)
+  svg3.selectAll(".timeLegendText").data(listX).transition().duration(250)
       .style("fill-opacity", function(d,i){
         if (i%12==0)
           return 1;
@@ -196,8 +196,10 @@ function updateTimeLegend() {
         return d.x; });  
 }
 
-function drawTimeBox(){  
-  svg.append("rect")
+
+function drawTimeBox(){
+
+  svg3.append("rect")
     .attr("class", "timeBox")
     .style("fill", "#aaa")
     .style("fill-opacity", 0.2)
@@ -225,9 +227,9 @@ function updateTimeBox(durationTime){
     if (nodes[i].y>maxY)
       maxY = nodes[i].y;
   }
-  svg.selectAll(".timeBox").transition().duration(durationTime)
+  svg3.selectAll(".timeBox").transition().duration(durationTime)
       .attr("y", maxY+12);
-  svg.selectAll(".timeLegendText").transition().duration(durationTime)
+  svg3.selectAll(".timeLegendText").transition().duration(durationTime)
     .style("fill-opacity", function(d,i){
         if (i%12==0)
           return 1;
@@ -255,7 +257,7 @@ var colorHighlight = "#fc8";
 var buttonColor = "#ddd";
 
 function drawLensingButton(){  
-  svg.append('rect')
+  svg3.append('rect')
     .attr("class", "lensingRect")
     .attr("x", 1)
     .attr("y", 170)
@@ -267,15 +269,15 @@ function drawLensingButton(){
     .style("stroke-width", 0.1)
     .style("fill", buttonColor)
     .on('mouseover', function(d2){
-      svg.selectAll(".lensingRect")
+      svg3.selectAll(".lensingRect")
           .style("fill", colorHighlight);
     })
     .on('mouseout', function(d2){
-      svg.selectAll(".lensingRect")
+      svg3.selectAll(".lensingRect")
           .style("fill", buttonColor);
     })
     .on('click', turnLensing);         
-  svg.append('text')
+  svg3.append('text')
     .attr("class", "lensingText")
     .attr("font-family", "sans-serif")
     .attr("font-size", "11px")
@@ -285,26 +287,26 @@ function drawLensingButton(){
     .style("text-anchor", "middle")
     .style("fill", "#000")
     .on('mouseover', function(d2){
-        svg.selectAll(".lensingRect")
+        svg3.selectAll(".lensingRect")
           .style("fill", colorHighlight);
     })
     .on('mouseout', function(d2){
-        svg.selectAll(".lensingRect")
+        svg3.selectAll(".lensingRect")
           .style("fill", buttonColor);
     })
     .on('click', turnLensing);
 }
 function turnLensing() {
   isLensing = !isLensing;
-  svg.selectAll('.lensingRect')
+  svg3.selectAll('.lensingRect')
     .style("stroke-width", function(){
       return isLensing ? 1 : 0.1;
     });
-  svg.selectAll('.lensingText')
+  svg3.selectAll('.lensingText')
     .style("font-weight", function() { 
       return isLensing ? "bold" : "";
     });
-   svg.append('rect')
+   svg3.append('rect')
     .attr("class", "lensingRect")
     .style("fill-opacity", 0)
     .attr("x", xStep)
