@@ -14,7 +14,7 @@ var fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquir
     // ,"CS_TTU"
 ];
 
-var initialDataset = "FactCheck";
+var initialDataset = "EmptyWheel";
 var categories = ["person","location","organization","miscellaneous"];
 
 var fileName;
@@ -54,52 +54,52 @@ function loadData(){
     fileName = "data/"+fileName+".tsv"; // Add data folder path
     if (fileName.indexOf("Cards_Fries")>=0){
         categories = ["increases_activity", "decreases_activity"];
-        loadAuthorData(draw, 100);
+        loadAuthorData(draw, 100, drawTimeArcs);
 
     }
     else if (fileName.indexOf("CS_TTU")>=0){
         categories = ["Data Science", "High Performance Computing", "Software Engineering","Artificial Intelligence", "Security"];
-        loadCS(drawCS, 100);
+        loadCS(drawCS, 100, drawTimeArcs);
 
     }
     else if (fileName.indexOf("Cards_PC")>=0){
         categories = ["adds_modification", "removes_modification", "increases","decreases", "binds", "translocation"];
-        loadAuthorData(draw, 100);
+        loadAuthorData(draw, 100, drawTimeArcs);
 
     }
     else if (fileName.indexOf("PopCha")>=0){
         categories = ["Comedy","Drama","Action", "Fantasy", "Horror"];
-        loadAuthorData(drawpop, 1000);
+        loadAuthorData(drawpop, 1000, drawTimeArcs);
 
     }
     else if (fileName.indexOf("IMDB")>=0){
         categories = ["Comedy","Drama","Action", "Family"];
-        loadAuthorData(draw, 20);
+        loadAuthorData(draw, 20, drawTimeArcs);
 
     }
     else if (fileName.indexOf("VIS")>=0){
         categories = categories = ["Vis","VAST","InfoVis","SciVis"];
-        loadAuthorData(draw, 20);
+        loadAuthorData(draw, 20, drawTimeArcs);
 
     }
     else if (fileName.indexOf("Huffington")>=0){
         categories = categories = ["person","location","organization","miscellaneous"];
-        loadBlogPostData(draw, 45, timeArcs);
+        loadBlogPostData(draw, 45, drawTimeArcs);
 
     }
     else if (fileName.indexOf("CrooksAndLiars")>=0){
         categories = categories = ["person","location","organization","miscellaneous"];
-        loadBlogPostData(draw, 40, timeArcs);
+        loadBlogPostData(draw, 40, drawTimeArcs);
 
     }
     else if (fileName.indexOf("EmptyWheel")>=0) {
         categories = categories = ["person", "location", "organization", "miscellaneous"];
-        loadBlogPostData(draw, 40, timeArcs);
+        loadBlogPostData(draw, 40, drawTimeArcs);
 
     }
     else if (fileName.indexOf("Esquire")>=0) {
         categories = categories = ["person", "location", "organization", "miscellaneous"];
-        loadBlogPostData(draw, 40, timeArcs);
+        loadBlogPostData(draw, 40, drawTimeArcs);
 
     }
     else{
