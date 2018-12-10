@@ -24,19 +24,19 @@
     <script src="javascripts/saveFriesCards.js"></script>
 
 </head>
-
+<body>
 <div id="loadingSpinner">
     <!-- <span id="progressText"> -->
 </div>
 
-<div>
-<nav class="navi">
-    <ul>
-    <li style="background-color: antiquewhite"><a target="_blank" href="index.html">WordStream</a></li>
-    <li><a target="_blank" href="timeArcs.html">TimeArcs</a></li>
-    </ul>
-</nav>
-</div>
+<!--<div>-->
+    <!--<nav class="navi">-->
+        <!--<ul>-->
+            <!--<li style="background-color: antiquewhite"><a target="_blank" href="index.html">WordStream</a></li>-->
+            <!--<li><a target="_blank" href="timeArcs.html">TimeArcs</a></li>-->
+        <!--</ul>-->
+    <!--</nav>-->
+<!--</div>-->
 <div id="holder1"  class="holder1">
     <select id="datasetsSelect" class="styled-select" onchange="loadNewData.call(this, event)"></select>
 </div>
@@ -46,6 +46,9 @@
 <link href="styles/jquery-ui.css" rel="stylesheet" type="text/css" />
 
 <!--Time arcs-->
+<script src="javascripts/main.js"></script>
+<script type='text/javascript' src="javascripts/mainTA.js"></script>
+
 <input type="checkbox" id="checkbox1" value="value2" class="check" onclick="update()">
 <label for="checkbox1">Area graph only</label>
 
@@ -60,12 +63,9 @@
 <label id="progUpdate">
     <!-- Success Message -->
 </label>
-<script src="javascripts/main.js"></script>
-<script type='text/javascript' src="javascripts/mainTA.js"></script>
-
 <button onclick="saveTimeArcsData()">Save data for TimeArcs</button>
 
-<script src="javascripts/searchBox.js"></script>
+<script src="javascripts/searchBox.js"></script><br>
 Time axis goes from left (2005) to right (2014)<br>
 Terms often appeared together in a blog are connected by a thicker link.<br>
 </body>
