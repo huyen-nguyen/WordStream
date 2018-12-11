@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="140e1f28-6c0b-46d1-b831-903931873018" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lib/loaddata.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/loaddata.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -75,7 +75,7 @@
         <counts>
           <entry key="css" value="108" />
           <entry key="html" value="357" />
-          <entry key="js" value="3827" />
+          <entry key="js" value="3833" />
           <entry key="tsv" value="1" />
         </counts>
       </usages-collector>
@@ -83,7 +83,7 @@
         <counts>
           <entry key="CSS" value="108" />
           <entry key="HTML" value="357" />
-          <entry key="JavaScript" value="3827" />
+          <entry key="JavaScript" value="3833" />
           <entry key="TSV" value="1" />
         </counts>
       </usages-collector>
@@ -116,7 +116,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="824">
@@ -143,11 +143,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/javascripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="202" column="71" selection-start-line="202" selection-start-column="71" selection-end-line="202" selection-end-column="71" />
+            <state relative-caret-position="303">
+              <caret line="12" column="109" selection-start-line="12" selection-start-column="109" selection-end-line="12" selection-end-column="109" />
             </state>
           </provider>
         </entry>
@@ -155,7 +155,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/EmptyWheel.tsv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
+            <state relative-caret-position="432">
               <caret line="3" column="770" selection-start-line="3" selection-start-column="770" selection-end-line="3" selection-end-column="770" />
             </state>
           </provider>
@@ -253,8 +253,8 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/data/EmptyWheel.tsv" />
         <option value="$PROJECT_DIR$/javascripts/mainTA.js" />
-        <option value="$PROJECT_DIR$/javascripts/main.js" />
         <option value="$PROJECT_DIR$/lib/loaddata.js" />
+        <option value="$PROJECT_DIR$/javascripts/main.js" />
       </list>
     </option>
   </component>
@@ -409,12 +409,12 @@
       <workItem from="1541802785357" duration="1867000" />
       <workItem from="1543947408647" duration="34219000" />
       <workItem from="1544370661359" duration="6032000" />
-      <workItem from="1544455074795" duration="33066000" />
+      <workItem from="1544455074795" duration="33431000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140586000" />
+    <option name="totallyTimeSpent" value="140951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="28" y="23" width="1040" height="1397" extended-state="0" />
@@ -617,13 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/EmptyWheel.tsv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="3" column="770" selection-start-line="3" selection-start-column="770" selection-end-line="3" selection-end-column="770" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
@@ -631,17 +624,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="202" column="71" selection-start-line="202" selection-start-column="71" selection-end-line="202" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="824">
           <caret line="246" lean-forward="true" selection-start-line="246" selection-end-line="246" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/EmptyWheel.tsv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="3" column="770" selection-start-line="3" selection-start-column="770" selection-end-line="3" selection-end-column="770" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascripts/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="12" column="109" selection-start-line="12" selection-start-column="109" selection-end-line="12" selection-end-column="109" />
         </state>
       </provider>
     </entry>
