@@ -10,7 +10,8 @@ var interval = 200;
 // var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
 
-var fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"
+var fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", //"VIS_papers",
+// "IMDB","PopCha","Cards_PC","Cards_Fries"
     // ,"CS_TTU"
 ];
 

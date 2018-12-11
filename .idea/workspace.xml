@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="140e1f28-6c0b-46d1-b831-903931873018" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/loaddata.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/loaddata.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -118,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="3" column="47" lean-forward="true" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
+            <state relative-caret-position="824">
+              <caret line="246" lean-forward="true" selection-start-line="246" selection-end-line="246" />
             </state>
           </provider>
         </entry>
@@ -145,11 +143,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1392">
-              <caret line="639" column="32" selection-start-line="639" selection-start-column="32" selection-end-line="639" selection-end-column="32" />
+            <state relative-caret-position="333">
+              <caret line="202" column="71" selection-start-line="202" selection-start-column="71" selection-end-line="202" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -194,7 +192,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>allwords:</find>
       <find>data</find>
       <find>facebook</find>
       <find>data in</find>
@@ -224,6 +221,7 @@
       <find>let</find>
       <find>update</find>
       <find>tick</find>
+      <find>axisnode</find>
     </findStrings>
     <replaceStrings>
       <replace>data</replace>
@@ -255,8 +253,8 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/data/EmptyWheel.tsv" />
         <option value="$PROJECT_DIR$/javascripts/mainTA.js" />
-        <option value="$PROJECT_DIR$/lib/loaddata.js" />
         <option value="$PROJECT_DIR$/javascripts/main.js" />
+        <option value="$PROJECT_DIR$/lib/loaddata.js" />
       </list>
     </option>
   </component>
@@ -411,12 +409,12 @@
       <workItem from="1541802785357" duration="1867000" />
       <workItem from="1543947408647" duration="34219000" />
       <workItem from="1544370661359" duration="6032000" />
-      <workItem from="1544455074795" duration="32154000" />
+      <workItem from="1544455074795" duration="33066000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139674000" />
+    <option name="totallyTimeSpent" value="140586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="28" y="23" width="1040" height="1397" extended-state="0" />
@@ -619,13 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="47" lean-forward="true" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/EmptyWheel.tsv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -642,8 +633,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/javascripts/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1392">
-          <caret line="639" column="32" selection-start-line="639" selection-start-column="32" selection-end-line="639" selection-end-column="32" />
+        <state relative-caret-position="333">
+          <caret line="202" column="71" selection-start-line="202" selection-start-column="71" selection-end-line="202" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="824">
+          <caret line="246" lean-forward="true" selection-start-line="246" selection-end-line="246" />
         </state>
       </provider>
     </entry>
