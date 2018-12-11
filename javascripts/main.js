@@ -1,4 +1,4 @@
-var minWidth = screen.availWidth, height = 800, gdata;
+var minWidth = window.innerWidth, height = 800, gdata;
 var svg = d3.select("body").append('svg').attr({
     width: minWidth,
     height: height,
@@ -134,19 +134,20 @@ function drawTimeArcs(){
 }
 function draw(data, pop){
     //Layout data
-
-    if (pop === 1) {
-        interval = 50;}
-    else if (pop === 2) {
-        interval = 160;}
-    else {interval = 200;}
+    //
+    // if (pop === 1) {
+    //     interval = 50;}
+    // else if (pop === 2) {
+    //     interval = 160;}
+    // else {interval = 200;}
 // function draw(data){
 //     //Layout data
 //     var dataWidth = data.length*100;
 
     // var width = (dataWidth > minWidth) ? dataWidth:minWidth;
 
-    var width = data.length*interval ;
+    // var width = data.length*interval ;
+    var width = 3 * minWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
     var font = "Arial";
     var interpolation = "cardinal";
@@ -201,7 +202,10 @@ function draw(data, pop){
     //Display the vertical gridline
     var xGridlineScale = d3.scale.ordinal().domain(d3.range(0, dates.length+1)).rangeBands([0, width+width/boxes.data.length]);
     var xGridlinesAxis = d3.svg.axis().orient('bottom').scale(xGridlineScale);
-    var xGridlinesGroup = svg.append('g').attr('transform', 'translate(' + (margins.left-width/boxes.data.length/2) + ',' + (height+margins.top + axisPadding+legendHeight+margins.bottom+offsetLegend) + ')');
+
+    var xGridlinesGroup = svg.append('g')
+        .attr('transform', 'translate(' + (margins.left-width/boxes.data.length/2) + ',' + (height+margins.top + axisPadding+legendHeight+margins.bottom+offsetLegend) + ')');
+
     var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-height-axisPadding-legendHeight-margins.bottom, 0, 0).tickFormat(''));
     styleGridlineNodes(gridlineNodes);
 
@@ -643,7 +647,7 @@ function styleGridlineNodes(gridlineNodes){
     });
     gridlineNodes.selectAll('.tick line').attr({
         fill: 'none',
-        'stroke-width': 0.7,
+        'stroke-width': 0.5,
         stroke: 'lightgray'
     });
 }

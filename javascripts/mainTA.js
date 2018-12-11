@@ -101,7 +101,7 @@ var isLensing = false;
 var lensingMul = 5;
 var lMonth = -lensingMul*2;
 var coordinate = [0,0];
-var XGAP_ = 16; // gap between months on xAxis
+var XGAP_ = 15; // gap between months on xAxis
 
 function xScale(m){
     if (isLensing){
