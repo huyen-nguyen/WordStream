@@ -636,6 +636,8 @@ function styleAxis(axisNodes){
         fill: 'none',
     });
     axisNodes.selectAll('.tick text').attr({
+        'text-anchor': 'end',
+        'transform': 'rotate(-30)',
         'font-family': 'serif',
         'font-size': 14
     });
