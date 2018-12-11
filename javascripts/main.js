@@ -1,4 +1,4 @@
-var minWidth = window.innerWidth, height = 800, gdata;
+var minWidth = screen.availWidth, height = 800, gdata;
 var svg = d3.select("body").append('svg').attr({
     width: minWidth,
     height: height,
@@ -94,7 +94,7 @@ function loadData(){
     }
     else if (fileName.indexOf("EmptyWheel")>=0) {
         categories = categories = ["person", "location", "organization", "miscellaneous"];
-        loadBlogPostData(draw, 50, drawTimeArcs);
+        loadBlogPostData(draw, 30, drawTimeArcs);
 
     }
     else if (fileName.indexOf("Esquire")>=0) {
@@ -147,7 +147,7 @@ function draw(data, pop){
     // var width = (dataWidth > minWidth) ? dataWidth:minWidth;
 
     // var width = data.length*interval ;
-    var width = 3 * minWidth;
+    var width = 1.5 * minWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
     var font = "Arial";
     var interpolation = "cardinal";
