@@ -1,4 +1,4 @@
-var minWidth = screen.availWidth, height = 900, gdata;
+var minWidth = screen.availWidth, height = 800, gdata;
 var svg = d3.select("body").append('svg').attr({
     width: minWidth,
     height: height,
@@ -94,7 +94,7 @@ function loadData(){
     }
     else if (fileName.indexOf("EmptyWheel")>=0) {
         categories = categories = ["person", "location", "organization", "miscellaneous"];
-        loadBlogPostData(draw, 40, drawTimeArcs);
+        loadBlogPostData(draw, 50, drawTimeArcs);
 
     }
     else if (fileName.indexOf("Esquire")>=0) {
@@ -104,7 +104,7 @@ function loadData(){
     }
     else{
         categories = ["person","location","organization","miscellaneous"];
-        loadBlogPostData(draw, 30, drawTimeArcs);
+        loadBlogPostData(draw, 40, drawTimeArcs);
 
     }
 }
@@ -517,7 +517,7 @@ function draw(data, pop){
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Compactness: " + compactness.toFixed(2))
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of Displayed Words = " + ratio.toFixed(2) + " ×" +
         " Stream Area" )
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Display: " + countDisplay + " All: " + countall + " Ratio: " + (countDisplay/countall))
+        // .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Display: " + countDisplay + " All: " + countall + " Ratio: " + (countDisplay/countall))
 
 
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted Display Rate: " + weightedRate.toFixed(2))
