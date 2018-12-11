@@ -5,7 +5,7 @@ var svg = d3.select("body").append('svg').attr({
     id: "mainsvg"
 
 });
-var interval = 200;
+var interval = 120;
 
 // var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
@@ -14,7 +14,7 @@ var fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquir
     // ,"CS_TTU"
 ];
 
-var initialDataset = "EmptyWheel";
+var initialDataset = "WikiNews";
 var categories = ["person","location","organization","miscellaneous"];
 
 var fileName;
@@ -94,7 +94,7 @@ function loadData(){
     }
     else if (fileName.indexOf("EmptyWheel")>=0) {
         categories = categories = ["person", "location", "organization", "miscellaneous"];
-        loadBlogPostData(draw, 30, drawTimeArcs);
+        loadBlogPostData(draw, 40, drawTimeArcs);
 
     }
     else if (fileName.indexOf("Esquire")>=0) {
@@ -135,19 +135,19 @@ function drawTimeArcs(){
 function draw(data, pop){
     //Layout data
     //
-    // if (pop === 1) {
-    //     interval = 50;}
-    // else if (pop === 2) {
-    //     interval = 160;}
-    // else {interval = 200;}
+    if (pop === 1) {
+        interval = 50;}
+    else if (pop === 2) {
+        interval = 120;}
+    else {interval = 120;}
 // function draw(data){
 //     //Layout data
 //     var dataWidth = data.length*100;
 
     // var width = (dataWidth > minWidth) ? dataWidth:minWidth;
 
-    // var width = data.length*interval ;
-    var width = 1.5 * minWidth;
+    var width = data.length*interval ;
+    // var width = 1.5 * minWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
     var font = "Arial";
     var interpolation = "cardinal";
@@ -636,8 +636,8 @@ function styleAxis(axisNodes){
         fill: 'none',
     });
     axisNodes.selectAll('.tick text').attr({
-        'text-anchor': 'end',
-        'transform': 'rotate(-30)',
+        // 'text-anchor': 'end',
+        // 'transform': 'rotate(-30)',
         'font-family': 'serif',
         'font-size': 14
     });
