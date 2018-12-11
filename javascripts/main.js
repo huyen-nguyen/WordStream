@@ -433,7 +433,7 @@ function draw(data, pop){
         stroke: 'black',
         'stroke-width': .5,
     });
-    legendNodes.append('text').text(function(d){return d;}).attr("class","axis").attr({
+    legendNodes.append('text').text(function(d){return d;}).attr("class","value").attr({
         'font-size': legendFontSize,
         'alignment-baseline': 'middle',
         dx: 15, dy: 3
@@ -512,7 +512,7 @@ function draw(data, pop){
     // ========== WRITE ==============
     d3.select('svg').append('g').attr({
         width: 200,
-        height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)').attr("class","axis")
+        height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)').attr("class","value")
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Importance value (tf-idf ratio): " + avgTfidf)
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Compactness: " + compactness.toFixed(2))
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of Displayed Words = " + ratio.toFixed(2) + " ×" +
