@@ -11,7 +11,7 @@ var interval = 120;
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
 
 var fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"
-    // ,"CS_TTU"
+
 ];
 
 var initialDataset = "WikiNews";
@@ -54,64 +54,80 @@ function loadData(){
     fileName = "data/"+fileName+".tsv"; // Add data folder path
     if (fileName.indexOf("Cards_Fries")>=0){
         categories = ["increases_activity", "decreases_activity"];
-        loadAuthorData(draw, 100, drawTimeArcs);
-
-    }
-    else if (fileName.indexOf("CS_TTU")>=0){
-        categories = ["Data Science", "High Performance Computing", "Software Engineering","Artificial Intelligence", "Security"];
-        loadCS(drawCS, 100, drawTimeArcs);
+        loadAuthorData(draw, 200
+           // ,drawTimeArcs
+        );
 
     }
     else if (fileName.indexOf("Cards_PC")>=0){
         categories = ["adds_modification", "removes_modification", "increases","decreases", "binds", "translocation"];
-        loadAuthorData(draw, 100, drawTimeArcs);
+        loadAuthorData(draw, 200
+            //, drawTimeArcs
+        );
 
     }
     else if (fileName.indexOf("PopCha")>=0){
         categories = ["Comedy","Drama","Action", "Fantasy", "Horror"];
-        loadAuthorData(drawpop, 1000, drawTimeArcs);
+        loadAuthorData(drawpop, 200
+            //, drawTimeArcs
+        );
 
     }
     else if (fileName.indexOf("IMDB")>=0){
         categories = ["Comedy","Drama","Action", "Family"];
-        loadAuthorData(draw, 20, drawTimeArcs);
+        loadAuthorData(draw, 45
+            //, drawTimeArcs
+        );
 
     }
     else if (fileName.indexOf("VIS")>=0){
         categories = categories = ["Vis","VAST","InfoVis","SciVis"];
-        loadAuthorData(draw, 20, drawTimeArcs);
+        loadAuthorData(draw, 45
+            //, drawTimeArcs
+        );
 
     }
-    else if (fileName.indexOf("Huffington")>=0){
-        categories = categories = ["person","location","organization","miscellaneous"];
-        loadBlogPostData(draw, 45, drawTimeArcs);
-
-    }
-    else if (fileName.indexOf("CrooksAndLiars")>=0){
-        categories = categories = ["person","location","organization","miscellaneous"];
-        loadBlogPostData(draw, 40, drawTimeArcs);
-
-    }
-    else if (fileName.indexOf("EmptyWheel")>=0) {
-        categories = categories = ["person", "location", "organization", "miscellaneous"];
-        loadBlogPostData(draw, 40, drawTimeArcs);
-
-    }
-    else if (fileName.indexOf("Esquire")>=0) {
-        categories = categories = ["person", "location", "organization", "miscellaneous"];
-        loadBlogPostData(draw, 40, drawTimeArcs);
-
-    }
+    //
+    // else if (fileName.indexOf("Huffington")>=0){
+    //     categories = categories = ["person","location","organization","miscellaneous"];
+    //     loadBlogPostData(draw, 30
+    //         //, drawTimeArcs
+    //     );
+    //
+    // }
+    // else if (fileName.indexOf("CrooksAndLiars")>=0){
+    //     categories = categories = ["person","location","organization","miscellaneous"];
+    //     loadBlogPostData(draw, 30
+    //         //, drawTimeArcs
+    //     );
+    //
+    // }
+    // else if (fileName.indexOf("EmptyWheel")>=0) {
+    //     categories = categories = ["person", "location", "organization", "miscellaneous"];
+    //     loadBlogPostData(draw, 30
+    //         //, drawTimeArcs
+    //     );
+    //
+    // }
+    // else if (fileName.indexOf("Esquire")>=0) {
+    //     categories = categories = ["person", "location", "organization", "miscellaneous"];
+    //     loadBlogPostData(draw, 30
+    //         //, drawTimeArcs
+    //     );
+    //
+    // }
     else{
         categories = ["person","location","organization","miscellaneous"];
-        loadBlogPostData(draw, 40, drawTimeArcs);
+        loadBlogPostData(draw, 45
+            //, drawTimeArcs
+        );
 
     }
 }
 function loadNewData(event) {
     svg.selectAll("*").remove();
-    svg2.selectAll("*").remove();
-    svg3.selectAll("*").remove();
+    // svg2.selectAll("*").remove();
+    // svg3.selectAll("*").remove();
     fileName = this.options[this.selectedIndex].text;
     console.log("Filename:");
     console.log(fileName);
@@ -139,7 +155,7 @@ function draw(data, pop){
         interval = 50;}
     else if (pop === 2) {
         interval = 120;}
-    else {interval = 120;}
+    else {interval = 150;}
 // function draw(data){
 //     //Layout data
 //     var dataWidth = data.length*100;
@@ -152,15 +168,15 @@ function draw(data, pop){
     var font = "Arial";
     var interpolation = "cardinal";
     var bias = 200;
-    var offsetLegend = 0;
+    var offsetLegend = -10;
     var axisPadding = 10;
     var margins = {left: 20, top: 20, right: 10, bottom: 30};
     var ws = d3.layout.wordStream()
         .size([width, height])
         .interpolate(interpolation)
         .fontScale(d3.scale.linear())
-        .minFontSize(10)
-        .maxFontSize(38)
+        .minFontSize(8)
+        .maxFontSize(40)
         .data(data)
         .font(font);
     var boxes = ws.boxes(),
@@ -281,9 +297,9 @@ function draw(data, pop){
         terms.concat(allWords[i].text);
     }
 
-    var opacity = d3.scale.log()
+    var opacity = d3.scale.linear()
         .domain([minFreq, maxFreq])
-        .range([0.4,1]);
+        .range([0.5,1]);
 
     // Add moi chu la 1 element <g>, xoay g dung d.rotate
     var placed = true; // = false de hien thi nhung tu ko dc dien
@@ -460,14 +476,14 @@ function draw(data, pop){
 
 
     //  =========== Display ==============
-    var countall = 0;
-    var countDisplay = 0;
-    allWords.forEach(function (d) {
-        countall += 1;
-        if (d.placed){
-            countDisplay += 1;
-        }
-    });
+    // var countall = 0;
+    // var countDisplay = 0;
+    // allWords.forEach(function (d) {
+    //     countall += 1;
+    //     if (d.placed){
+    //         countDisplay += 1;
+    //     }
+    // });
 
 
     //  =========== COMPACTNESS ==============
@@ -524,10 +540,10 @@ function draw(data, pop){
         // .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Display: " + countDisplay + " All: " + countall + " Ratio: " + (countDisplay/countall))
 
 
-        // .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted Display Rate: " + weightedRate.toFixed(2))
-        // .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Average Normalized Frequency: " + averageNormFreq.toFixed(3) );
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted Display Rate: " + weightedRate.toFixed(2))
+        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Average Normalized Frequency: " + averageNormFreq.toFixed(3) );
 
-    // console.log(compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3))
+    console.log(avgTfidf.toFixed(2), compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3))
     ;
 
     // ============ Get APPROXIMATE AREA ============
@@ -548,7 +564,7 @@ function draw(data, pop){
     // console.log("Area within black border: "+getArea(boundary));
 
 
-
+spinner.stop();
 
 };
 
