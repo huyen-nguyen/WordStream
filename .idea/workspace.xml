@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="140e1f28-6c0b-46d1-b831-903931873018" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/images/ws.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ws1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EuroVis19_Template.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascripts/mainTA.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/mainTA.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/d3.layout.wordstream.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/d3.layout.wordstream.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/loaddata.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/loaddata.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$ResultDataNew.xlsx" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -85,7 +80,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="108" />
-          <entry key="html" value="363" />
+          <entry key="html" value="365" />
           <entry key="js" value="4351" />
           <entry key="tsv" value="1" />
         </counts>
@@ -93,7 +88,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="108" />
-          <entry key="HTML" value="363" />
+          <entry key="HTML" value="365" />
           <entry key="JavaScript" value="4351" />
           <entry key="TSV" value="1" />
         </counts>
@@ -101,8 +96,10 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="11" />
+          <entry key="gif" value="1" />
           <entry key="html" value="11" />
           <entry key="js" value="36" />
+          <entry key="png" value="2" />
           <entry key="tsv" value="2" />
         </counts>
       </usages-collector>
@@ -110,6 +107,7 @@
         <counts>
           <entry key="CSS" value="11" />
           <entry key="HTML" value="11" />
+          <entry key="Image" value="3" />
           <entry key="JavaScript" value="36" />
           <entry key="TSV" value="2" />
         </counts>
@@ -118,13 +116,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="3" column="26" lean-forward="true" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+            <state relative-caret-position="96">
+              <caret line="4" column="57" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/images/ws1.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -141,7 +144,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascripts/mainTA.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
@@ -213,10 +216,10 @@
         <option value="$PROJECT_DIR$/data/EmptyWheel.tsv" />
         <option value="$PROJECT_DIR$/javascripts/mainTA.js" />
         <option value="$PROJECT_DIR$/test/sprite.html" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/javascripts/main.js" />
         <option value="$PROJECT_DIR$/lib/loaddata.js" />
         <option value="$PROJECT_DIR$/lib/d3.layout.wordstream.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -228,7 +231,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1261" />
-    <option name="y" value="227" />
+    <option name="y" value="290" />
     <option name="width" value="1299" />
     <option name="height" value="1211" />
   </component>
@@ -264,6 +267,16 @@
             <path>
               <item name="WordStream" type="b2602c69:ProjectViewProjectNode" />
               <item name="WordStream" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WordStream" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WordStream" type="462c0819:PsiDirectoryNode" />
+              <item name="images2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WordStream" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WordStream" type="462c0819:PsiDirectoryNode" />
               <item name="javascripts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -281,14 +294,15 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/javascripts" />
-      <recent name="$PROJECT_DIR$/data" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/javascripts" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images" />
+      <recent name="$PROJECT_DIR$/javascripts" />
+      <recent name="$PROJECT_DIR$/data" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -352,15 +366,15 @@
       <workItem from="1544455074795" duration="43122000" />
       <workItem from="1544632344446" duration="7932000" />
       <workItem from="1544666337131" duration="1709000" />
-      <workItem from="1544810362931" duration="1209000" />
+      <workItem from="1544810362931" duration="3237000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="161492000" />
+    <option name="totallyTimeSpent" value="163520000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1261" y="227" width="1299" height="1211" extended-state="0" />
+    <frame x="1261" y="290" width="1299" height="1211" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14319248" />
@@ -572,13 +586,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="26" lean-forward="true" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/javascripts/input.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -593,6 +600,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="3" column="21" lean-forward="true" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/msdropdown/skin1/dd_arrow.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/ws.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/images/ws1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="57" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
         </state>
       </provider>
     </entry>
