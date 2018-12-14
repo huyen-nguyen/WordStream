@@ -55,35 +55,35 @@ function loadData(){
     if (fileName.indexOf("Cards_Fries")>=0){
         categories = ["increases_activity", "decreases_activity"];
         loadAuthorData(draw, 200
-           // ,drawTimeArcs
+            ,drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("Cards_PC")>=0){
         categories = ["adds_modification", "removes_modification", "increases","decreases", "binds", "translocation"];
         loadAuthorData(draw, 200
-            //, drawTimeArcs
+            , drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("PopCha")>=0){
         categories = ["Comedy","Drama","Action", "Fantasy", "Horror"];
         loadAuthorData(drawpop, 200
-            //, drawTimeArcs
+            , drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("IMDB")>=0){
         categories = ["Comedy","Drama","Action", "Family"];
         loadAuthorData(draw, 45
-            //, drawTimeArcs
+            , drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("VIS")>=0){
         categories = categories = ["Vis","VAST","InfoVis","SciVis"];
         loadAuthorData(draw, 45
-            //, drawTimeArcs
+            , drawTimeArcs
         );
 
     }
@@ -119,7 +119,7 @@ function loadData(){
     else{
         categories = ["person","location","organization","miscellaneous"];
         loadBlogPostData(draw, 45
-            //, drawTimeArcs
+            , drawTimeArcs
         );
 
     }
@@ -129,8 +129,6 @@ function loadNewData(event) {
     // svg2.selectAll("*").remove();
     // svg3.selectAll("*").remove();
     fileName = this.options[this.selectedIndex].text;
-    console.log("Filename:");
-    console.log(fileName);
     loadData();
 }
 function getInputFile(){
@@ -155,14 +153,14 @@ function draw(data, pop){
         interval = 50;}
     else if (pop === 2) {
         interval = 120;}
-    else {interval = 150;}
+    else {interval = 180;}
 // function draw(data){
 //     //Layout data
 //     var dataWidth = data.length*100;
 
     // var width = (dataWidth > minWidth) ? dataWidth:minWidth;
 
-    var width = data.length*interval ;
+    var width = minWidth  ;
     // var width = 1.5 * minWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
     var font = "Arial";
@@ -175,7 +173,7 @@ function draw(data, pop){
         .size([width, height])
         .interpolate(interpolation)
         .fontScale(d3.scale.linear())
-        .minFontSize(8)
+        .minFontSize(10)
         .maxFontSize(40)
         .data(data)
         .font(font);
@@ -543,7 +541,7 @@ function draw(data, pop){
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted Display Rate: " + weightedRate.toFixed(2))
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Average Normalized Frequency: " + averageNormFreq.toFixed(3) );
 
-    console.log(avgTfidf.toFixed(2), compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3))
+    // console.log(avgTfidf.toFixed(2), compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3))
     ;
 
     // ============ Get APPROXIMATE AREA ============

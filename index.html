@@ -14,14 +14,14 @@
     <link rel="stylesheet" type="text/css" href="styles/msdropdown/dd.css" />
     <link rel="stylesheet" type="text/css" href="styles/main.css" media="screen"/>
 
-    <!--<script src="./lib/fisheye.js"></script>-->
-    <!--<script src="./lib/select2.min.js"></script>-->
-    <!--<script src="javascripts/util.js"></script>-->
-    <!--<script src="javascripts/sliderRelationship.js"></script>-->
-    <!--<script src="javascripts/streamGraph.js"></script>-->
-    <!--<script src="javascripts/stopList.js"></script>-->
-    <!--<link href="styles/jquery-ui.css" rel="stylesheet" type="text/css" />-->
-    <!--<script src="javascripts/saveFriesCards.js"></script>-->
+    <script src="./lib/fisheye.js"></script>
+    <script src="./lib/select2.min.js"></script>
+    <script src="javascripts/util.js"></script>
+    <script src="javascripts/sliderRelationship.js"></script>
+    <script src="javascripts/streamGraph.js"></script>
+    <script src="javascripts/stopList.js"></script>
+    <link href="styles/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="javascripts/saveFriesCards.js"></script>
 
 </head>
 <body>
@@ -39,6 +39,19 @@
 <!--</div>-->
 <div id="holder1"  class="holder1">
     <select id="datasetsSelect" class="styled-select" onchange="loadNewData.call(this, event)"></select>
+</div>
+<div class="container main" style="position: absolute; top: 23px; left: 100px;" >
+    <form id="form_id" method="post" name="myform">
+        <h2>Javascript Set Form Action Example</h2>
+        <label>Name :</label>
+        <input id="name" name="name" placeholder="Name" type="text"><br>
+        <label>Email :</label>
+        <input id="email" name="email" placeholder="Valid Email" type="text"><br>
+        <label>Contact No. :</label>
+        <input id="contact" name="contact" placeholder="Contact No." type="text"><br>
+        <input onclick="myfunction()" type="button" value="Submit"><br>
+        <span><b class="note">Note :</b> Form action will be set to <b>success.php</b> on click of submit button.</span>
+    </form>
 </div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script> <!-- Spinner when loading -->
 

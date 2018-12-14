@@ -1,3 +1,3 @@
-# WordStream
+# WordStreamVis.github.io
 
-https://nnhuyen.github.io/WordStream/
+Demo: https://wordstreamvis.github.io/

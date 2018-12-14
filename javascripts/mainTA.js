@@ -280,7 +280,7 @@ d3.tsv(fileName, function(error, data_) {
 
     });
 
-    console.log("DONE reading the input file = "+data1.length);
+    // console.log("DONE reading the input file = "+data1.length);
 
     setupSliderScale(svg3);
 
@@ -552,7 +552,7 @@ d3.tsv(fileName, function(error, data_) {
             }
 
             if (!e.max && e.max!=0)
-                console.log("What the e.term = "+e.term+" e.max =" +e.max );
+                // console.log("What the e.term = "+e.term+" e.max =" +e.max );
 
             termArray.push(e);
         }
@@ -569,7 +569,7 @@ d3.tsv(fileName, function(error, data_) {
 
         //if (searchTerm)
         numberInputTerms = termArray.length;
-       console.log("numberInputTerms="+numberInputTerms) ;
+       // console.log("numberInputTerms="+numberInputTerms) ;
 
     // Compute relationship **********************************************************
         numNode = Math.min(80, termArray.length);
@@ -615,7 +615,7 @@ d3.tsv(fileName, function(error, data_) {
         });
 
 
-        console.log("DONE computing realtionships relationshipMaxMax="+relationshipMaxMax);
+        //console.log("DONE computing realtionships relationshipMaxMax="+relationshipMaxMax);
     }
 
     function computeConnectivity(a, num) {
@@ -659,7 +659,7 @@ d3.tsv(fileName, function(error, data_) {
     function computeNodes() {
 
         // check substrings of 100 first terms
-        console.log("termArray.length = "+termArray.length);
+        //console.log("termArray.length = "+termArray.length);
 
         for (var i=0; i<numNode2;i++){
           for (var j=0; j<numNode2;j++){
@@ -674,7 +674,7 @@ d3.tsv(fileName, function(error, data_) {
             if (termArray.length<numberInputTerms/3 || !termArray[i].isSubtring)  // only remove substring when there are too many of them
                 termArray2.push(termArray[i])
         }
-        console.log("termArray2.length = "+termArray2.length);
+        //console.log("termArray2.length = "+termArray2.length);
 
 
         computeConnectivity(termArray2, termArray2.length);
@@ -685,7 +685,7 @@ d3.tsv(fileName, function(error, data_) {
             if (termArray2[i].isSearchTerm || termArray2[i].isConnected>0)
                 termArray3.push(termArray2[i]);
         }
-        console.log("termArray3.length = "+termArray3.length);
+        //console.log("termArray3.length = "+termArray3.length);
 
 
         termArray3.sort(function (a, b) {
@@ -743,7 +743,7 @@ d3.tsv(fileName, function(error, data_) {
         }
         numNode = nodes.length;
 
-        console.log("numNode="+numNode);
+        //console.log("numNode="+numNode);
 
 
         // compute the monthly data
@@ -793,8 +793,8 @@ d3.tsv(fileName, function(error, data_) {
 
      //   drawStreamTerm(svg, pNodes, 100, 600) ;
 
-        console.log("pNode:");
-        console.log(JSON.parse(JSON.stringify(pNodes)));
+        // console.log("pNode:");
+        // console.log(JSON.parse(JSON.stringify(pNodes)));
 
         svg3.selectAll(".layer").remove();
         svg3.selectAll(".layer")
@@ -910,7 +910,7 @@ d3.tsv(fileName, function(error, data_) {
             l.value = linkScale(relationship[term1+"__"+term2][month]);
         }  );
 
-        console.log("DONE links relationshipMaxMax2="+relationshipMaxMax2);
+        //console.log("DONE links relationshipMaxMax2="+relationshipMaxMax2);
 
         //Create all the line svgs but without locations yet
         svg3.selectAll(".linkArc").remove();
