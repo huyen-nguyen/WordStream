@@ -1,4 +1,4 @@
-#holder1 {
+.holder1 {
     position:absolute;
     border-radius: 0px;
     z-index: 1110;
@@ -8,7 +8,15 @@
     height: 50px;
     border: 0px solid rgba(0,0,0, 1);
     font: normal 18px Impact, Charcoal, sans-serif !important;
-} 
+}
+.holder2 {
+    position:absolute;
+    border-radius: 0px;
+    left: 230px;
+    height: 50px;
+    border: 0px solid rgba(0,0,0, 1);
+}
+
 .styled-select {
     overflow: hidden;
     height: 28px;
@@ -18,10 +26,12 @@
 }
 #mainsvg{
     position:absolute;
-    top:-10px;
+    top:200px;
     left: 205px;
 }
-.value{font: 15px sans-serif;}
+.value{
+    font: 15px sans-serif;
+    color: #0d97ba}
 .navi ul {
     list-style-type: none;
     margin: 0;
@@ -105,12 +115,11 @@
 }
 
 
-h3 {
-    color: #1ABC9C;
-    text-align:center;
-    font-style: italic;
-    font-size: 14px;
-    font-family: "Helvetica";
+.ws {
+    top: -30px;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Helvetica;
 }
 
 .ticky {

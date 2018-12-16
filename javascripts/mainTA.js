@@ -140,12 +140,6 @@ var numberInputTerms =0;
 var listMonth;
 
 
-
-function inputFile(){
-    var name = getInputFile();
-    return name;
-}
-
 function timeArcs(){
 
     var nodes2 = [];

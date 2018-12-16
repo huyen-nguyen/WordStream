@@ -1,9 +1,16 @@
-var minWidth = screen.availWidth, height = 800, gdata;
-var svg = d3.select("body").append('svg').attr({
-    width: minWidth,
-    height: height,
-    id: "mainsvg"
+// pre-defined size
+var globalWidth = 800,
+    globalHeight = 800,
+    globalMinFont = 8,
+    globalMaxFont = 40,
+    topRank = 45
+;
 
+var svg = d3.select("body").append('svg')
+    .attr({
+    width: globalWidth,
+    height: globalHeight,
+    id: "mainsvg",
 });
 var interval = 120;
 
@@ -54,75 +61,48 @@ function loadData(){
     fileName = "data/"+fileName+".tsv"; // Add data folder path
     if (fileName.indexOf("Cards_Fries")>=0){
         categories = ["increases_activity", "decreases_activity"];
-        loadAuthorData(draw, 200
+        loadAuthorData(draw, topRank
             ,drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("Cards_PC")>=0){
         categories = ["adds_modification", "removes_modification", "increases","decreases", "binds", "translocation"];
-        loadAuthorData(draw, 200
+        loadAuthorData(draw, topRank
             , drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("PopCha")>=0){
         categories = ["Comedy","Drama","Action", "Fantasy", "Horror"];
-        loadAuthorData(drawpop, 200
+        loadAuthorData(drawpop, topRank
             , drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("IMDB")>=0){
         categories = ["Comedy","Drama","Action", "Family"];
-        loadAuthorData(draw, 45
+        loadAuthorData(draw, topRank
             , drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("VIS")>=0){
-        categories = categories = ["Vis","VAST","InfoVis","SciVis"];
-        loadAuthorData(draw, 45
+        categories = ["Vis","VAST","InfoVis","SciVis"];
+        loadAuthorData(draw, topRank
             , drawTimeArcs
         );
 
     }
-    //
-    // else if (fileName.indexOf("Huffington")>=0){
-    //     categories = categories = ["person","location","organization","miscellaneous"];
-    //     loadBlogPostData(draw, 30
-    //         //, drawTimeArcs
-    //     );
-    //
-    // }
-    // else if (fileName.indexOf("CrooksAndLiars")>=0){
-    //     categories = categories = ["person","location","organization","miscellaneous"];
-    //     loadBlogPostData(draw, 30
-    //         //, drawTimeArcs
-    //     );
-    //
-    // }
-    // else if (fileName.indexOf("EmptyWheel")>=0) {
-    //     categories = categories = ["person", "location", "organization", "miscellaneous"];
-    //     loadBlogPostData(draw, 30
-    //         //, drawTimeArcs
-    //     );
-    //
-    // }
-    // else if (fileName.indexOf("Esquire")>=0) {
-    //     categories = categories = ["person", "location", "organization", "miscellaneous"];
-    //     loadBlogPostData(draw, 30
-    //         //, drawTimeArcs
-    //     );
-    //
-    // }
+
     else{
         categories = ["person","location","organization","miscellaneous"];
-        loadBlogPostData(draw, 45
+        loadBlogPostData(draw, topRank
             , drawTimeArcs
         );
 
     }
+
 }
 function loadNewData(event) {
     svg.selectAll("*").remove();
@@ -131,10 +111,7 @@ function loadNewData(event) {
     fileName = this.options[this.selectedIndex].text;
     loadData();
 }
-function getInputFile(){
-    var name = fileName;
-    return name;
-}
+
 
 function drawpop(data){
     draw(data, 1);
@@ -160,8 +137,9 @@ function draw(data, pop){
 
     // var width = (dataWidth > minWidth) ? dataWidth:minWidth;
 
-    var width = minWidth  ;
-    // var width = 1.5 * minWidth;
+    var width = globalWidth  ;
+    var height = globalHeight;
+    // var width = 1.5 * resWidth;
     document.getElementById("mainsvg").setAttribute("width",width);
     var font = "Arial";
     var interpolation = "cardinal";
@@ -173,8 +151,8 @@ function draw(data, pop){
         .size([width, height])
         .interpolate(interpolation)
         .fontScale(d3.scale.linear())
-        .minFontSize(10)
-        .maxFontSize(40)
+        .minFontSize(globalMinFont)
+        .maxFontSize(globalMaxFont)
         .data(data)
         .font(font);
     var boxes = ws.boxes(),
@@ -528,7 +506,8 @@ function draw(data, pop){
     var averageNormFreq = displayNormFreq_2 / numbers_2;
 
     // ========== WRITE ==============
-    d3.select('svg').append('g').attr({
+    d3.select('#mainsvg').append('g').attr({
+        id: "metrics",
         width: 200,
         height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)').attr("class","value")
         .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Importance value (tf-idf ratio): " + avgTfidf.toFixed(2))
@@ -666,4 +645,22 @@ function styleGridlineNodes(gridlineNodes){
         'stroke-width': 0.5,
         stroke: 'lightgray'
     });
+}
+function topRank200(topRank){
+    if (topRank==undefined){
+        topRank = 200;
+    }
+    return topRank;
+}
+function topRank1000(topRank){
+    if (topRank==undefined){
+        topRank = 1000;
+    }
+    return topRank;
+}
+function topRank45(topRank){
+    if (topRank==undefined){
+        topRank = 45;
+    }
+    return topRank;
 }

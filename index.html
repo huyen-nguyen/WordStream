@@ -8,12 +8,15 @@
     <script src="./lib/d3.min.js"></script>
     <script src="./lib/loaddata.js"></script>
     <script src="./lib/d3.layout.wordstream.js"></script>
+    <script src="lib/d3.slider.js"></script>
     <script src="./test/testutil.js"></script>
     <script src="javascripts/jquery/jquery-1.9.0.min.js"></script>
+
     <script src="javascripts/msdropdown/jquery.dd.js"></script>
     <script src="javascripts/msdropdown/select.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/msdropdown/dd.css" />
     <link rel="stylesheet" type="text/css" href="styles/main.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="styles/d3.slider.css">
 
     <script src="./lib/fisheye.js"></script>
     <script src="./lib/select2.min.js"></script>
@@ -30,37 +33,59 @@
     <!-- <span id="progressText"> -->
 </div>
 
-<!--<div>-->
-    <!--<nav class="navi">-->
-        <!--<ul>-->
-            <!--<li style="background-color: antiquewhite"><a target="_blank" href="index.html">WordStream</a></li>-->
-            <!--<li><a target="_blank" href="timeArcs.html">TimeArcs</a></li>-->
-        <!--</ul>-->
-    <!--</nav>-->
-<!--</div>-->
 <div id="holder1"  class="holder1">
     <select id="datasetsSelect" class="styled-select" onchange="loadNewData.call(this, event)"></select>
 </div>
-<div class="container main" style="position: absolute; top: 23px; left: 100px;" >
-    <form id="form_id" method="post" name="myform">
-        <h2>Javascript Set Form Action Example</h2>
-        <label>Name :</label>
-        <input id="name" name="name" placeholder="Name" type="text"><br>
-        <label>Email :</label>
-        <input id="email" name="email" placeholder="Valid Email" type="text"><br>
-        <label>Contact No. :</label>
-        <input id="contact" name="contact" placeholder="Contact No." type="text"><br>
-        <input onclick="myfunction()" type="button" value="Submit"><br>
-        <span><b class="note">Note :</b> Form action will be set to <b>success.php</b> on click of submit button.</span>
-    </form>
-</div>
+
 <script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script> <!-- Spinner when loading -->
 
 <script type='text/javascript' src="https://code.jquery.com/ui/1.11.0/jquery-ui.min.js"> </script>
 <link href="styles/jquery-ui.css" rel="stylesheet" type="text/css" />
 
 <!--Time arcs-->
+
+
+
+<!--✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ Slider ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿-->
+<div id="menu" class="holder2" style="display: inline-block">
+    <p class="ws">WordStream: Interactive Tool for Topic Evolution</p>
+
+    <p>
+        <img class="fontIcon" src="images/font.png" style="width:40px;height:40px;">
+        <span class="fontText">
+        <span id="fontMin">10</span>,
+        <span id="fontMax">25</span>
+    </span>
+    </p>
+
+    <div id="fontSlider" class="fontAxis"></div>
+
+
+    <p>
+        <span id="heightText" class="heightText">800</span>
+        <img class="heightIcon" src="images/height.png" style="width:40px;height:40px;">
+    </p><br>
+    <div id="heightSlider" class="haxis"></div>
+
+    <p>
+        <img class="widthIcon" src="images/width.png" style="width:40px;height:40px;">
+        <span id="widthText" class="widthText">800</span>
+    </p><br>
+    <div id="widthSlider" class="waxis"></div>
+
+    <input class="submit" onclick="submitInput()" type="button" value="Submit"><br>
+</div>
+
+<p><div id="topRankText" class="topRankText">
+        </div>
+    <img class="topRankIcon" src="images/toprank.png" style="width:30px;height:40px;">
+</p><br>
+<div id="topRankSlider" class="topRankAxis"></div>
+
+<script src="javascripts/input.js"></script>
 <script src="javascripts/main.js"></script>
+
+
 <!--<script type='text/javascript' src="javascripts/mainTA.js"></script>-->
 
 <!--<input type="checkbox" id="checkbox1" value="value2" class="check" onclick="update()">-->
