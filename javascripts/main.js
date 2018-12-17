@@ -1,11 +1,3 @@
-// pre-defined size
-var globalWidth = 800,
-    globalHeight = 800,
-    globalMinFont = 8,
-    globalMaxFont = 40,
-    topRank = 45
-;
-
 var svg = d3.select("body").append('svg')
     .attr({
     width: globalWidth,
@@ -61,35 +53,35 @@ function loadData(){
     fileName = "data/"+fileName+".tsv"; // Add data folder path
     if (fileName.indexOf("Cards_Fries")>=0){
         categories = ["increases_activity", "decreases_activity"];
-        loadAuthorData(draw, topRank
+        loadAuthorData(draw, topRank200()
             ,drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("Cards_PC")>=0){
         categories = ["adds_modification", "removes_modification", "increases","decreases", "binds", "translocation"];
-        loadAuthorData(draw, topRank
+        loadAuthorData(draw, topRank200()
             , drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("PopCha")>=0){
         categories = ["Comedy","Drama","Action", "Fantasy", "Horror"];
-        loadAuthorData(drawpop, topRank
+        loadAuthorData(drawpop, topRank200()
             , drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("IMDB")>=0){
         categories = ["Comedy","Drama","Action", "Family"];
-        loadAuthorData(draw, topRank
+        loadAuthorData(draw, topRank45()
             , drawTimeArcs
         );
 
     }
     else if (fileName.indexOf("VIS")>=0){
         categories = ["Vis","VAST","InfoVis","SciVis"];
-        loadAuthorData(draw, topRank
+        loadAuthorData(draw, topRank45()
             , drawTimeArcs
         );
 
@@ -97,11 +89,12 @@ function loadData(){
 
     else{
         categories = ["person","location","organization","miscellaneous"];
-        loadBlogPostData(draw, topRank
+        loadBlogPostData(draw, topRank45()
             , drawTimeArcs
         );
 
     }
+
 
 }
 function loadNewData(event) {
@@ -109,7 +102,10 @@ function loadNewData(event) {
     // svg2.selectAll("*").remove();
     // svg3.selectAll("*").remove();
     fileName = this.options[this.selectedIndex].text;
+    topRank=undefined;
     loadData();
+    d3.selectAll(".topRank").remove();
+    updateTopRank();
 }
 
 
@@ -646,19 +642,19 @@ function styleGridlineNodes(gridlineNodes){
         stroke: 'lightgray'
     });
 }
-function topRank200(topRank){
+function topRank200(){
     if (topRank==undefined){
         topRank = 200;
     }
     return topRank;
 }
-function topRank1000(topRank){
+function topRank1000(){
     if (topRank==undefined){
         topRank = 1000;
     }
     return topRank;
 }
-function topRank45(topRank){
+function topRank45(){
     if (topRank==undefined){
         topRank = 45;
     }

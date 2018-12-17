@@ -1,3 +1,4 @@
+
 .d3-slider {
     position: relative;
     font-family: Verdana,Arial,sans-serif;
@@ -7,20 +8,30 @@
 }
 
 .d3-slider-horizontal {
-    height: 0.3em;
     width: 300px;
+    height: 0.3em;
     border-radius: 20px;
     background-color: rgba(1, 132, 127, 0.33);
     border-color: rgba(1, 125, 120, 0.44);
 }
 
+.d3-slider-width {
+    width: 500px;
+}
+.d3-slider-height {
+    width: 200px;
+}
+.d3-slider-normal {
+    width: 300px;
+}
 .d3-slider-range {
     background: #1c8199;
     left:0px;
     right:0px;
     height: 0.3em;
     position: absolute;
-    border-color: #1c8199;
+    border-radius: 20px;
+    border-color: transparent;
 
 }
 
@@ -188,6 +199,26 @@ h2 {
 .fontAxis {
     position: absolute;
     top: 80px;
+    left: 557px;
+}
+
+
+.topRankIcon {
+    position: absolute;
+    top: 132px;
+    left: 505px;
+    width: 38px;
+    height: 38px
+}
+.topRankText {
+    white-space: nowrap;
+    position: absolute;
+    top: 145px;
+    left: 872px;
+}
+.topRankAxis {
+    position: absolute;
+    top: 150px;
     left: 557px;
 }
 .submit {

@@ -44,46 +44,50 @@
 
 <!--Time arcs-->
 
-
-
 <!--✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ Slider ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿-->
 <div id="menu" class="holder2" style="display: inline-block">
     <p class="ws">WordStream: Interactive Tool for Topic Evolution</p>
 
-    <p>
-        <img class="fontIcon" src="images/font.png" style="width:40px;height:40px;">
+    <p><img class="fontIcon" src="images/font.png" style="width:40px;height:40px;">
         <span class="fontText">
-        <span id="fontMin">10</span>,
-        <span id="fontMax">25</span>
+        <span id="fontMin"></span>,
+        <span id="fontMax"></span>
     </span>
     </p>
 
     <div id="fontSlider" class="fontAxis"></div>
-
-
     <p>
-        <span id="heightText" class="heightText">800</span>
+        <span id="heightText" class="heightText"></span>
         <img class="heightIcon" src="images/height.png" style="width:40px;height:40px;">
     </p><br>
     <div id="heightSlider" class="haxis"></div>
 
     <p>
         <img class="widthIcon" src="images/width.png" style="width:40px;height:40px;">
-        <span id="widthText" class="widthText">800</span>
+        <span id="widthText" class="widthText"></span>
     </p><br>
     <div id="widthSlider" class="waxis"></div>
 
+    <img class="topRankIcon" src="images/toprank3.png">
     <input class="submit" onclick="submitInput()" type="button" value="Submit"><br>
+
 </div>
 
-<p><div id="topRankText" class="topRankText">
-        </div>
-    <img class="topRankIcon" src="images/toprank.png" style="width:30px;height:40px;">
-</p><br>
-<div id="topRankSlider" class="topRankAxis"></div>
-
 <script src="javascripts/input.js"></script>
+<script>
+    d3.select("#heightText").text(initHeight);
+    d3.select("#widthText").text(initWidth);
+    d3.select("#fontMin").text(initMinFont);
+    d3.select("#fontMax").text(initMaxFont);
+</script>
 <script src="javascripts/main.js"></script>
+<script>
+    updateTopRank();
+</script>
+<div>
+
+</div>
+
 
 
 <!--<script type='text/javascript' src="javascripts/mainTA.js"></script>-->
