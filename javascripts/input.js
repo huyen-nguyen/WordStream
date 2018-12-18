@@ -20,9 +20,9 @@ var axisFont = d3.svg.axis().tickValues([0,25,50,75,100]);
 
 d3.select('#widthSlider').call(d3.slider()
     .axis(axis)
-    .value([600,initWidth])
-    .min(600)
-    .max(1400)
+    .value([0,initWidth])
+    .min(0)
+    .max(2000)
     .step(20)
     .on("slide", function (evt, value) {
     d3.select('#widthText').text(value[1]);
@@ -30,9 +30,9 @@ d3.select('#widthSlider').call(d3.slider()
 ;
 d3.select('#heightSlider').call(d3.slider()
     .axis(axis)
-    .value([200,initHeight])
-    .min(200)
-    .max(1000)
+    .value([0,initHeight])
+    .min(0)
+    .max(2000)
     .step(20)
     .on("slide", function (evt, value) {
         d3.select('#heightText').text(value[1]);
@@ -43,14 +43,53 @@ d3.select('#fontSlider').call(d3.slider().axis(axisFont).value([initMinFont, ini
     d3.select('#fontMax').text(value[1].toFixed(0));
 }));
 
-function updateTopRank(){
-    d3.select(".holder2").append("span")
-        .attr("id","topRankText")
-        .attr("class","topRankText topRank");
+var metricLine = [1,2,3,4,5];
+var metricName = ["Importance value (tf-idf ratio): ","Compactness: ","All Words Area/Stream Area:","Weighted Display" +
+" Rate:","Average Normalized Frequency: "];
 
-    d3.select(".holder2").append("div")
+var metric = d3.select("body").append("svg")
+    .attr("width",360)
+    .attr("height", 300)
+    .attr("class","metricSVG")
+    .attr("id","metricSVG");
+
+metric.append("text").attr("y", 15).attr("font-weight",600).text("Metrics");
+
+metric.selectAll("rect")
+    .data(metricLine)
+    .enter()
+    .append("rect")
+    .attr("id", "metric" + function(d){
+        return d
+    })
+    .attr("class",".metricText")
+    .attr("x","13")
+    .attr("y",(d,i) => 50*i+40)
+    .attr("rx","5")
+    .attr("ry","5")
+    .attr("width","330")
+    .attr("height","38")
+    .style("fill","#eeeeee")
+    .attr("stroke","#8f8f8f");
+
+metric.selectAll(".metricText")
+    .data(metricName)
+    .enter()
+    .append("text")
+    .text(d => d)
+    .attr("x","20")
+    .attr("y",(d,i) => 63+i*50)
+    .attr("font-size","13px");
+
+
+function updateTopRank(){
+    d3.select(".holderCP").append("span")
+        .attr("id","topRankText")
+        .attr("class","topRankText topRank textSlider");
+
+    d3.select(".holderCP").append("div")
         .attr("id","topRankSlider")
-        .attr("class","topRankAxis topRank");
+        .attr("class","topRankAxis topRank slider");
 
     d3.select("#topRankText").text(topRank);
 

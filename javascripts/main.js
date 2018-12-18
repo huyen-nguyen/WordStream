@@ -103,7 +103,7 @@ function loadNewData(event) {
     // svg3.selectAll("*").remove();
     fileName = this.options[this.selectedIndex].text;
     topRank=undefined;
-    loadData();
+    loadData()
     d3.selectAll(".topRank").remove();
     updateTopRank();
 }
@@ -161,7 +161,7 @@ function draw(data, pop){
     //set svg data.
     svg.attr({
         width: width + margins.left + margins.top,
-        height: height + margins.top + margins.bottom + axisPadding + offsetLegend+legendHeight + bias
+        height: height + margins.top + margins.bottom + axisPadding + offsetLegend+legendHeight
     });
 
     var area = d3.svg.area()
@@ -501,20 +501,34 @@ function draw(data, pop){
     var weightedRate = displayFreq_1 / totalFreq_1;
     var averageNormFreq = displayNormFreq_2 / numbers_2;
 
+    // ========== Write to box =======
+
+    var metValue = [avgTfidf.toFixed(2), compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3)];
+
+    metric.selectAll(".metricValue")
+        .data(metValue)
+        .enter()
+        .append("text")
+        .text(d => d)
+        .attr("class","metricValue")
+        .attr("x","290")
+        .attr("y",(d,i) => 63+i*50)
+        .attr("font-size","13px")
+        .attr("font-weight", "bold");
     // ========== WRITE ==============
-    d3.select('#mainsvg').append('g').attr({
-        id: "metrics",
-        width: 200,
-        height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)').attr("class","value")
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Importance value (tf-idf ratio): " + avgTfidf.toFixed(2))
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Compactness: " + compactness.toFixed(2))
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of Displayed Words = " + ratio.toFixed(2) + " ×" +
-        " Stream Area" )
-        // .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Display: " + countDisplay + " All: " + countall + " Ratio: " + (countDisplay/countall))
-
-
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted Display Rate: " + weightedRate.toFixed(2))
-        .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Average Normalized Frequency: " + averageNormFreq.toFixed(3) );
+    // d3.select('#mainsvg').append('g').attr({
+    //     id: "metrics",
+    //     width: 200,
+    //     height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)').attr("class","value")
+    //     .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Importance value (tf-idf ratio): " + avgTfidf.toFixed(2))
+    //     .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Compactness: " + compactness.toFixed(2))
+    //     .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of Displayed Words = " + ratio.toFixed(2) + " ×" +
+    //     " Stream Area" )
+    //     // .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Display: " + countDisplay + " All: " + countall + " Ratio: " + (countDisplay/countall))
+    //
+    //
+    //     .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted Display Rate: " + weightedRate.toFixed(2))
+    //     .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Average Normalized Frequency: " + averageNormFreq.toFixed(3) );
 
     // console.log(avgTfidf.toFixed(2), compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3))
     ;
