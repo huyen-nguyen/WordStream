@@ -119,6 +119,12 @@ function submitInput(){
     globalMinFont = parseInt(document.getElementById("fontMin").innerText);
     globalMaxFont = parseInt(document.getElementById("fontMax").innerText);
     topRank = parseInt(document.getElementById("topRankText").innerText);
+    var isChecked = document.getElementById("s1").checked;
+
+    if (isChecked){
+        console.log("Checked!")
+    }
+    else {console.log("Hmmm")}
     loadNewLayout();
 }
 
