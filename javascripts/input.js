@@ -43,43 +43,51 @@ d3.select('#fontSlider').call(d3.slider().axis(axisFont).value([initMinFont, ini
     d3.select('#fontMax').text(value[1].toFixed(0));
 }));
 
-var metricLine = [1,2,3,4,5];
-var metricName = ["Importance value (tf-idf ratio): ","Compactness: ","All Words Area/Stream Area:","Weighted Display" +
-" Rate:","Average Normalized Frequency: "];
+var metricName = [["Importance value (tf-idf ratio) "],["Compactness "],["All Words Area/Stream Area"],["Weighted Display Rate"],["Average Normalized Frequency "]];
 
 var metric = d3.select("body").append("svg")
     .attr("width",360)
-    .attr("height", 300)
+    .attr("height", 252)
     .attr("class","metricSVG")
     .attr("id","metricSVG");
 
 metric.append("text").attr("y", 15).attr("font-weight",600).text("Metrics");
 
-metric.selectAll("rect")
-    .data(metricLine)
-    .enter()
-    .append("rect")
-    .attr("id", "metric" + function(d){
-        return d
-    })
-    .attr("class",".metricText")
-    .attr("x","13")
-    .attr("y",(d,i) => 50*i+40)
-    .attr("rx","5")
-    .attr("ry","5")
-    .attr("width","330")
-    .attr("height","38")
-    .style("fill","#eeeeee")
-    .attr("stroke","#8f8f8f");
+d3.select("body")
+    // .append("div")
+    .append("table")
+    .attr("class","metTable")
+    .style("border-collapse", "collapse")
+    .style("border", "2px black solid")
 
-metric.selectAll(".metricText")
+    .selectAll("tr")
     .data(metricName)
-    .enter()
-    .append("text")
-    .text(d => d)
-    .attr("x","20")
-    .attr("y",(d,i) => 63+i*50)
-    .attr("font-size","13px");
+    .enter().append("tr")
+
+    .selectAll("td")
+    .data(function(d){return d;})
+    .enter().append("td")
+    .style("border", "1px black solid")
+    .style("padding", "10px")
+    .on("mouseover", function(){d3.select(this).style("background-color", "aliceblue")})
+    .on("mouseout", function(){d3.select(this).style("background-color", "white")})
+    .text(function(d){return d;})
+    .style("font-size", "13px");
+
+var metric2 = d3.select("body").append("svg")
+    .attr("width",100)
+    .attr("height", 300)
+    .attr("class","metricSVG2")
+    .attr("id","metricSVG2");
+
+// draw line
+var frontier = d3.select("#cp").append("line")
+    .attr("id","frontier")
+    .attr("x1", 170)
+    .attr("x2", 170)
+    .attr("y1", 300)
+    .attr("y2", 350)
+    .attr("class","frontier");
 
 
 function updateTopRank(){
@@ -137,3 +145,29 @@ function loadNewLayout(){
 //         d3.select('#heightText').text(value);
 //     }))
 // ;
+
+// metric.selectAll("rect")
+//     .data(metricLine)
+//     .enter()
+//     .append("rect")
+//     .attr("id", "metric" + function(d){
+//         return d
+//     })
+//     .attr("class",".metricRect")
+//     .attr("x","20")
+//     .attr("y",(d,i) => 50*i+40)
+//     .attr("rx","5")
+//     .attr("ry","5")
+//     .attr("width","320")
+//     .attr("height","36")
+//     .style("fill","#eeeeee")
+//     .attr("stroke","#8f8f8f");
+
+// metric.selectAll(".metricText")
+//     .data(metricName)
+//     .enter()
+//     .append("text")
+//     .text(d => d)
+//     .attr("class","metricDisplay")
+//     .attr("x","33")
+//     .attr("y",(d,i) =>i*50);

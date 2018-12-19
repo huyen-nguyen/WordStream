@@ -505,16 +505,16 @@ function draw(data, pop){
 
     var metValue = [avgTfidf.toFixed(2), compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3)];
 
-    metric.selectAll(".metricValue")
+    metric2.selectAll(".metricValue")
         .data(metValue)
         .enter()
         .append("text")
         .text(d => d)
-        .attr("class","metricValue")
-        .attr("x","290")
-        .attr("y",(d,i) => 63+i*50)
-        .attr("font-size","13px")
-        .attr("font-weight", "bold");
+        .attr("class","metricValue metricDisplay")
+        .attr("x","0")
+        .attr("y",(d,i) =>43+ 36*i)
+        .attr("font-weight", "bold")
+        .attr("z-index",1);
     // ========== WRITE ==============
     // d3.select('#mainsvg').append('g').attr({
     //     id: "metrics",
