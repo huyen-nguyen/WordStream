@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="140e1f28-6c0b-46d1-b831-903931873018" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javascripts/input.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/input.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/d3.slider.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/d3.slider.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/main.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,8 +22,8 @@
             <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/styles/d3.slider.css">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="211">
-                    <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+                  <state relative-caret-position="65">
+                    <caret line="148" column="12" selection-start-line="148" selection-start-column="12" selection-end-line="148" selection-end-column="12" />
                   </state>
                 </provider>
               </entry>
@@ -124,7 +122,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="2275" />
+          <entry key="css" value="2286" />
           <entry key="html" value="2202" />
           <entry key="js" value="8348" />
           <entry key="tsv" value="1" />
@@ -132,7 +130,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="2275" />
+          <entry key="CSS" value="2286" />
           <entry key="HTML" value="2202" />
           <entry key="JavaScript" value="8348" />
           <entry key="TSV" value="1" />
@@ -164,8 +162,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="500" column="51" lean-forward="true" selection-start-line="500" selection-start-column="51" selection-end-line="500" selection-end-column="51" />
+            <state relative-caret-position="26">
+              <caret line="498" column="7" lean-forward="true" selection-start-line="498" selection-start-column="7" selection-end-line="498" selection-end-column="7" />
               <folding>
                 <marker date="1545188018203" expanded="true" signature="16962:17261" ph="..." />
               </folding>
@@ -176,8 +174,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="62" column="8" lean-forward="true" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
+            <state relative-caret-position="172">
+              <caret line="89" column="4" selection-start-line="89" selection-start-column="4" selection-end-line="89" selection-end-column="4" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#p#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -224,7 +222,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>10</find>
       <find>border</find>
       <find>d3-slider-range</find>
       <find>value</find>
@@ -254,6 +251,7 @@
       <find>texts</find>
       <find>wrap</find>
       <find>holdercp</find>
+      <find>textsli</find>
     </findStrings>
     <replaceStrings>
       <replace>data</replace>
@@ -293,8 +291,8 @@
         <option value="$PROJECT_DIR$/javascripts/main.js" />
         <option value="$PROJECT_DIR$/javascripts/input.js" />
         <option value="$PROJECT_DIR$/styles/main.css" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/styles/d3.slider.css" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -305,10 +303,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1267" />
-    <option name="y" value="582" />
-    <option name="width" value="1299" />
-    <option name="height" value="822" />
+    <option name="x" value="401" />
+    <option name="y" value="200" />
+    <option name="width" value="1438" />
+    <option name="height" value="1240" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -452,12 +450,12 @@
       <workItem from="1544455074795" duration="43122000" />
       <workItem from="1544632344446" duration="7932000" />
       <workItem from="1544666337131" duration="1709000" />
-      <workItem from="1544810362931" duration="92208000" />
+      <workItem from="1544810362931" duration="92467000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="252491000" />
+    <option name="totallyTimeSpent" value="252750000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1267" y="582" width="1299" height="822" extended-state="0" />
@@ -723,16 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="500" column="51" lean-forward="true" selection-start-line="500" selection-start-column="51" selection-end-line="500" selection-end-column="51" />
-          <folding>
-            <marker date="1545188018203" expanded="true" signature="16962:17261" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/av.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -753,17 +741,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/javascripts/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="498" column="7" lean-forward="true" selection-start-line="498" selection-start-column="7" selection-end-line="498" selection-end-column="7" />
+          <folding>
+            <marker date="1545188018203" expanded="true" signature="16962:17261" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/styles/d3.slider.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="65">
+          <caret line="148" column="12" selection-start-line="148" selection-start-column="12" selection-end-line="148" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="62" column="8" lean-forward="true" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
+        <state relative-caret-position="172">
+          <caret line="89" column="4" selection-start-line="89" selection-start-column="4" selection-end-line="89" selection-end-column="4" />
           <folding>
             <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#p#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
