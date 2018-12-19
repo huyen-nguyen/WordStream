@@ -47,7 +47,7 @@ var metricName = [["Importance value (tf-idf ratio) "],["Compactness "],["All Wo
 
 var metric = d3.select("body").append("svg")
     .attr("width",360)
-    .attr("height", 252)
+    .attr("height", 250)
     .attr("class","metricSVG")
     .attr("id","metricSVG");
 
