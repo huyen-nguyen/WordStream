@@ -150,7 +150,8 @@ function draw(data, pop){
         .minFontSize(globalMinFont)
         .maxFontSize(globalMaxFont)
         .data(data)
-        .font(font);
+        .font(font)
+        .flag(globalFlag);
     var boxes = ws.boxes(),
         minFreq = ws.minFreq(),
         maxFreq = ws.maxFreq();
@@ -505,6 +506,7 @@ function draw(data, pop){
 
     var metValue = [avgTfidf.toFixed(2), compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3)];
 
+    metric2.selectAll(".metricValue").remove();
     metric2.selectAll(".metricValue")
         .data(metValue)
         .enter()
@@ -515,6 +517,8 @@ function draw(data, pop){
         .attr("y",(d,i) =>43+ 36*i)
         .attr("font-weight", "bold")
         .attr("z-index",1);
+
+
     // ========== WRITE ==============
     // d3.select('#mainsvg').append('g').attr({
     //     id: "metrics",

@@ -2,21 +2,26 @@
 var initWidth = 800,
     initHeight = 800,
     initMinFont = 12,
-    initMaxFont = 50
-;
+    initMaxFont = 50,
+    initFlag = "none";
 
 var globalWidth = initWidth,
     globalHeight = initHeight,
     globalMinFont = initMinFont,
     globalMaxFont = initMaxFont,
+    globalFlag = initFlag,
     topRank
 ;
 
 var axis = d3.svg.axis().ticks(4);
 var axisFont = d3.svg.axis().tickValues([0,25,50,75,100]);
 // var verticalAxis = d3.svg.axis().orient("left").ticks(5);
-
-
+function testJS(){
+    console.log("Mouse test JS");
+}
+function testJQuery(){
+    console.log("Mouse test Jquery");
+}
 
 d3.select('#widthSlider').call(d3.slider()
     .axis(axis)
@@ -42,6 +47,7 @@ d3.select('#fontSlider').call(d3.slider().axis(axisFont).value([initMinFont, ini
     d3.select('#fontMin').text(value[0].toFixed(0));
     d3.select('#fontMax').text(value[1].toFixed(0));
 }));
+
 
 var metricName = [["Importance value (tf-idf ratio) "],["Compactness "],["All Words Area/Stream Area"],["Weighted Display Rate"],["Average Normalized Frequency "]];
 
@@ -91,6 +97,7 @@ var frontier = d3.select("#cp").append("line")
 
 
 function updateTopRank(){
+
     d3.select(".holderCP").append("span")
         .attr("id","topRankText")
         .attr("class","topRankText topRank textSlider");
@@ -110,21 +117,51 @@ function updateTopRank(){
         .on("slide", function (evt, value) {
             d3.select('#topRankText').text(value[1]);
         }))
+        // .on("mouseup", submitInput())
     ;
 }
+function loadNewPage()
+{
+    $(document).ready(function() {
+        $('.switch-input').on('change', function() {
+            var isChecked = $(this).is(':checked');
+            var selectedData;
+            var $switchLabel = $('.switch-label');
+            console.log('isChecked: ' + isChecked);
 
+            if(isChecked) {
+                selectedData = $switchLabel.attr('data-yes');
+            } else {
+                selectedData = $switchLabel.attr('data-no');
+            }
+            console.log('Selected data: ' + selectedData);
+        });
+    });
+}
 function submitInput(){
     globalWidth = parseInt(document.getElementById("widthText").innerText);
     globalHeight = parseInt(document.getElementById("heightText").innerText);
     globalMinFont = parseInt(document.getElementById("fontMin").innerText);
     globalMaxFont = parseInt(document.getElementById("fontMax").innerText);
     topRank = parseInt(document.getElementById("topRankText").innerText);
-    var isChecked = document.getElementById("s1").checked;
-
-    if (isChecked){
-        console.log("Checked!")
+    var isFlow = document.getElementById("flow").checked;
+    var isAv = document.getElementById("av").checked;
+    if (isFlow && isAv){
+        console.log("Flow and Av");
+        globalFlag = "fa";
     }
-    else {console.log("Hmmm")}
+    else if (isFlow && !isAv) {
+        console.log("Just Flow");
+        globalFlag = "f";}
+
+    else if (!isFlow && isAv){
+        console.log("Just AV");
+        globalFlag = "a";}
+
+    else if (!isFlow && !isAv){
+        console.log("None");
+        globalFlag = "none"}
+
     loadNewLayout();
 }
 

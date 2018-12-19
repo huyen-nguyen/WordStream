@@ -56,12 +56,12 @@
     <p><span id="heightText" class="heightText textSlider"></span>
         <img class="heightIcon icon" src="images/height.png" style="width:35px;height:35px;">
     </p>
-    <div id="heightSlider" class="haxis slider"></div>
+    <div id="heightSlider" class="haxis slider" ></div>
 
     <p><img class="widthIcon icon" src="images/width.png" style="width:35px;height:35px;">
         <span id="widthText" class="widthText textSlider"></span>
     </p>
-    <div id="widthSlider" class="waxis slider"></div>
+    <div id="widthSlider" class="waxis slider" ></div>
 
     <p><img class="fontIcon icon" src="images/font.png" style="width:35px;height:35px;">
         <span class="fontText textSlider">
@@ -69,21 +69,21 @@
         <span id="fontMax"></span>
     </span>
     </p>
-    <div id="fontSlider" class="fontAxis slider"></div>
+    <div id="fontSlider" class="fontAxis slider" ></div>
 
     <img class="topRankIcon icon" src="images/toprank3.png">
 
     <p class="textSlider flow">Flow</p>
     <img class="flow" style="left: 68px; width: 33px; height: 23px" src="images/flow.png">
     <label class="switch flow"  style="left: 105px;">
-        <input type="checkbox" id="s1">
+        <input type="checkbox" id="flow"  onclick="submitInput()">
         <span class="toggle round"></span>
     </label>
 
     <p class="textSlider angleVariance">Angle Variance</p>
     <img class="angleVariance" style="top: 302px;left: 278px;width: 32px; height: 35px" src="images/av.png">
     <label class="switch angleVariance" style="left: 315px">
-        <input type="checkbox" id = "s2">
+        <input type="checkbox" id = "av" onclick="submitInput()">
         <span class="toggle round"></span>
     </label>
     <input class="submit" onclick="submitInput()" type="button" value="Submit"><br>
