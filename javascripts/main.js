@@ -1,10 +1,18 @@
+// pre-defined size
+var initWidth = 800,
+    initHeight = 800,
+    initMinFont = 12,
+    initMaxFont = 50,
+    initFlag = "none",
+    topRank;
+
 var svg = d3.select("body").append('svg')
     .attr({
-    width: globalWidth,
-    height: globalHeight,
+    width: initWidth,
+    height: initHeight,
     id: "mainsvg",
 });
-var interval = 120;
+var mainGroup;
 
 // var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
@@ -67,7 +75,7 @@ function loadData(){
     }
     else if (fileName.indexOf("PopCha")>=0){
         categories = ["Comedy","Drama","Action", "Fantasy", "Horror"];
-        loadAuthorData(drawpop, topRank200()
+        loadAuthorData(draw, topRank200()
             , drawTimeArcs
         );
 
@@ -94,8 +102,6 @@ function loadData(){
         );
 
     }
-
-
 }
 function loadNewData(event) {
     svg.selectAll("*").remove();
@@ -103,40 +109,17 @@ function loadNewData(event) {
     // svg3.selectAll("*").remove();
     fileName = this.options[this.selectedIndex].text;
     topRank=undefined;
-    loadData()
+    loadData();
     d3.selectAll(".topRank").remove();
     updateTopRank();
 }
 
-
-function drawpop(data){
-    draw(data, 1);
-};
-
-function drawCS(data){
-    draw(data, 2)
-}
 function drawTimeArcs(){
     timeArcs()
 }
-function draw(data, pop){
-    //Layout data
-    //
-    if (pop === 1) {
-        interval = 50;}
-    else if (pop === 2) {
-        interval = 120;}
-    else {interval = 180;}
-// function draw(data){
-//     //Layout data
-//     var dataWidth = data.length*100;
-
-    // var width = (dataWidth > minWidth) ? dataWidth:minWidth;
-
-    var width = globalWidth  ;
-    var height = globalHeight;
-    // var width = 1.5 * resWidth;
-    document.getElementById("mainsvg").setAttribute("width",width);
+function draw(data){
+    var width = initWidth  ;
+    var height = initHeight;
     var font = "Arial";
     var interpolation = "cardinal";
     var bias = 200;
@@ -147,12 +130,12 @@ function draw(data, pop){
         .size([width, height])
         .interpolate(interpolation)
         .fontScale(d3.scale.linear())
-        .minFontSize(globalMinFont)
-        .maxFontSize(globalMaxFont)
+        .minFontSize(initMinFont)
+        .maxFontSize(initMaxFont)
         .data(data)
         .font(font)
-        .flag(globalFlag);
-    var boxes = ws.boxes(),
+        .flag(initFlag);
+    var boxes = ws.boxes(),     // initial boxes
         minFreq = ws.minFreq(),
         maxFreq = ws.maxFreq();
 
@@ -199,7 +182,7 @@ function draw(data, pop){
     styleGridlineNodes(gridlineNodes);
 
     //Main group
-    var mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
+    mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
     var wordStreamG = mainGroup.append('g');
 
     // =============== Get BOUNDARY and LAYERPATH ===============
@@ -264,11 +247,14 @@ function draw(data, pop){
         });
     });
 
+    console.log("all words:");
+    console.log(allWords);
     //Color based on term
-    var terms = [];
-    for(i=0; i< allWords.length; i++){
-        terms.concat(allWords[i].text);
-    }
+    // var terms = [];
+    // for(i=0; i< allWords.length; i++){
+    //     terms.concat(allWords[i].text);
+    // }
+    //
 
     var opacity = d3.scale.linear()
         .domain([minFreq, maxFreq])
@@ -277,11 +263,14 @@ function draw(data, pop){
     // Add moi chu la 1 element <g>, xoay g dung d.rotate
     var placed = true; // = false de hien thi nhung tu ko dc dien
 
+    //  ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ PLACING WORDS  ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿
+
     mainGroup.selectAll('g').data(allWords).enter().append('g')
         .attr({transform: function(d){return 'translate('+d.x+', '+d.y+')rotate('+d.rotate+')';}})
         .append('text')
-        .text(function(d){return d.text;})      // add text vao g
+        .text(function(d){return d.text;})
         .attr({
+            "id": d => d.id,
             'font-family': font,
             'font-size': function(d){return d.fontSize;},
             fill: function(d){return color(d.topicIndex);},
@@ -289,14 +278,15 @@ function draw(data, pop){
             'text-anchor': 'middle',
             'alignment-baseline': 'middle',
             topic: function(d){return d.topic;},
-            visibility: function(d){ return d.placed ? (placed? "visible": "hidden"): (placed? "hidden": "visible");}
+            visibility: function(d){ return d.placed ? ("visible"): ("hidden");}
         });
+
 
     // When click a term
     //Try
     var prevColor;
-    //Highlight
-    mainGroup.selectAll('text').on('mouseenter', function(){
+    // --- Highlight when mouse enter ---
+    mainGroup.selectAll('text').on('mouseenter', function(){  // hover above the word -> select this
         var thisText = d3.select(this);
         thisText.style('cursor', 'pointer');
         prevColor = thisText.attr('fill');
@@ -308,10 +298,12 @@ function draw(data, pop){
         });
         allTexts.attr({
             stroke: prevColor,
+            fill: prevColor,
             'stroke-width': 1.5
         });
     });
 
+    // --- Lowlight when mouse out ---
     mainGroup.selectAll('text').on('mouseout', function(){
         var thisText = d3.select(this);
         thisText.style('cursor', 'default');
@@ -330,13 +322,17 @@ function draw(data, pop){
         var thisText = d3.select(this);
         var text = thisText.text();
         var topic = thisText.attr('topic');
-        var allTexts = mainGroup.selectAll('text').filter(t =>{
+        var allTexts = mainGroup.selectAll('text').filter(t =>{     // group of all the same words
             return t && t.text === text &&  t.topic === topic;
         });
+        console.log("allTexts");
+        console.log(allTexts);
         // get the word out
-        //Select the data for the stream layers
-        var streamLayer = d3.select("path[topic='"+ topic+"']" )[0][0].__data__;
+        // Select the data for the stream layers
+        var streamLayer = d3.select("path[topic='"+ topic+"']" )[0][0].__data__; // at this time: not available
 
+        console.log("streamLayer:");
+        console.log(streamLayer);
         //Push all points
         var points = Array();
         //Initialize all points
@@ -347,7 +343,7 @@ function draw(data, pop){
                 y: 0//zero as default
             });
         });
-        allTexts[0].forEach(t => {
+        allTexts[0].forEach(t => {      // for each TEXT
             var data = t.__data__;
             var fontSize = data.fontSize;
             //The point
@@ -356,15 +352,15 @@ function draw(data, pop){
             //Set it to visible.
             //Clone the nodes.
             var clonedNode = t.cloneNode(true);
-            d3.select(clonedNode).attr({
+            d3.select(clonedNode).attr({        // add attribute to the cloned node
                 visibility: "visible",
                 stroke: 'none',
                 'stroke-size': 0,
             });
-            var clonedParentNode = t.parentNode.cloneNode(false);
+            var clonedParentNode = t.parentNode.cloneNode(false);   // clone ca parent nua -_- empty
             clonedParentNode.appendChild(clonedNode);
 
-            t.parentNode.parentNode.appendChild(clonedParentNode);
+            t.parentNode.parentNode.appendChild(clonedParentNode);  // append clonedParent vao grandparent
             d3.select(clonedParentNode).attr({
                 cloned: true,
                 topic: topic
@@ -393,7 +389,6 @@ function draw(data, pop){
         });
         allOtherTexts.attr('visibility', 'hidden');
     });
-
 
 
     topics.forEach(topic=>{
@@ -434,7 +429,6 @@ function draw(data, pop){
     });
 
 
-
     //  =========== TF-IDF ==============
     var sumTfidfDisplayed = 0;
     var sumTfidf = 0;
@@ -446,18 +440,6 @@ function draw(data, pop){
     });
 
     var avgTfidf = sumTfidfDisplayed/sumTfidf;
-
-
-    //  =========== Display ==============
-    // var countall = 0;
-    // var countDisplay = 0;
-    // allWords.forEach(function (d) {
-    //     countall += 1;
-    //     if (d.placed){
-    //         countDisplay += 1;
-    //     }
-    // });
-
 
     //  =========== COMPACTNESS ==============
 
@@ -517,42 +499,6 @@ function draw(data, pop){
         .attr("y",(d,i) =>43+ 36*i)
         .attr("font-weight", "bold")
         .attr("z-index",1);
-
-
-    // ========== WRITE ==============
-    // d3.select('#mainsvg').append('g').attr({
-    //     id: "metrics",
-    //     width: 200,
-    //     height: 200}).attr('transform', 'translate(' + (margins.left) + ',' + (height + margins.top + axisPadding + legendHeight + margins.bottom+offsetLegend) + ')').append("svg:text").attr('transform','translate (0,20)').attr("class","value")
-    //     .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Importance value (tf-idf ratio): " + avgTfidf.toFixed(2))
-    //     .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Compactness: " + compactness.toFixed(2))
-    //     .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Area of Displayed Words = " + ratio.toFixed(2) + " ×" +
-    //     " Stream Area" )
-    //     // .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Display: " + countDisplay + " All: " + countall + " Ratio: " + (countDisplay/countall))
-    //
-    //
-    //     .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Weighted Display Rate: " + weightedRate.toFixed(2))
-    //     .append("svg:tspan").attr('x', 0).attr('dy', 20).text("Average Normalized Frequency: " + averageNormFreq.toFixed(3) );
-
-    // console.log(avgTfidf.toFixed(2), compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3))
-    ;
-
-    // ============ Get APPROXIMATE AREA ============
-
-    // var aveX = 0, aveY1, aveY2,
-    //     sumY1 = 0, sumY2 = 0;
-    //
-    // for (var q = 0; q < boundary.length; q++){
-    //     if (boundary[q].x > aveX) {aveX = boundary[q].x};
-    //     if (q < lenb/2) {sumY1 += boundary[q].y}
-    //     else (sumY2 += boundary[q].y)
-    // };
-    // aveY1 = sumY1 / (lenb / 2);
-    // aveY2 = sumY2 / (lenb / 2);
-
-    // console.log("Area of grey region: " +totalArea);
-    // console.log("Area aprx: " + (aveY2 - aveY1)*aveX);
-    // console.log("Area within black border: "+getArea(boundary));
 
 
 spinner.stop();

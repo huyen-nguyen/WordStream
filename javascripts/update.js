@@ -1,16 +1,9 @@
-// pre-defined size
-var initWidth = 800,
-    initHeight = 800,
-    initMinFont = 12,
-    initMaxFont = 50,
-    initFlag = "none";
-
 var globalWidth = initWidth,
     globalHeight = initHeight,
     globalMinFont = initMinFont,
     globalMaxFont = initMaxFont,
     globalFlag = initFlag,
-    topRank
+    updateGroup = mainGroup;
 ;
 
 var axis = d3.svg.axis().ticks(4);
@@ -49,7 +42,8 @@ d3.select('#fontSlider').call(d3.slider().axis(axisFont).value([initMinFont, ini
 }));
 
 
-var metricName = [["Importance value (tf-idf ratio) "],["Compactness "],["All Words Area/Stream Area"],["Weighted Display Rate"],["Average Normalized Frequency "]];
+var metricName = [["Importance value (tf-idf ratio) "],["Compactness "],["All Words Area/Stream Area"],
+    ["Weighted Display Rate"],["Average Normalized Frequency "]];
 
 var metric = d3.select("body").append("svg")
     .attr("width",360)
@@ -120,24 +114,6 @@ function updateTopRank(){
         // .on("mouseup", submitInput())
     ;
 }
-function loadNewPage()
-{
-    $(document).ready(function() {
-        $('.switch-input').on('change', function() {
-            var isChecked = $(this).is(':checked');
-            var selectedData;
-            var $switchLabel = $('.switch-label');
-            console.log('isChecked: ' + isChecked);
-
-            if(isChecked) {
-                selectedData = $switchLabel.attr('data-yes');
-            } else {
-                selectedData = $switchLabel.attr('data-no');
-            }
-            console.log('Selected data: ' + selectedData);
-        });
-    });
-}
 function submitInput(){
     globalWidth = parseInt(document.getElementById("widthText").innerText);
     globalHeight = parseInt(document.getElementById("heightText").innerText);
@@ -162,18 +138,58 @@ function submitInput(){
         console.log("None");
         globalFlag = "none"}
 
-    loadNewLayout();
+    console.log("input submitted");
+    updateData(mainGroup);
 }
+var up = [];
+function updateData(mainGroup){
+    var ws = d3.layout.wordStream()
+        .size([globalWidth, globalHeight])
+        .minFontSize(globalMinFont)
+        .maxFontSize(globalMaxFont)
+        .data(gdata)
+        .flag(globalFlag);
 
-function loadNewLayout(){
-    svg.selectAll("*").remove();
-    // svg2.selectAll("*").remove();
-    // svg3.selectAll("*").remove();
-    fileName = fileName.slice(0, -4).slice(5);
-    loadData(function(){
+    var newboxes = ws.boxes(),
+        minFreq = ws.minFreq(),
+        maxFreq = ws.maxFreq();
 
+    console.log("new boxes");
+    console.log(newboxes);
+
+    var data = ws.boxes().data;
+    console.log("new data");
+
+    // ARRAY OF ALL WORDS
+    var allWordsUpdate = [];
+    d3.map(data, function(row){
+        newboxes.topics.forEach(topic=>{
+            allWordsUpdate = allWordsUpdate.concat(row.words[topic]);
+        });
     });
+    var opacity = d3.scale.linear()
+        .domain([minFreq, maxFreq])
+        .range([0.5,1]);
+
+    up = JSON.parse(JSON.stringify(allWordsUpdate));
+    var gUpdate = mainGroup.selectAll('g').data(allWordsUpdate, d => d.id)
+        .transition()
+        .duration(1000)
+        .attr({transform: function(d){return 'translate('+d.x+', '+d.y+')rotate('+d.rotate+')';}})
+        .select("text")
+        .text(function(d){return d.text;})
+        .attr({
+            'font-size': function(d){return d.fontSize;},
+            fill: function(d){return color(d.topicIndex);},
+            'fill-opacity': function(d){return opacity(d.frequency)},
+            'text-anchor': 'middle',
+            'alignment-baseline': 'middle',
+            topic: function(d){return d.topic;},
+            visibility: function(d){ return d.placed ? ("visible"): ("hidden");}
+        });
+
 }
+
 
 // d3.select("#heightSlider")
 //     .attr("id","test")
