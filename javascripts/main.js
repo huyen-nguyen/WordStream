@@ -1,6 +1,6 @@
 // pre-defined size
-var initWidth = 800,
-    initHeight = 800,
+var initWidth = 1000,
+    initHeight = 1000,
     initMinFont = 12,
     initMaxFont = 50,
     initFlag = "none",
@@ -145,7 +145,7 @@ function draw(data){
     //set svg data.
     svg.attr({
         width: width + margins.left + margins.top,
-        height: height + margins.top + margins.bottom + axisPadding + offsetLegend+legendHeight
+        height: height + margins.top + margins.bottom + axisPadding + offsetLegend + legendHeight
     });
 
     var area = d3.svg.area()
@@ -428,8 +428,29 @@ function draw(data){
 
     });
 
+    // ========== Write to box =======
 
-    //  =========== TF-IDF ==============
+    var metValue = [getTfidf(allWords).toFixed(2),
+        getCompactness(allWords, layerPath)[0].toFixed(2),
+        getCompactness(allWords, layerPath)[1].toFixed(2),
+        getDisplayRate(allWords, maxFreq)[0].toFixed(2),
+        getDisplayRate(allWords, maxFreq)[1].toFixed(3)];
+
+    metric2.selectAll(".metricValue").remove();
+    metric2.selectAll(".metricValue")
+        .data(metValue)
+        .enter()
+        .append("text")
+        .text(d => d)
+        .attr("class","metricValue metricDisplay")
+        .attr("x","0")
+        .attr("y",(d,i) =>43+ 36*i)
+        .attr("font-weight", "bold");
+
+spinner.stop();
+
+};
+function getTfidf(allWords){
     var sumTfidfDisplayed = 0;
     var sumTfidf = 0;
     allWords.forEach(function (d) {
@@ -439,9 +460,10 @@ function draw(data){
         }
     });
 
-    var avgTfidf = sumTfidfDisplayed/sumTfidf;
+    return sumTfidfDisplayed/sumTfidf;
+}
 
-    //  =========== COMPACTNESS ==============
+function getCompactness(allWords, layerPath){
 
     var usedArea = 0, allWordsArea = 0,
         totalArea, compactness,
@@ -462,6 +484,9 @@ function draw(data){
     compactness = usedArea/totalArea;
     ratio = allWordsArea/totalArea;
 
+    return [compactness, ratio];
+}
+function getDisplayRate(allWords, maxFreq){
     // ======== DISPLAY RATES ===========
     var displayFreq_1 = 0,        // sum of Display Freqs
         totalFreq_1 = 0;          // total of freq for top 30
@@ -484,28 +509,8 @@ function draw(data){
     var weightedRate = displayFreq_1 / totalFreq_1;
     var averageNormFreq = displayNormFreq_2 / numbers_2;
 
-    // ========== Write to box =======
-
-    var metValue = [avgTfidf.toFixed(2), compactness.toFixed(2), ratio.toFixed(2), weightedRate.toFixed(2), averageNormFreq.toFixed(3)];
-
-    metric2.selectAll(".metricValue").remove();
-    metric2.selectAll(".metricValue")
-        .data(metValue)
-        .enter()
-        .append("text")
-        .text(d => d)
-        .attr("class","metricValue metricDisplay")
-        .attr("x","0")
-        .attr("y",(d,i) =>43+ 36*i)
-        .attr("font-weight", "bold")
-        .attr("z-index",1);
-
-
-spinner.stop();
-
-};
-
-
+    return [weightedRate, averageNormFreq]
+}
 // path:      an SVG <path> element
 // threshold: a 'close-enough' limit (ignore subdivisions with area less than this)
 // segments:  (optional) how many segments to subdivisions to create at each level

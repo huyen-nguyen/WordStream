@@ -143,6 +143,9 @@ function submitInput(){
 }
 var up = [];
 function updateData(mainGroup){
+    var offsetLegend = -10;
+    var axisPadding = 10;
+    var margins = {left: 20, top: 20, right: 10, bottom: 30};
     var ws = d3.layout.wordStream()
         .size([globalWidth, globalHeight])
         .minFontSize(globalMinFont)
@@ -154,11 +157,18 @@ function updateData(mainGroup){
         minFreq = ws.minFreq(),
         maxFreq = ws.maxFreq();
 
-    console.log("new boxes");
-    console.log(newboxes);
+    var legendFontSize = 20;
+    var legendHeight = newboxes.topics.length*legendFontSize;
+
+    d3.select("#mainsvg")
+        .transition()
+        .duration(300)
+        .attr({
+        width: globalWidth + margins.left + margins.top,
+        height: globalHeight + + margins.top + margins.bottom + axisPadding + offsetLegend + legendHeight
+    });
 
     var data = ws.boxes().data;
-    console.log("new data");
 
     // ARRAY OF ALL WORDS
     var allWordsUpdate = [];
@@ -167,12 +177,13 @@ function updateData(mainGroup){
             allWordsUpdate = allWordsUpdate.concat(row.words[topic]);
         });
     });
+
+    up = JSON.parse(JSON.stringify(allWordsUpdate));
     var opacity = d3.scale.linear()
         .domain([minFreq, maxFreq])
         .range([0.5,1]);
 
-    up = JSON.parse(JSON.stringify(allWordsUpdate));
-    var gUpdate = mainGroup.selectAll('g').data(allWordsUpdate, d => d.id)
+    mainGroup.selectAll('g').data(allWordsUpdate, d => d.id)
         .transition()
         .duration(1000)
         .attr({transform: function(d){return 'translate('+d.x+', '+d.y+')rotate('+d.rotate+')';}})
@@ -187,6 +198,24 @@ function updateData(mainGroup){
             topic: function(d){return d.topic;},
             visibility: function(d){ return d.placed ? ("visible"): ("hidden");}
         });
+
+    var metValue = [getTfidf(allWordsUpdate).toFixed(2),
+        // getCompactness(allWordsUpdate, layerPath)[0].toFixed(2),
+        // getCompactness(allWordsUpdate, layerPath)[1].toFixed(2),
+        getDisplayRate(allWordsUpdate, maxFreq)[0].toFixed(2),
+        getDisplayRate(allWordsUpdate, maxFreq)[1].toFixed(3)];
+
+    metric2.selectAll(".metricValue").remove();
+    metric2.selectAll(".metricValue")
+        .data(metValue)
+        .enter()
+        .append("text")
+        .text(d => d)
+        .attr("class","metricValue metricDisplay")
+        .attr("x","0")
+        .attr("y",(d,i) =>43+ 36*i)
+        .attr("font-weight", "bold");
+
 
 }
 
