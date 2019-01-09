@@ -194,7 +194,7 @@ function updateData(mainGroup){
     var xGridlineScale = d3.scale.ordinal().domain(d3.range(0, dates.length+1)).rangeBands([0, globalWidth+globalWidth/data.length]);
     var xGridlinesAxis = d3.svg.axis().orient('bottom').scale(xGridlineScale);
 
-    xGridlinesGroup = svg.selectAll('g')
+    xGridlinesGroup.selectAll('g')
         .attr('transform', 'translate(' + (margins.left-globalWidth/data.length/2) + ',' + (globalHeight+margins.top + axisPadding+legendHeight+margins.bottom+offsetLegend) + ')');
 
     var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-globalHeight-axisPadding-legendHeight-margins.bottom, 0, 0).tickFormat(''));
