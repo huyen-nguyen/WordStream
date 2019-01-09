@@ -2,8 +2,8 @@ var globalWidth = initWidth,
     globalHeight = initHeight,
     globalMinFont = initMinFont,
     globalMaxFont = initMaxFont,
-    globalFlag = initFlag,
-    updateGroup = mainGroup;
+    globalFlag = initFlag
+
 ;
 
 var axis = d3.svg.axis().ticks(4);
@@ -41,45 +41,6 @@ d3.select('#fontSlider').call(d3.slider().axis(axisFont).value([initMinFont, ini
     d3.select('#fontMax').text(value[1].toFixed(0));
 }));
 
-
-var metricName = [["Importance value (tf-idf ratio) "],["Compactness "],["All Words Area/Stream Area"],
-    ["Weighted Display Rate"],["Average Normalized Frequency "]];
-
-var metric = d3.select("body").append("svg")
-    .attr("width",360)
-    .attr("height", 250)
-    .attr("class","metricSVG")
-    .attr("id","metricSVG");
-
-metric.append("text").attr("y", 15).attr("font-weight",600).text("Metrics");
-
-d3.select("body")
-    // .append("div")
-    .append("table")
-    .attr("class","metTable")
-    .style("border-collapse", "collapse")
-    .style("border", "2px black solid")
-
-    .selectAll("tr")
-    .data(metricName)
-    .enter().append("tr")
-
-    .selectAll("td")
-    .data(function(d){return d;})
-    .enter().append("td")
-    .style("border", "1px black solid")
-    .style("padding", "10px")
-    .on("mouseover", function(){d3.select(this).style("background-color", "aliceblue")})
-    .on("mouseout", function(){d3.select(this).style("background-color", "white")})
-    .text(function(d){return d;})
-    .style("font-size", "13px");
-
-var metric2 = d3.select("body").append("svg")
-    .attr("width",100)
-    .attr("height", 300)
-    .attr("class","metricSVG2")
-    .attr("id","metricSVG2");
-
 // draw line
 var frontier = d3.select("#cp").append("line")
     .attr("id","frontier")
@@ -88,7 +49,6 @@ var frontier = d3.select("#cp").append("line")
     .attr("y1", 300)
     .attr("y2", 350)
     .attr("class","frontier");
-
 
 function updateTopRank(){
 
@@ -170,6 +130,11 @@ function updateData(mainGroup){
 
     var data = ws.boxes().data;
 
+    var dates = [];
+    data.forEach(row =>{
+        dates.push(row.date);
+    });
+
     // ARRAY OF ALL WORDS
     var allWordsUpdate = [];
     d3.map(data, function(row){
@@ -185,7 +150,7 @@ function updateData(mainGroup){
 
     mainGroup.selectAll('g').data(allWordsUpdate, d => d.id)
         .transition()
-        .duration(1000)
+        .duration(1500)
         .attr({transform: function(d){return 'translate('+d.x+', '+d.y+')rotate('+d.rotate+')';}})
         .select("text")
         .text(function(d){return d.text;})
@@ -215,6 +180,25 @@ function updateData(mainGroup){
         .attr("x","0")
         .attr("y",(d,i) =>43+ 36*i)
         .attr("font-weight", "bold");
+
+    var xAxisScale = d3.scale.ordinal().domain(dates).rangeBands([0, globalWidth]);
+    var xAxis = d3.svg.axis().orient('bottom').scale(xAxisScale);
+
+    axisGroup.selectAll("g")
+        .attr('transform', 'translate(' + (margins.left) + ',' + (globalHeight + margins.top+axisPadding+legendHeight+offsetLegend) + ')');
+
+    var axisNodes = axisGroup.call(xAxis);
+    styleAxis(axisNodes);
+
+    //Display the vertical gridline
+    var xGridlineScale = d3.scale.ordinal().domain(d3.range(0, dates.length+1)).rangeBands([0, globalWidth+globalWidth/data.length]);
+    var xGridlinesAxis = d3.svg.axis().orient('bottom').scale(xGridlineScale);
+
+    xGridlinesGroup = svg.selectAll('g')
+        .attr('transform', 'translate(' + (margins.left-globalWidth/data.length/2) + ',' + (globalHeight+margins.top + axisPadding+legendHeight+margins.bottom+offsetLegend) + ')');
+
+    var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-globalHeight-axisPadding-legendHeight-margins.bottom, 0, 0).tickFormat(''));
+    styleGridlineNodes(gridlineNodes);
 
 
 }

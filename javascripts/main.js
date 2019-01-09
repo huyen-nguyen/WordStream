@@ -12,7 +12,8 @@ var svg = d3.select("body").append('svg')
     height: initHeight,
     id: "mainsvg",
 });
-var mainGroup;
+
+var mainGroup, axisGroup, xGridlinesGroup;
 
 // var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
@@ -168,14 +169,14 @@ function draw(data){
 
     var xAxisScale = d3.scale.ordinal().domain(dates).rangeBands([0, width]);
     var xAxis = d3.svg.axis().orient('bottom').scale(xAxisScale);
-    var axisGroup = svg.append('g').attr('transform', 'translate(' + (margins.left) + ',' + (height+margins.top+axisPadding+legendHeight+offsetLegend) + ')');
+    axisGroup = svg.append('g').attr('transform', 'translate(' + (margins.left) + ',' + (height+margins.top+axisPadding+legendHeight+offsetLegend) + ')');
     var axisNodes = axisGroup.call(xAxis);
     styleAxis(axisNodes);
     //Display the vertical gridline
     var xGridlineScale = d3.scale.ordinal().domain(d3.range(0, dates.length+1)).rangeBands([0, width+width/boxes.data.length]);
     var xGridlinesAxis = d3.svg.axis().orient('bottom').scale(xGridlineScale);
 
-    var xGridlinesGroup = svg.append('g')
+    xGridlinesGroup = svg.append('g')
         .attr('transform', 'translate(' + (margins.left-width/boxes.data.length/2) + ',' + (height+margins.top + axisPadding+legendHeight+margins.bottom+offsetLegend) + ')');
 
     var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-height-axisPadding-legendHeight-margins.bottom, 0, 0).tickFormat(''));
