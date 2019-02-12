@@ -1,8 +1,8 @@
 // pre-defined size
-var initWidth = 1000,
-    initHeight = 1000,
-    initMinFont = 12,
-    initMaxFont = 50,
+var initWidth = 4000,
+    initHeight = 2300,
+    initMinFont = 30,
+    initMaxFont = 54,
     initFlag = "none",
     topRank;
 
@@ -22,7 +22,7 @@ var fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquir
 
 ];
 
-var initialDataset = "WikiNews";
+var initialDataset = "Huffington";
 var categories = ["person","location","organization","miscellaneous"];
 
 var fileName;
@@ -124,7 +124,7 @@ function draw(data){
     var font = "Arial";
     var interpolation = "cardinal";
     var bias = 200;
-    var offsetLegend = -10;
+    var offsetLegend = 0;
     var axisPadding = 10;
     var margins = {left: 20, top: 20, right: 10, bottom: 30};
     var ws = d3.layout.wordStream()
@@ -216,7 +216,7 @@ function draw(data){
         + "Z";
 
 
-    // ============== DRAW CURVES =================
+    // ============== DRAW CURVES AREA =================
     var topics = boxes.topics;
     mainGroup.selectAll('path')
         .data(boxes.layers)
@@ -276,6 +276,7 @@ function draw(data){
             'font-size': function(d){return d.fontSize;},
             fill: function(d){return color(d.topicIndex);},
             'fill-opacity': function(d){return opacity(d.frequency)},
+           // 'fill-opacity': 0,
             'text-anchor': 'middle',
             'alignment-baseline': 'middle',
             topic: function(d){return d.topic;},
@@ -626,7 +627,7 @@ function topRank1000(){
 }
 function topRank45(){
     if (topRank==undefined){
-        topRank = 45;
+        topRank = 50;
     }
     return topRank;
 }
