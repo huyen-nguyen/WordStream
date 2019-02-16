@@ -29,10 +29,10 @@
         var word_count = {};
         words.forEach(date=> {
             categories.forEach((c,i) =>{
-                date.words[c].slice(0,5).forEach(w=> word_count[w.text] = {frequency: w.frequency, category: [c,i]})})
+                date.words[c].slice(0,8).forEach(w=> word_count[w.text] = {frequency: w.frequency, category: [c,i]})})
         });
         var margin = {top: 0, right: 0, bottom: 0, left: 0};
-        var width = 1500;
+        var width = 1700;
         var height = 700;
         d3.select("#WordcloudImg").select('svg').remove();
         d3.select("#WordcloudImg")
@@ -54,22 +54,22 @@
                 return d.value.frequency;
             })
             ])
-            .range([14,45]);
+            .range([18,40]);
 
         var opacity = d3.scaleLinear()
             .domain([0, d3.max(word_entries, function(d) {
                 return d.value.frequency;
             })
             ])
-            .range([0.5,1]);
+            .range([0.45,1]);
 
         d3.layout.cloud().size([width, height])
             .timeInterval(20)
             .words(word_entries)
             .fontSize(function(d) { return xScale(d.value.frequency); })
             .text(function(d) { return d.key; })
-            .rotate(function() { return (~~(Math.random() * 6) - 3) * 8 })
-            // .rotate(0)
+            //.rotate(function() { return (~~(Math.random() * 6) - 3) * 8 })
+            .rotate(0)
             .font(font)
             .on("end", draw)
             .start();

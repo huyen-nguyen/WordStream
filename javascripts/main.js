@@ -1,8 +1,8 @@
 // pre-defined size
-var initWidth = 4000,
-    initHeight = 2300,
-    initMinFont = 30,
-    initMaxFont = 54,
+var initWidth = 3200,
+    initHeight = 1350,
+    initMinFont = 25,
+    initMaxFont = 35,
     initFlag = "none",
     topRank;
 
@@ -19,7 +19,6 @@ var mainGroup, axisGroup, xGridlinesGroup;
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
 
 var fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"
-
 ];
 
 var initialDataset = "Huffington";
@@ -138,7 +137,10 @@ function draw(data){
         .flag(initFlag);
     var boxes = ws.boxes(),     // initial boxes
         minFreq = ws.minFreq(),
-        maxFreq = ws.maxFreq();
+        maxFreq = ws.maxFreq(),
+        minSud = ws.minSud(),
+        maxSud = ws.maxSud()
+    ;
 
     //Display data
     var legendFontSize = 20;
@@ -257,9 +259,9 @@ function draw(data){
     // }
     //
 
-    var opacity = d3.scale.linear()
-        .domain([minFreq, maxFreq])
-        .range([0.5,1]);
+    var opacity = d3.scale.log()
+        .domain([minSud, maxSud])
+        .range([0.3,1]);
 
     // Add moi chu la 1 element <g>, xoay g dung d.rotate
     var placed = true; // = false de hien thi nhung tu ko dc dien
