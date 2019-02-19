@@ -20,7 +20,6 @@
 
     <script src="./lib/fisheye.js"></script>
     <script src="./lib/select2.min.js"></script>
-    <script src="javascripts/util.js"></script>
     <script src="javascripts/sliderRelationship.js"></script>
     <script src="javascripts/streamGraph.js"></script>
     <script src="javascripts/stopList.js"></script>
@@ -75,14 +74,14 @@
     <p class="textSlider flow">Flow</p>
     <img class="flow" style="left: 68px; width: 33px; height: 23px" src="images/flow.png">
     <label class="switch flow"  style="left: 105px;">
-        <input type="checkbox" id="flow"  onclick="submitInput()">
+        <input type="checkbox" id="flow"  onclick="submitInput(updateData)">
         <span class="toggle round"></span>
     </label>
 
     <p class="textSlider angleVariance">Angle Variance</p>
     <img class="angleVariance" style="top: 302px;left: 278px;width: 32px; height: 35px" src="images/av.png">
     <label class="switch angleVariance" style="left: 315px">
-        <input type="checkbox" id = "av" onclick="submitInput()">
+        <input type="checkbox" id = "av" onclick="submitInput(updateData)">
         <span class="toggle round"></span>
     </label>
     <input class="submit" onclick="submitInput()" type="button" value="Submit"><br>
@@ -101,12 +100,11 @@
 <script>
     updateTopRank();
 </script>
-
-
-<!--<script type='text/javascript' src="javascripts/mainTA.js"></script>-->
-
+<!--<script src="javascripts/util.js"></script>-->
+<!--<script type='text/javascript' src="javascripts/timeArcs.js"></script>-->
+<!--<div style="display: block"></div>-->
 <!--<input type="checkbox" id="checkbox1" value="value2" class="check" onclick="update()">-->
-<!--<label for="checkbox1">Area graph only</label>-->
+<!--<label for="checkbox1" >Area graph only</label>-->
 
 <!--<input id="search">-->
 <!--<button type="button" onclick="searchNode()">Search</button>-->

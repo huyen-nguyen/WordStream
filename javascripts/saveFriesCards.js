@@ -3,11 +3,7 @@ var data3;
 var nodes3 =[];
 var links3 =[];
   
-d3.json("data/cards-for-time-arcs.json", function(error, data_) {
-    data3 = data_;
 
-}) 
- 
 function saveTimeArcsData() {
   console.log("*********** saveTimeArcsData ******************");
   var csvContent = "";

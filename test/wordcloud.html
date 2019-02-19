@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>WordCloud</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -20,7 +20,7 @@
 <script>
     var categories = ["person","location","organization","miscellaneous"];
 
-    d3.json("../data/wchuff.json", function(error, data){
+    d3.json("../data/wcloudHuff.json", function(error, data){
         drawWordCloud(data);
     });
 
@@ -29,10 +29,10 @@
         var word_count = {};
         words.forEach(date=> {
             categories.forEach((c,i) =>{
-                date.words[c].slice(0,8).forEach(w=> word_count[w.text] = {frequency: w.frequency, category: [c,i]})})
+                date.words[c].slice(0,3).forEach(w=> word_count[w.text] = {sudden: w.sudden, category: [c,i]})})
         });
         var margin = {top: 0, right: 0, bottom: 0, left: 0};
-        var width = 1700;
+        var width = 1800;
         var height = 700;
         d3.select("#WordcloudImg").select('svg').remove();
         d3.select("#WordcloudImg")
@@ -51,22 +51,22 @@
 
         var xScale = d3.scaleLinear()
             .domain([0, d3.max(word_entries, function(d) {
-                return d.value.frequency;
+                return d.value.sudden;
             })
             ])
-            .range([18,40]);
+            .range([26,50]);
 
-        var opacity = d3.scaleLinear()
+        var opacity = d3.scaleSqrt()
             .domain([0, d3.max(word_entries, function(d) {
-                return d.value.frequency;
+                return d.value.sudden;
             })
             ])
-            .range([0.45,1]);
+            .range([0.4,1]);
 
         d3.layout.cloud().size([width, height])
             .timeInterval(20)
             .words(word_entries)
-            .fontSize(function(d) { return xScale(d.value.frequency); })
+            .fontSize(function(d) { return xScale(d.value.sudden); })
             .text(function(d) { return d.key; })
             //.rotate(function() { return (~~(Math.random() * 6) - 3) * 8 })
             .rotate(0)
@@ -83,11 +83,11 @@
                 .selectAll("text")
                 .data(words)
                 .enter().append("text")
-                .style("font-size", function(d) { return xScale(+d.value.frequency) + "px"; })
+                .style("font-size", function(d) { return xScale(+d.value.sudden) + "px"; })
                 .style("font-family", font)
                 // .style("fill", function(d, i) { return fill(d.value.category[1]); })
                 .style("fill", function(d, i) { return "#000" })
-                .style("fill-opacity", function(d) { return opacity(+d.value.frequency) })
+                .style("fill-opacity", function(d) { return opacity(+d.value.sudden) })
                 .attr("text-anchor", "middle")
                 .attr("transform", function(d) {
                     return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";

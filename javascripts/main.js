@@ -1,8 +1,8 @@
 // pre-defined size
-var initWidth = 3200,
-    initHeight = 1350,
-    initMinFont = 25,
-    initMaxFont = 35,
+var initWidth = 1500,
+    initHeight = 1000,
+    initMinFont = 14,
+    initMaxFont = 30,
     initFlag = "none",
     topRank;
 
@@ -118,6 +118,7 @@ function drawTimeArcs(){
     timeArcs()
 }
 function draw(data){
+    var t0 = performance.now();
     var width = initWidth  ;
     var height = initHeight;
     var font = "Arial";
@@ -129,7 +130,7 @@ function draw(data){
     var ws = d3.layout.wordStream()
         .size([width, height])
         .interpolate(interpolation)
-        .fontScale(d3.scale.linear())
+        .fontScale(d3.scale.log())
         .minFontSize(initMinFont)
         .maxFontSize(initMaxFont)
         .data(data)
@@ -141,7 +142,8 @@ function draw(data){
         minSud = ws.minSud(),
         maxSud = ws.maxSud()
     ;
-
+    var t1 = performance.now();
+    console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
     //Display data
     var legendFontSize = 20;
     var legendHeight = boxes.topics.length*legendFontSize;
@@ -261,15 +263,16 @@ function draw(data){
 
     var opacity = d3.scale.log()
         .domain([minSud, maxSud])
-        .range([0.3,1]);
+        .range([0.4,1]);
 
     // Add moi chu la 1 element <g>, xoay g dung d.rotate
     var placed = true; // = false de hien thi nhung tu ko dc dien
 
     //  ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ PLACING WORDS  ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿
 
-    mainGroup.selectAll('g').data(allWords).enter().append('g')
+    mainGroup.selectAll('.word').data(allWords).enter().append('g')
         .attr({transform: function(d){return 'translate('+d.x+', '+d.y+')rotate('+d.rotate+')';}})
+        .attr("class", "word")
         .append('text')
         .text(function(d){return d.text;})
         .attr({
@@ -277,8 +280,8 @@ function draw(data){
             'font-family': font,
             'font-size': function(d){return d.fontSize;},
             fill: function(d){return color(d.topicIndex);},
-            'fill-opacity': function(d){return opacity(d.frequency)},
-           // 'fill-opacity': 0,
+            'fill-opacity': function(d){return opacity(d.sudden)},
+           //'fill-opacity': 0,
             'text-anchor': 'middle',
             'alignment-baseline': 'middle',
             topic: function(d){return d.topic;},
@@ -329,14 +332,11 @@ function draw(data){
         var allTexts = mainGroup.selectAll('text').filter(t =>{     // group of all the same words
             return t && t.text === text &&  t.topic === topic;
         });
-        console.log("allTexts");
-        console.log(allTexts);
+
         // get the word out
         // Select the data for the stream layers
         var streamLayer = d3.select("path[topic='"+ topic+"']" )[0][0].__data__; // at this time: not available
 
-        console.log("streamLayer:");
-        console.log(streamLayer);
         //Push all points
         var points = Array();
         //Initialize all points
@@ -513,6 +513,7 @@ function getDisplayRate(allWords, maxFreq){
     var weightedRate = displayFreq_1 / totalFreq_1;
     var averageNormFreq = displayNormFreq_2 / numbers_2;
 
+    console.log([weightedRate, averageNormFreq]);
     return [weightedRate, averageNormFreq]
 }
 // path:      an SVG <path> element
@@ -611,8 +612,9 @@ function styleGridlineNodes(gridlineNodes){
     });
     gridlineNodes.selectAll('.tick line').attr({
         fill: 'none',
-        'stroke-width': 0.5,
-        stroke: 'lightgray'
+        'stroke-width': 2,
+        stroke: '#aaaaaa',
+        "stroke-dasharray": ("3, 4")
     });
 }
 function topRank200(){

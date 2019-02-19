@@ -5,30 +5,26 @@ var globalWidth = initWidth,
     globalFlag = initFlag
 
 ;
-
+var color = d3.scale.category10();
 var axis = d3.svg.axis().ticks(4);
-var axisFont = d3.svg.axis().tickValues([0,25,50,75,100]);
+var axisFont = d3.svg.axis().tickValues([0, 25, 50, 75, 100]);
+
 // var verticalAxis = d3.svg.axis().orient("left").ticks(5);
-function testJS(){
-    console.log("Mouse test JS");
-}
-function testJQuery(){
-    console.log("Mouse test Jquery");
-}
+
 
 d3.select('#widthSlider').call(d3.slider()
     .axis(axis)
-    .value([0,initWidth])
+    .value([0, initWidth])
     .min(0)
     .max(2000)
     .step(20)
     .on("slide", function (evt, value) {
-    d3.select('#widthText').text(value[1]);
-}))
+        d3.select('#widthText').text(value[1]);
+    }))
 ;
 d3.select('#heightSlider').call(d3.slider()
     .axis(axis)
-    .value([0,initHeight])
+    .value([0, initHeight])
     .min(0)
     .max(2000)
     .step(20)
@@ -41,40 +37,41 @@ d3.select('#fontSlider').call(d3.slider().axis(axisFont).value([initMinFont, ini
     d3.select('#fontMax').text(value[1].toFixed(0));
 }));
 
-// draw line
-var frontier = d3.select("#cp").append("line")
-    .attr("id","frontier")
-    .attr("x1", 170)
-    .attr("x2", 170)
-    .attr("y1", 300)
-    .attr("y2", 350)
-    .attr("class","frontier");
+// // draw line
+// var frontier = d3.select("#cp").append("line")
+//     .attr("id", "frontier")
+//     .attr("x1", 170)
+//     .attr("x2", 170)
+//     .attr("y1", 300)
+//     .attr("y2", 350)
+//     .attr("class", "frontier");
 
-function updateTopRank(){
+function updateTopRank() {
 
     d3.select(".holderCP").append("span")
-        .attr("id","topRankText")
-        .attr("class","topRankText topRank textSlider");
+        .attr("id", "topRankText")
+        .attr("class", "topRankText topRank textSlider");
 
     d3.select(".holderCP").append("div")
-        .attr("id","topRankSlider")
-        .attr("class","topRankAxis topRank slider");
+        .attr("id", "topRankSlider")
+        .attr("class", "topRankAxis topRank slider");
 
     d3.select("#topRankText").text(topRank);
 
     d3.select('#topRankSlider').call(d3.slider()
         .axis(axis)
-        .value([0,topRank])
+        .value([0, topRank])
         .min(0)
         .max(300)
         .step(5)
         .on("slide", function (evt, value) {
             d3.select('#topRankText').text(value[1]);
         }))
-        // .on("mouseup", submitInput())
+    // .on("mouseup", submitInput())
     ;
 }
-function submitInput(){
+
+function submitInput(updateData) {
     globalWidth = parseInt(document.getElementById("widthText").innerText);
     globalHeight = parseInt(document.getElementById("heightText").innerText);
     globalMinFont = parseInt(document.getElementById("fontMin").innerText);
@@ -82,27 +79,32 @@ function submitInput(){
     topRank = parseInt(document.getElementById("topRankText").innerText);
     var isFlow = document.getElementById("flow").checked;
     var isAv = document.getElementById("av").checked;
-    if (isFlow && isAv){
+    if (isFlow && isAv) {
         console.log("Flow and Av");
         globalFlag = "fa";
     }
     else if (isFlow && !isAv) {
         console.log("Just Flow");
-        globalFlag = "f";}
+        globalFlag = "f";
+    }
 
-    else if (!isFlow && isAv){
+    else if (!isFlow && isAv) {
         console.log("Just AV");
-        globalFlag = "a";}
+        globalFlag = "a";
+    }
 
-    else if (!isFlow && !isAv){
+    else if (!isFlow && !isAv) {
         console.log("None");
-        globalFlag = "none"}
+        globalFlag = "none"
+    }
 
     console.log("input submitted");
     updateData(mainGroup);
 }
+
 var up = [];
-function updateData(mainGroup){
+
+function updateData() {
     var offsetLegend = -10;
     var axisPadding = 10;
     var margins = {left: 20, top: 20, right: 10, bottom: 30};
@@ -118,27 +120,33 @@ function updateData(mainGroup){
         maxFreq = ws.maxFreq();
 
     var legendFontSize = 20;
-    var legendHeight = newboxes.topics.length*legendFontSize;
+    var legendHeight = newboxes.topics.length * legendFontSize;
 
     d3.select("#mainsvg")
         .transition()
         .duration(300)
         .attr({
-        width: globalWidth + margins.left + margins.top,
-        height: globalHeight + + margins.top + margins.bottom + axisPadding + offsetLegend + legendHeight
-    });
+            width: globalWidth + margins.left + margins.top,
+            height: globalHeight + +margins.top + margins.bottom + axisPadding + offsetLegend + legendHeight
+        });
+    var area = d3.svg.area()
+        .interpolate("cardinal")
+        .x(function(d){return (d.x);})
+        .y0(function(d){return d.y0;})
+        .y1(function(d){return (d.y0 + d.y); });
 
+    mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
     var data = ws.boxes().data;
 
     var dates = [];
-    data.forEach(row =>{
+    data.forEach(row => {
         dates.push(row.date);
     });
 
     // ARRAY OF ALL WORDS
     var allWordsUpdate = [];
-    d3.map(data, function(row){
-        newboxes.topics.forEach(topic=>{
+    d3.map(data, function (row) {
+        newboxes.topics.forEach(topic => {
             allWordsUpdate = allWordsUpdate.concat(row.words[topic]);
         });
     });
@@ -146,27 +154,94 @@ function updateData(mainGroup){
     up = JSON.parse(JSON.stringify(allWordsUpdate));
     var opacity = d3.scale.linear()
         .domain([minFreq, maxFreq])
-        .range([0.5,1]);
+        .range([0.5, 1]);
 
-    mainGroup.selectAll('g').data(allWordsUpdate, d => d.id)
+    d3.select("#mainsvg").selectAll('.word').data(allWordsUpdate, d => d.id)
         .transition()
-        .duration(1500)
-        .attr({transform: function(d){return 'translate('+d.x+', '+d.y+')rotate('+d.rotate+')';}})
-        .select("text")
-        .text(function(d){return d.text;})
+        .duration(1000)
         .attr({
-            'font-size': function(d){return d.fontSize;},
-            fill: function(d){return color(d.topicIndex);},
-            'fill-opacity': function(d){return opacity(d.frequency)},
+            transform: function (d) {
+                return 'translate(' + d.x + ', ' + d.y + ')rotate(' + d.rotate + ')';
+            }
+        })
+        .select("text")
+        .text(function (d) {
+            return d.text;
+        })
+        .attr({
+            'font-size': function (d) {
+                return d.fontSize;
+            },
+            fill: function (d) {
+                return color(d.topicIndex);
+            },
+            'fill-opacity': function (d) {
+                return opacity(d.frequency)
+            },
             'text-anchor': 'middle',
             'alignment-baseline': 'middle',
-            topic: function(d){return d.topic;},
-            visibility: function(d){ return d.placed ? ("visible"): ("hidden");}
+            topic: function (d) {
+                return d.topic;
+            },
+            visibility: function (d) {
+                return d.placed ? ("visible") : ("hidden");
+            }
+        });
+// Get layer path
+    var lineCardinal = d3.svg.line()
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; })
+        .interpolate("cardinal");
+
+    var boundary = [];
+    for (var i = 0; i < newboxes.layers[0].length; i ++){
+        var tempPoint = Object.assign({}, newboxes.layers[0][i]);
+        tempPoint.y = tempPoint.y0;
+        boundary.push(tempPoint);
+    }
+
+    for (var i = newboxes.layers[newboxes.layers.length-1].length-1; i >= 0; i --){
+        var tempPoint2 = Object.assign({}, newboxes.layers[newboxes.layers.length-1][i]);
+        tempPoint2.y = tempPoint2.y + tempPoint2.y0;
+        boundary.push(tempPoint2);
+    }       // Add next (8) elements
+
+    var lenb = boundary.length;
+
+    // Get the string for path
+
+    var combined = lineCardinal( boundary.slice(0,lenb/2))
+        + "L"
+        + lineCardinal( boundary.slice(lenb/2, lenb))
+            .substring(1,lineCardinal( boundary.slice(lenb/2, lenb)).length)
+        + "Z";
+
+    var topics = newboxes.topics;
+    mainGroup.selectAll('path')
+        .data(newboxes.layers)
+        .enter()
+        .append('path')
+        .attr('d', area)
+        .style('fill', function (d, i) {
+            return color(i);
+        })
+        .attr({
+            'fill-opacity': 0,      // = 1 if full color
+            // stroke: 'black',
+            'stroke-width': 0.3,
+            topic: function(d, i){return topics[i];}
+        });
+    // ============= Get LAYER PATH ==============
+    var layerPath = mainGroup.selectAll("path").append("path")
+        .attr("d", combined )
+        .attr({
+            'fill-opacity': 0.1,
+            'stroke-opacity': 0,
         });
 
     var metValue = [getTfidf(allWordsUpdate).toFixed(2),
-        // getCompactness(allWordsUpdate, layerPath)[0].toFixed(2),
-        // getCompactness(allWordsUpdate, layerPath)[1].toFixed(2),
+        getCompactness(allWordsUpdate, layerPath)[0].toFixed(2),
+        getCompactness(allWordsUpdate, layerPath)[1].toFixed(2),
         getDisplayRate(allWordsUpdate, maxFreq)[0].toFixed(2),
         getDisplayRate(allWordsUpdate, maxFreq)[1].toFixed(3)];
 
@@ -176,30 +251,29 @@ function updateData(mainGroup){
         .enter()
         .append("text")
         .text(d => d)
-        .attr("class","metricValue metricDisplay")
-        .attr("x","0")
-        .attr("y",(d,i) =>43+ 36*i)
+        .attr("class", "metricValue metricDisplay")
+        .attr("x", "0")
+        .attr("y", (d, i) => 43 + 36 * i)
         .attr("font-weight", "bold");
 
     var xAxisScale = d3.scale.ordinal().domain(dates).rangeBands([0, globalWidth]);
     var xAxis = d3.svg.axis().orient('bottom').scale(xAxisScale);
 
     axisGroup.selectAll("g")
-        .attr('transform', 'translate(' + (margins.left) + ',' + (globalHeight + margins.top+axisPadding+legendHeight+offsetLegend) + ')');
+        .attr('transform', 'translate(' + (margins.left) + ',' + (globalHeight + margins.top + axisPadding + legendHeight + offsetLegend) + ')');
 
     var axisNodes = axisGroup.call(xAxis);
     styleAxis(axisNodes);
 
     //Display the vertical gridline
-    var xGridlineScale = d3.scale.ordinal().domain(d3.range(0, dates.length+1)).rangeBands([0, globalWidth+globalWidth/data.length]);
+    var xGridlineScale = d3.scale.ordinal().domain(d3.range(0, dates.length + 1)).rangeBands([0, globalWidth + globalWidth / data.length]);
     var xGridlinesAxis = d3.svg.axis().orient('bottom').scale(xGridlineScale);
 
     xGridlinesGroup.selectAll('g')
-        .attr('transform', 'translate(' + (margins.left-globalWidth/data.length/2) + ',' + (globalHeight+margins.top + axisPadding+legendHeight+margins.bottom+offsetLegend) + ')');
+        .attr('transform', 'translate(' + (margins.left - globalWidth/24)  + ',' + (globalHeight + margins.top + axisPadding + legendHeight + margins.bottom + offsetLegend) + ')');
 
-    var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-globalHeight-axisPadding-legendHeight-margins.bottom, 0, 0).tickFormat(''));
+    var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-globalHeight - axisPadding - legendHeight - margins.bottom, 0, 0).tickFormat(''));
     styleGridlineNodes(gridlineNodes);
-
 
 }
 
@@ -217,7 +291,6 @@ function updateData(mainGroup){
 //         d3.select('#heightText').text(value);
 //     }))
 // ;
-
 // metric.selectAll("rect")
 //     .data(metricLine)
 //     .enter()
