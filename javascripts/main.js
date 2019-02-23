@@ -105,8 +105,8 @@ function loadData(){
 }
 function loadNewData(event) {
     svg.selectAll("*").remove();
-    // svg2.selectAll("*").remove();
-    // svg3.selectAll("*").remove();
+    svg2.selectAll("*").remove();
+    svg3.selectAll("*").remove();
     fileName = this.options[this.selectedIndex].text;
     topRank=undefined;
     loadData();
