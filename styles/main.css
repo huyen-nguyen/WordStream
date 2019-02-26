@@ -99,7 +99,7 @@ body {
     border-radius: 0px;
     z-index: 1110;
     top: 144px;
-    left: 90px;
+    left: 80px;
     width: 240px;
     height: 50px;
     border: 0px solid rgba(0,0,0, 1);
@@ -149,7 +149,7 @@ body {
 .styled-select {
     overflow: hidden;
     height: 28px;
-    width: 200px;
+    width: 240px;
     margin-right: 10px;
     background: #eee;
 }

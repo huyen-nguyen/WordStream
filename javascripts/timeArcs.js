@@ -382,7 +382,7 @@ function timeArcs(){
             var ccc=0;
             for (var m=0;m<numMonth;m++){
                 if (relationship[name1+"__"+name2][m]){
-                    if (relationship[name1+"__"+name2][m]>valueSlider) //relationship[name1+"__"+name2][m]>ccc &&
+                    if (relationship[name1+"__"+name2][m]>valueSlider) //links[name1+"__"+name2][m]>ccc &&
                         ccc+=relationship[name1+"__"+name2][m];
                 }
             }
@@ -581,7 +581,7 @@ function readTermsAndRelationships() {
     numberInputTerms = termArray.length;
     console.log("numberInputTerms="+numberInputTerms) ;
 
-    // Compute relationship **********************************************************
+    // Compute links **********************************************************
     numNode = Math.min(80, termArray.length);
     numNode2 = Math.min(numNode*3, termArray.length);
     var selectedTerms = {};
@@ -613,7 +613,7 @@ function readTermsAndRelationships() {
                                     relationship[term1+"__"+term2].max = relationship[term1+"__"+term2][m];
                                     relationship[term1+"__"+term2].maxMonth =m;
 
-                                    // max of a relationship: max number of co-occurrence in a timestep
+                                    // max of a links: max number of co-occurrence in a timestep
                                     // maxMonth: timestep that has max
                                     if (relationship[term1+"__"+term2].max>relationshipMaxMax) // max over time
                                         relationshipMaxMax = relationship[term1+"__"+term2].max;
@@ -650,7 +650,7 @@ function computeConnectivity(a, num) {
                     a[j].isConnectedMaxMonth = relationship[term1+"__"+term2].maxMonth;
                 }
             }
-            // isConnected: for each term, equals to max of all relationship
+            // isConnected: for each term, equals to max of all links
 
             else if (relationship[term2+"__"+term1] && relationship[term2+"__"+term1].max>=valueSlider){
                 if (relationship[term2+"__"+term1].max>a[i].isConnected){
@@ -836,10 +836,13 @@ function computeLinks() {
         for (var j=i+1; j<numNode;j++){
             var term2 =  nodes[j].name;
             if (relationship[term1+"__"+term2] && relationship[term1+"__"+term2].max>=valueSlider){
-                for (var m=1; m<numMonth;m++){
+                for (var m=0; m<numMonth;m++){
                     if (relationship[term1+"__"+term2][m] && relationship[term1+"__"+term2][m]>=valueSlider){
                         var sourceNodeId = i;
                         var targetNodeId = j;
+
+                        var  sourceID = nodes[i].name + "_" + nodes[i].group + "_" + m;
+                        var  targetID = nodes[j].name + "_" + nodes[j].group + "_" + m;
 
                         if (!nodes[i].connect)
                             nodes[i].connect = new Array();
@@ -896,11 +899,13 @@ function computeLinks() {
 
                         var l = new Object();
                         l.source = sourceNodeId;
-                        l.sourceName = term1;
                         l.target = targetNodeId;
-                        l.targetName = term2;
+
+                        l.sourceID = sourceID;
+                        l.targetID = targetID;
+
                         l.m = m;
-                        //l.value = linkScale(relationship[term1+"__"+term2][m]);
+                        //l.value = linkScale(links[term1+"__"+term2][m]);
                         links.push(l);
                         if (relationship[term1+"__"+term2][m] > relationshipMaxMax2)
                             relationshipMaxMax2 = relationship[term1+"__"+term2][m];
@@ -925,7 +930,7 @@ function computeLinks() {
         var term2 = nodes[l.target].name;
         var month = l.m;
         l.weight = relationship[term1+"__"+term2][month];
-        l.value = linkScale(relationship[term1+"__"+term2][month]);
+        //l.value = linkScale(relationship[term1+"__"+term2][month]);
     }  );
 
     console.log("DONE links relationshipMaxMax2="+relationshipMaxMax2);

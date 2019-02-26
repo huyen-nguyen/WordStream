@@ -212,11 +212,6 @@
     top: 260px;
 
 }
-.submit {
-    position: absolute;
-    top: 355px;
-    left: 153px;
-}
 
 
 .switch {
@@ -272,7 +267,7 @@ input:checked + .toggle:before {
 
 /* Rounded toggles */
 .toggle.round {
-    border-radius: 34px;
+    border-radius: 45px;
 }
 
 .toggle.round:before {
@@ -299,4 +294,16 @@ input:checked + .toggle:before {
     position: absolute;
     left: 180px;
     top: 400px;
+}
+.rel {
+    position: absolute;
+    white-space: nowrap;
+    top: 355px;
+    left: 170px;
+    margin: 0;
+}
+.submit {
+    position: absolute;
+    top: 355px;
+    left: 30px;
 }

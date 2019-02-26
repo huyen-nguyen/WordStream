@@ -74,17 +74,26 @@
     <p class="textSlider flow">Flow</p>
     <img class="flow" style="left: 68px; width: 33px; height: 23px" src="images/flow.png">
     <label class="switch flow"  style="left: 105px;">
-        <input type="checkbox" id="flow"  onclick="submitInput(updateData)">
+        <input type="checkbox" id="flow">
+               <!--onclick="submitInput(updateData)"-->
+
         <span class="toggle round"></span>
     </label>
 
     <p class="textSlider angleVariance">Angle Variance</p>
     <img class="angleVariance" style="top: 302px;left: 278px;width: 32px; height: 35px" src="images/av.png">
     <label class="switch angleVariance" style="left: 315px">
-        <input type="checkbox" id = "av" onclick="submitInput(updateData)">
+        <input type="checkbox" id = "av">
+               <!--onclick="submitInput(updateData)">-->
         <span class="toggle round"></span>
     </label>
-    <input class="submit" onclick="submitInput()" type="button" value="Submit"><br>
+
+    <p class="textSlider rel">Relationships</p>
+    <label class="switch rel"  style="left: 315px;">
+        <input type="checkbox" id="rel"  onclick="showRelationship()">
+        <span class="toggle round"></span>
+    </label>
+    <input class="submit" onclick="submitInput(updateData)" type="button" value="Submit"><br>
 
 </div>
 
@@ -100,28 +109,28 @@
 <script>
     updateTopRank();
 </script>
-<script src="javascripts/util.js"></script>
-<script type='text/javascript' src="javascripts/timeArcs.js"></script>
-<div style="display: block"></div>
-<input type="checkbox" id="checkbox1" value="value2" class="check" onclick="update()">
-<label for="checkbox1" >Area graph only</label>
+<!--<script src="javascripts/util.js"></script>-->
+<!--<script type='text/javascript' src="javascripts/timeArcs.js"></script>-->
+<!--<div style="display: block"></div>-->
+<!--<input type="checkbox" id="checkbox1" value="value2" class="check" onclick="update()">-->
+<!--<label for="checkbox1" >Area graph only</label>-->
 
-<input id="search">
-<button type="button" onclick="searchNode()">Search</button>
+<!--<input id="search">-->
+<!--<button type="button" onclick="searchNode()">Search</button>-->
 
-<progress value="0" max="100" id="progBar">
-    <span id="downloadProgress">
-        <!-- Your fallback goes here -->
-    </span>
-</progress>
-<label id="progUpdate">
-    <!-- Success Message -->
-</label>
-<br>
-<button onclick="saveTimeArcsData()">Save data for TimeArcs</button>
+<!--<progress value="0" max="100" id="progBar">-->
+    <!--<span id="downloadProgress">-->
+        <!--&lt;!&ndash; Your fallback goes here &ndash;&gt;-->
+    <!--</span>-->
+<!--</progress>-->
+<!--<label id="progUpdate">-->
+    <!--&lt;!&ndash; Success Message &ndash;&gt;-->
+<!--</label>-->
+<!--<br>-->
+<!--<button onclick="saveTimeArcsData()">Save data for TimeArcs</button>-->
 
-<script src="javascripts/searchBox.js"></script><br>
-Time axis goes from left to right<br>
-Terms often appeared together in a blog are connected by a thicker link.<br>
+<!--<script src="javascripts/searchBox.js"></script><br>-->
+<!--Time axis goes from left to right<br>-->
+<!--Terms often appeared together in a blog are connected by a thicker link.<br>-->
 </body>
 </html>

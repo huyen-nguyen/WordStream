@@ -70,15 +70,22 @@ function updateTopRank() {
     // .on("mouseup", submitInput())
     ;
 }
-
+function showRelationship(){
+    let isRel = document.getElementById("rel").checked;
+    console.log(isRel);
+    if (isRel){
+        d3.selectAll(".connection").transition().duration(200).attr("opacity", 1);
+    }
+    else d3.selectAll(".connection").transition().duration(200).attr("opacity", 0);
+}
 function submitInput(updateData) {
     globalWidth = parseInt(document.getElementById("widthText").innerText);
     globalHeight = parseInt(document.getElementById("heightText").innerText);
     globalMinFont = parseInt(document.getElementById("fontMin").innerText);
     globalMaxFont = parseInt(document.getElementById("fontMax").innerText);
     topRank = parseInt(document.getElementById("topRankText").innerText);
-    var isFlow = document.getElementById("flow").checked;
-    var isAv = document.getElementById("av").checked;
+    let isFlow = document.getElementById("flow").checked;
+    let isAv = document.getElementById("av").checked;
     if (isFlow && isAv) {
         console.log("Flow and Av");
         globalFlag = "fa";

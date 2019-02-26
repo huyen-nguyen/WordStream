@@ -1,8 +1,8 @@
 // pre-defined size
-var initWidth = 1500,
+var initWidth = 2000,
     initHeight = 1000,
     initMinFont = 14,
-    initMaxFont = 30,
+    initMaxFont = 28,
     initFlag = "none",
     topRank;
 
@@ -13,12 +13,12 @@ var svg = d3.select("body").append('svg')
     id: "mainsvg",
 });
 
-var mainGroup, axisGroup, xGridlinesGroup;
+var mainGroup, axisGroup, xGridlinesGroup, opacScale;
 
 // var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
 
-var fileList = ["WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck", "VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"
+var fileList = ["QuantumComputing", "ACLED", "H.E.A.T.Map", "GTD", "WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck","VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"
 ];
 
 var initialDataset = "Huffington";
@@ -105,8 +105,8 @@ function loadData(){
 }
 function loadNewData(event) {
     svg.selectAll("*").remove();
-    svg2.selectAll("*").remove();
-    svg3.selectAll("*").remove();
+    // svg2.selectAll("*").remove();
+    // svg3.selectAll("*").remove();
     fileName = this.options[this.selectedIndex].text;
     topRank=undefined;
     loadData();
@@ -117,7 +117,7 @@ function loadNewData(event) {
 function drawTimeArcs(){
     timeArcs()
 }
-function draw(data){
+async function draw(data){
     var t0 = performance.now();
     var width = initWidth  ;
     var height = initHeight;
@@ -143,7 +143,7 @@ function draw(data){
         maxSud = ws.maxSud()
     ;
     var t1 = performance.now();
-    console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
+    console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");
     //Display data
     var legendFontSize = 20;
     var legendHeight = boxes.topics.length*legendFontSize;
@@ -243,7 +243,6 @@ function draw(data){
             'fill-opacity': 0.1,
             'stroke-opacity': 0,
         });
-
     // ARRAY OF ALL WORDS
     var allWords = [];
     d3.map(boxes.data, function(row){
@@ -254,12 +253,58 @@ function draw(data){
 
     console.log("all words:");
     console.log(allWords);
-    //Color based on term
-    // var terms = [];
-    // for(i=0; i< allWords.length; i++){
-    //     terms.concat(allWords[i].text);
-    // }
-    //
+
+    d3.json("data/linksHuff2012.json", function (error, rawLinks) {
+        const threshold = 10;
+        const links = rawLinks.filter(d => d.weight > threshold);
+
+        links.forEach(d => {
+            d.sourceID = d.sourceID.split(".").join("_").split(" ").join("_");
+            d.targetID = d.targetID.split(".").join("_").split(" ").join("_");
+        });
+        let visibleLinks = [];
+
+        // select only links with: word place = true and have same id
+        links.forEach(d => {
+            let s = allWords.find(w => (w.id === d.sourceID) && (w.placed === true));
+            let t = allWords.find(w => (w.id === d.targetID) && (w.placed === true));
+            if ((s !== undefined) && (t !== undefined)){
+                d.sourceX = s.x;
+                d.sourceY = s.y;
+                d.targetX = t.x;
+                d.targetY = t.y;
+                visibleLinks.push(d);
+            }
+        });
+
+        const lineScale = d3.scale.linear()
+            .domain(d3.extent(visibleLinks, d => d.weight))
+            .range([0.5,3]);
+
+        opacScale = d3.scale.linear()
+            .domain(d3.extent(visibleLinks, d => d.weight))
+            .range([0.5,1]);
+
+        mainGroup.selectAll(".connection")
+            .data(visibleLinks)
+            .enter()
+            .append("line")
+            .attr("class", "connection")
+            .attr("opacity", 0)
+            .attr({
+                "x1": d => d.sourceX,
+                "y1": d => d.sourceY,
+                "x2": d => d.targetX,
+                "y2": d => d.targetY,
+                "stroke": "#444444",
+                "stroke-opacity": d => opacScale(d.weight),
+                "stroke-width": d => lineScale(d.weight)
+            });
+
+        drawWords();
+    });
+
+    function drawWords() {
 
     var opacity = d3.scale.log()
         .domain([minSud, maxSud])
@@ -288,6 +333,49 @@ function draw(data){
             visibility: function(d){ return d.placed ? ("visible"): ("hidden");}
         });
 
+    mainGroup.selectAll(".connection").on("mouseover", function () {
+        var thisLink = d3.select(this);
+        thisLink.style('cursor', 'crosshair');
+         // in order to select by byid, the id must not have space
+        var sourceText = mainGroup.select("#" + thisLink.data()[0].sourceID);
+        var prevSourceColor = sourceText.attr("fill");
+        var targetText = mainGroup.select("#" + thisLink.data()[0].targetID);
+        var prevTargetColor = targetText.attr("fill");
+
+        thisLink.attr("stroke-width", 4);
+
+        sourceText.attr({
+            stroke: prevSourceColor,
+            fill: prevSourceColor,
+            'stroke-width': 1.5
+        });
+
+        targetText.attr({
+            stroke: prevTargetColor,
+            fill: prevTargetColor,
+            'stroke-width': 1.5
+        });
+    });
+
+        mainGroup.selectAll(".connection").on("mouseout", function () {
+            var thisLink = d3.select(this);
+            thisLink.style('cursor', 'crosshair');
+
+            var sourceText = mainGroup.select("#" + thisLink.data()[0].sourceID);
+            var targetText = mainGroup.select("#" + thisLink.data()[0].targetID);
+
+            thisLink.attr("stroke-width", d => opacScale(d.weight));
+
+            sourceText.attr({
+                stroke: 'none',
+                'stroke-width': 0
+            });
+
+            targetText.attr({
+                stroke: 'none',
+                'stroke-width':0
+            });
+        });
 
     // When click a term
     //Try
@@ -453,7 +541,7 @@ function draw(data){
 
 spinner.stop();
 
-};
+}};
 function getTfidf(allWords){
     var sumTfidfDisplayed = 0;
     var sumTfidf = 0;
