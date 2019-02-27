@@ -58,8 +58,8 @@ function loadData(){
     spinner = new Spinner(opts).spin(target);
     // END: loader spinner settings ****************************
 
-    fileName = "data/"+fileName+".tsv"; // Add data folder path
     if (fileName.indexOf("Cards_Fries")>=0){
+        fileName = "data/"+fileName+".tsv"; // Add data folder path
         categories = ["increases_activity", "decreases_activity"];
         loadAuthorData(draw, topRank200()
             ,drawTimeArcs
@@ -67,6 +67,7 @@ function loadData(){
 
     }
     else if (fileName.indexOf("Cards_PC")>=0){
+        fileName = "data/"+fileName+".tsv"; // Add data folder path
         categories = ["adds_modification", "removes_modification", "increases","decreases", "binds", "translocation"];
         loadAuthorData(draw, topRank200()
             , drawTimeArcs
@@ -74,6 +75,7 @@ function loadData(){
 
     }
     else if (fileName.indexOf("PopCha")>=0){
+        fileName = "data/"+fileName+".tsv"; // Add data folder path
         categories = ["Comedy","Drama","Action", "Fantasy", "Horror"];
         loadAuthorData(draw, topRank200()
             , drawTimeArcs
@@ -81,6 +83,7 @@ function loadData(){
 
     }
     else if (fileName.indexOf("IMDB")>=0){
+        fileName = "data/"+fileName+".tsv"; // Add data folder path
         categories = ["Comedy","Drama","Action", "Family"];
         loadAuthorData(draw, topRank45()
             , drawTimeArcs
@@ -88,14 +91,21 @@ function loadData(){
 
     }
     else if (fileName.indexOf("VIS")>=0){
+        fileName = "data/"+fileName+".tsv"; // Add data folder path
         categories = ["Vis","VAST","InfoVis","SciVis"];
         loadAuthorData(draw, topRank45()
             , drawTimeArcs
         );
 
     }
+    else if (fileName.indexOf("QuantumComputing")>=0){
+        fileName = "data/"+fileName+".tsv"; // Add data folder path
+        categories = ["Unknown citation","Have citation","Affiliations","Author"];
+        loadQuantum(draw, 20);
 
+    }
     else{
+        fileName = "data/"+fileName+".tsv";
         categories = ["person","location","organization","miscellaneous"];
         loadBlogPostData(draw, topRank45()
             , drawTimeArcs
@@ -254,55 +264,58 @@ async function draw(data){
     console.log("all words:");
     console.log(allWords);
 
-    d3.json("data/linksHuff2012.json", function (error, rawLinks) {
-        const threshold = 10;
-        const links = rawLinks.filter(d => d.weight > threshold);
+    if (fileName.indexOf("Huffington") >= 0) {
+        d3.json("data/linksHuff2012.json", function (error, rawLinks) {
+            const threshold = 10;
+            const links = rawLinks.filter(d => d.weight > threshold);
 
-        links.forEach(d => {
-            d.sourceID = d.sourceID.split(".").join("_").split(" ").join("_");
-            d.targetID = d.targetID.split(".").join("_").split(" ").join("_");
-        });
-        let visibleLinks = [];
+            links.forEach(d => {
+                d.sourceID = d.sourceID.split(".").join("_").split(" ").join("_");
+                d.targetID = d.targetID.split(".").join("_").split(" ").join("_");
+            });
+            let visibleLinks = [];
 
-        // select only links with: word place = true and have same id
-        links.forEach(d => {
-            let s = allWords.find(w => (w.id === d.sourceID) && (w.placed === true));
-            let t = allWords.find(w => (w.id === d.targetID) && (w.placed === true));
-            if ((s !== undefined) && (t !== undefined)){
-                d.sourceX = s.x;
-                d.sourceY = s.y;
-                d.targetX = t.x;
-                d.targetY = t.y;
-                visibleLinks.push(d);
-            }
-        });
-
-        const lineScale = d3.scale.linear()
-            .domain(d3.extent(visibleLinks, d => d.weight))
-            .range([0.5,3]);
-
-        opacScale = d3.scale.linear()
-            .domain(d3.extent(visibleLinks, d => d.weight))
-            .range([0.5,1]);
-
-        mainGroup.selectAll(".connection")
-            .data(visibleLinks)
-            .enter()
-            .append("line")
-            .attr("class", "connection")
-            .attr("opacity", 0)
-            .attr({
-                "x1": d => d.sourceX,
-                "y1": d => d.sourceY,
-                "x2": d => d.targetX,
-                "y2": d => d.targetY,
-                "stroke": "#444444",
-                "stroke-opacity": d => opacScale(d.weight),
-                "stroke-width": d => lineScale(d.weight)
+            // select only links with: word place = true and have same id
+            links.forEach(d => {
+                let s = allWords.find(w => (w.id === d.sourceID) && (w.placed === true));
+                let t = allWords.find(w => (w.id === d.targetID) && (w.placed === true));
+                if ((s !== undefined) && (t !== undefined)) {
+                    d.sourceX = s.x;
+                    d.sourceY = s.y;
+                    d.targetX = t.x;
+                    d.targetY = t.y;
+                    visibleLinks.push(d);
+                }
             });
 
-        drawWords();
-    });
+            const lineScale = d3.scale.linear()
+                .domain(d3.extent(visibleLinks, d => d.weight))
+                .range([0.5, 3]);
+
+            opacScale = d3.scale.linear()
+                .domain(d3.extent(visibleLinks, d => d.weight))
+                .range([0.5, 1]);
+
+            mainGroup.selectAll(".connection")
+                .data(visibleLinks)
+                .enter()
+                .append("line")
+                .attr("class", "connection")
+                .attr("opacity", 0)
+                .attr({
+                    "x1": d => d.sourceX,
+                    "y1": d => d.sourceY,
+                    "x2": d => d.targetX,
+                    "y2": d => d.targetY,
+                    "stroke": "#444444",
+                    "stroke-opacity": d => opacScale(d.weight),
+                    "stroke-width": d => lineScale(d.weight)
+                });
+
+            drawWords();
+        });
+    }
+    else drawWords();
 
     function drawWords() {
 
