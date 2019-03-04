@@ -1,9 +1,9 @@
 // pre-defined size
 var initWidth = 2000,
-    initHeight = 1000,
-    initMinFont = 14,
-    initMaxFont = 28,
-    initFlag = "none",
+    initHeight = 900,
+    initMinFont = 15,
+    initMaxFont = 35,
+    initFlag = "none",// none / fa/ f / a
     topRank;
 
 var svg = d3.select("body").append('svg')
@@ -18,10 +18,12 @@ var mainGroup, axisGroup, xGridlinesGroup, opacScale;
 // var fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
 //                 ,"VIS_papers","IMDB","PopCha","Cards_PC","Cards_Fries"]
 
-var fileList = ["QuantumComputing", "ACLED", "H.E.A.T.Map", "GTD", "WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck","VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"
+var fileList = ["QuantumComputing",
+    // "ACLED", "H.E.A.T.Map", "GTD",
+    "WikiNews", "Huffington", "CrooksAndLiars", "EmptyWheel","Esquire","FactCheck","VIS_papers", "IMDB","PopCha","Cards_PC","Cards_Fries"
 ];
 
-var initialDataset = "Huffington";
+var initialDataset = "VIS_papers";
 var categories = ["person","location","organization","miscellaneous"];
 
 var fileName;
@@ -153,6 +155,7 @@ async function draw(data){
         maxSud = ws.maxSud()
     ;
     var t1 = performance.now();
+    console.log("complete");
     console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");
     //Display data
     var legendFontSize = 20;
@@ -702,8 +705,8 @@ function styleAxis(axisNodes){
     axisNodes.selectAll('.tick text').attr({
         // 'text-anchor': 'end',
         // 'transform': 'rotate(-30)',
-        'font-family': 'serif',
-        'font-size': 14
+        'font-family': 'sans-serif',
+        'font-size': 20
     });
 }
 function styleGridlineNodes(gridlineNodes){
@@ -732,7 +735,7 @@ function topRank1000(){
 }
 function topRank45(){
     if (topRank==undefined){
-        topRank = 50;
+        topRank = 40;
     }
     return topRank;
 }

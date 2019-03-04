@@ -8,9 +8,7 @@ var globalWidth = initWidth,
 var color = d3.scale.category10();
 var axis = d3.svg.axis().ticks(4);
 var axisFont = d3.svg.axis().tickValues([0, 25, 50, 75, 100]);
-
 // var verticalAxis = d3.svg.axis().orient("left").ticks(5);
-
 
 d3.select('#widthSlider').call(d3.slider()
     .axis(axis)
@@ -78,7 +76,39 @@ function showRelationship(){
     }
     else d3.selectAll(".connection").transition().duration(200).attr("opacity", 0);
 }
-function submitInput(updateData) {
+function progressing() {
+    var bar = new ProgressBar.Line(progressBar, {
+        strokeWidth: 4,
+        easing: 'easeInOut',
+        //duration: 1400,
+        color: '#FFEA82',
+        trailColor: '#eee',
+        trailWidth: 1,
+        svgStyle: {width: '100%', height: '100%'},
+        text: {
+            style: {
+                // Text color.
+                // Default: same as stroke color (options.color)
+                color: '#999',
+                position: 'absolute',
+                right: '0',
+                top: '30px',
+                padding: 0,
+                margin: 0,
+                transform: null
+            },
+            autoStyleContainer: false
+        },
+        from: {color: '#FFEA82'},
+        to: {color: '#ED6A5A'},
+        step: (state, bar) => {
+            bar.setText(Math.round(bar.value() * 100) + ' %');
+        }
+    });
+
+    bar.animate(1.0);  // Number from 0.0 to 1.0
+}
+function submitInput() {
     globalWidth = parseInt(document.getElementById("widthText").innerText);
     globalHeight = parseInt(document.getElementById("heightText").innerText);
     globalMinFont = parseInt(document.getElementById("fontMin").innerText);
@@ -106,12 +136,17 @@ function submitInput(updateData) {
     }
 
     console.log("input submitted");
-    updateData(mainGroup);
+
+    // var q = d3.queue();
+    // q.defer(progressing)
+    //     .await(updateData);
+    updateData();
 }
 
 var up = [];
 
-function updateData() {
+function updateData(error) {
+    if (error) throw error;
     var offsetLegend = -10;
     var axisPadding = 10;
     var margins = {left: 20, top: 20, right: 10, bottom: 30};
@@ -124,7 +159,9 @@ function updateData() {
 
     var newboxes = ws.boxes(),
         minFreq = ws.minFreq(),
-        maxFreq = ws.maxFreq();
+        maxFreq = ws.maxFreq(),
+        minSud = ws.minSud(),
+        maxSud = ws.maxSud();
 
     var legendFontSize = 20;
     var legendHeight = newboxes.topics.length * legendFontSize;
@@ -143,25 +180,24 @@ function updateData() {
         .y1(function(d){return (d.y0 + d.y); });
 
     mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
-    var data = ws.boxes().data;
 
     var dates = [];
-    data.forEach(row => {
+    newboxes.data.forEach(row => {
         dates.push(row.date);
     });
 
     // ARRAY OF ALL WORDS
     var allWordsUpdate = [];
-    d3.map(data, function (row) {
+    d3.map(newboxes.data, function (row) {
         newboxes.topics.forEach(topic => {
             allWordsUpdate = allWordsUpdate.concat(row.words[topic]);
         });
     });
 
     up = JSON.parse(JSON.stringify(allWordsUpdate));
-    var opacity = d3.scale.linear()
-        .domain([minFreq, maxFreq])
-        .range([0.5, 1]);
+    var opacity = d3.scale.log()
+        .domain([minSud, maxSud])
+        .range([0.4, 1]);
 
     d3.select("#mainsvg").selectAll('.word').data(allWordsUpdate, d => d.id)
         .transition()
@@ -183,7 +219,7 @@ function updateData() {
                 return color(d.topicIndex);
             },
             'fill-opacity': function (d) {
-                return opacity(d.frequency)
+                return opacity(d.sudden)
             },
             'text-anchor': 'middle',
             'alignment-baseline': 'middle',
@@ -273,7 +309,7 @@ function updateData() {
     styleAxis(axisNodes);
 
     //Display the vertical gridline
-    var xGridlineScale = d3.scale.ordinal().domain(d3.range(0, dates.length + 1)).rangeBands([0, globalWidth + globalWidth / data.length]);
+    var xGridlineScale = d3.scale.ordinal().domain(d3.range(0, dates.length + 1)).rangeBands([0, globalWidth + globalWidth / newboxes.data.length]);
     var xGridlinesAxis = d3.svg.axis().orient('bottom').scale(xGridlineScale);
 
     xGridlinesGroup.selectAll('g')
