@@ -65,7 +65,9 @@ function updateTopRank() {
         .on("slide", function (evt, value) {
             d3.select('#topRankText').text(value[1]);
         }))
-    // .on("mouseup", submitInput())
+        .on("mouseup",function () {
+            submitInput(updateData);
+        })
     ;
 }
 function showRelationship(){
@@ -113,7 +115,7 @@ function submitInput() {
     globalHeight = parseInt(document.getElementById("heightText").innerText);
     globalMinFont = parseInt(document.getElementById("fontMin").innerText);
     globalMaxFont = parseInt(document.getElementById("fontMax").innerText);
-    topRank = parseInt(document.getElementById("topRankText").innerText);
+    topRankUpdate = parseInt(document.getElementById("topRankText").innerText);
     let isFlow = document.getElementById("flow").checked;
     let isAv = document.getElementById("av").checked;
     if (isFlow && isAv) {
@@ -135,6 +137,22 @@ function submitInput() {
         globalFlag = "none"
     }
 
+    // top rank
+    if (topRankUpdate <= topRank){
+        for (var i = 0; i < gdata.length; i ++){
+            for (var j in categories){
+                gdata[i]["words"][categories[j]]=gdata[i]["words"][categories[j]].slice(0, topRankUpdate);
+            }
+        }
+    }
+    else {
+        for (var i = 1; i < totalData.length; i ++){        // start 1 for sudden
+            for (var j in categories){
+                gdata[i-1]["words"][categories[j]]=totalData[i]["words"][categories[j]].slice(0, topRankUpdate);
+            }
+        }
+        gdata = tfidf(gdata);
+    }
     console.log("input submitted");
 
     // var q = d3.queue();
@@ -150,8 +168,11 @@ function updateData(error) {
     var offsetLegend = -10;
     var axisPadding = 10;
     var margins = {left: 20, top: 20, right: 10, bottom: 30};
+
     var ws = d3.layout.wordStream()
         .size([globalWidth, globalHeight])
+        .interpolate("cardinal")
+        .fontScale(d3.scale.log())
         .minFontSize(globalMinFont)
         .maxFontSize(globalMaxFont)
         .data(gdata)
@@ -173,6 +194,35 @@ function updateData(error) {
             width: globalWidth + margins.left + margins.top,
             height: globalHeight + +margins.top + margins.bottom + axisPadding + offsetLegend + legendHeight
         });
+
+    var dates = [];
+    newboxes.data.forEach(row => {
+        dates.push(row.date);
+    });
+
+    var xAxisScale = d3.scale.ordinal().domain(dates).rangeBands([0, globalWidth]);
+    var xAxis = d3.svg.axis().orient('bottom').scale(xAxisScale);
+
+    axisGroup
+        .attr('transform', 'translate(' + (margins.left) + ',' + (globalHeight + margins.top + axisPadding + legendHeight + offsetLegend) + ')');
+
+    var axisNodes = axisGroup.call(xAxis);
+    styleAxis(axisNodes);
+
+    //Display the vertical gridline
+    var xGridlineScale = d3.scale.ordinal().domain(d3.range(0, dates.length + 1)).rangeBands([0, globalWidth + globalWidth / newboxes.data.length]);
+    var xGridlinesAxis = d3.svg.axis().orient('bottom').scale(xGridlineScale);
+
+    xGridlinesGroup.attr("id", "gridLines")
+        .attr('transform', 'translate(' +
+            (margins.left - globalWidth/24)
+            + ',' + (globalHeight + margins.top + axisPadding + legendHeight + margins.bottom + offsetLegend) + ')');
+
+    var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-globalHeight - axisPadding - legendHeight - margins.bottom, 0, 0).tickFormat(''));
+    styleGridlineNodes(gridlineNodes);
+
+    // build legend
+    legendGroup.attr('transform', 'translate(' + margins.left + ',' + (globalHeight+margins.top+offsetLegend) + ')');
     var area = d3.svg.area()
         .interpolate("cardinal")
         .x(function(d){return (d.x);})
@@ -180,11 +230,6 @@ function updateData(error) {
         .y1(function(d){return (d.y0 + d.y); });
 
     mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
-
-    var dates = [];
-    newboxes.data.forEach(row => {
-        dates.push(row.date);
-    });
 
     // ARRAY OF ALL WORDS
     var allWordsUpdate = [];
@@ -199,8 +244,66 @@ function updateData(error) {
         .domain([minSud, maxSud])
         .range([0.4, 1]);
 
-    d3.select("#mainsvg").selectAll('.word').data(allWordsUpdate, d => d.id)
+    if (fileName.indexOf("Huffington") >= 0) {
+        d3.json("data/linksHuff2012.json", function (error, rawLinks) {
+            const threshold = 10;
+            const links = rawLinks.filter(d => d.weight > threshold);
+
+            links.forEach(d => {
+                d.sourceID = d.sourceID.split(".").join("_").split(" ").join("_");
+                d.targetID = d.targetID.split(".").join("_").split(" ").join("_");
+            });
+            let visibleLinks = [];
+
+            // select only links with: word place = true and have same id
+            links.forEach(d => {
+                let s = allWordsUpdate.find(w => (w.id === d.sourceID) && (w.placed === true));
+                let t = allWordsUpdate.find(w => (w.id === d.targetID) && (w.placed === true));
+                if ((s !== undefined) && (t !== undefined)) {
+                    d.sourceX = s.x;
+                    d.sourceY = s.y;
+                    d.targetX = t.x;
+                    d.targetY = t.y;
+                    visibleLinks.push(d);
+                }
+            });
+
+            const lineScale = d3.scale.linear()
+                .domain(d3.extent(visibleLinks, d => d.weight))
+                .range([0.5, 3]);
+
+            opacScale = d3.scale.linear()
+                .domain(d3.extent(visibleLinks, d => d.weight))
+                .range([0.5, 1]);
+
+            mainGroup.selectAll(".connection")
+                .data(visibleLinks)
+                .enter()
+                .append("line")
+                .attr("class", "connection")
+                .attr("opacity", 0)
+                .attr({
+                    "x1": d => d.sourceX,
+                    "y1": d => d.sourceY,
+                    "x2": d => d.targetX,
+                    "y2": d => d.targetY,
+                    "stroke": "#444444",
+                    "stroke-opacity": d => opacScale(d.weight),
+                    "stroke-width": d => lineScale(d.weight)
+                });
+
+            drawWordsUpdate();
+        });
+    }
+    else drawWordsUpdate();
+    function drawWordsUpdate(){
+    var texts = d3.select("#mainsvg").selectAll('.word').data(allWordsUpdate, d => d.id);
+
+    texts.exit()
         .transition()
+        .duration(1000).remove();
+
+    texts.transition()
         .duration(1000)
         .attr({
             transform: function (d) {
@@ -230,6 +333,38 @@ function updateData(error) {
                 return d.placed ? ("visible") : ("hidden");
             }
         });
+
+        texts.enter().append('g')
+            .attr({
+                transform: function (d) {
+                    return 'translate(' + d.x + ', ' + d.y + ')rotate(' + d.rotate + ')';
+                }
+            })
+            .transition()
+            .duration(1000)
+            .append("text")
+            .text(function (d) {
+                return d.text;
+            })
+            .attr({
+                'font-size': function (d) {
+                    return d.fontSize;
+                },
+                fill: function (d) {
+                    return color(d.topicIndex);
+                },
+                'fill-opacity': function (d) {
+                    return opacity(d.sudden)
+                },
+                'text-anchor': 'middle',
+                'alignment-baseline': 'middle',
+                topic: function (d) {
+                    return d.topic;
+                },
+                visibility: function (d) {
+                    return d.placed ? ("visible") : ("hidden");
+                }
+            });
 // Get layer path
     var lineCardinal = d3.svg.line()
         .x(function(d) { return d.x; })
@@ -299,26 +434,9 @@ function updateData(error) {
         .attr("y", (d, i) => 43 + 36 * i)
         .attr("font-weight", "bold");
 
-    var xAxisScale = d3.scale.ordinal().domain(dates).rangeBands([0, globalWidth]);
-    var xAxis = d3.svg.axis().orient('bottom').scale(xAxisScale);
 
-    axisGroup.selectAll("g")
-        .attr('transform', 'translate(' + (margins.left) + ',' + (globalHeight + margins.top + axisPadding + legendHeight + offsetLegend) + ')');
 
-    var axisNodes = axisGroup.call(xAxis);
-    styleAxis(axisNodes);
-
-    //Display the vertical gridline
-    var xGridlineScale = d3.scale.ordinal().domain(d3.range(0, dates.length + 1)).rangeBands([0, globalWidth + globalWidth / newboxes.data.length]);
-    var xGridlinesAxis = d3.svg.axis().orient('bottom').scale(xGridlineScale);
-
-    xGridlinesGroup.selectAll('g')
-        .attr('transform', 'translate(' + (margins.left - globalWidth/24)  + ',' + (globalHeight + margins.top + axisPadding + legendHeight + margins.bottom + offsetLegend) + ')');
-
-    var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-globalHeight - axisPadding - legendHeight - margins.bottom, 0, 0).tickFormat(''));
-    styleGridlineNodes(gridlineNodes);
-
-}
+}}
 
 
 // d3.select("#heightSlider")

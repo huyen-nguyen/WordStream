@@ -192,8 +192,8 @@ body {
     margin-right: 10px;
     background: #eee;
 }
-.value{
-    font: 15px sans-serif;
+.legendValue{
+    font: 18px sans-serif;
     color: #0d97ba}
 
 .nodeText {
