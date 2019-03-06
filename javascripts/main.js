@@ -341,13 +341,15 @@ function draw(data){
             'font-family': font,
             'font-size': function(d){return d.fontSize;},
             fill: function(d){return color(d.topicIndex);},
-            'fill-opacity': function(d){return opacity(d.sudden)},
-           //'fill-opacity': 0,
+           'fill-opacity': function(d){return opacity(d.sudden)},
+           // 'fill-opacity': 0,
             'text-anchor': 'middle',
             'alignment-baseline': 'middle',
             topic: function(d){return d.topic;},
             visibility: function(d){ return d.placed ? ("visible"): ("hidden");}
         });
+
+
 
     mainGroup.selectAll(".connection").on("mouseover", function () {
         var thisLink = d3.select(this);
@@ -735,7 +737,7 @@ function topRank1000(){
 }
 function topRank45(){
     if (topRank==undefined){
-        topRank = 20;
+        topRank = 50;
     }
     return topRank;
 }

@@ -60,24 +60,26 @@ function updateTopRank() {
         .axis(axis)
         .value([0, topRank])
         .min(0)
-        .max(300)
+        .max(50)
         .step(5)
         .on("slide", function (evt, value) {
             d3.select('#topRankText').text(value[1]);
         }))
-        .on("mouseup",function () {
+        .on("mouseup", function () {
             submitInput(updateData);
         })
     ;
 }
-function showRelationship(){
+
+function showRelationship() {
     let isRel = document.getElementById("rel").checked;
     console.log(isRel);
-    if (isRel){
+    if (isRel) {
         d3.selectAll(".connection").transition().duration(200).attr("opacity", 1);
     }
     else d3.selectAll(".connection").transition().duration(200).attr("opacity", 0);
 }
+
 function progressing() {
     var bar = new ProgressBar.Line(progressBar, {
         strokeWidth: 4,
@@ -110,6 +112,7 @@ function progressing() {
 
     bar.animate(1.0);  // Number from 0.0 to 1.0
 }
+
 function submitInput() {
     globalWidth = parseInt(document.getElementById("widthText").innerText);
     globalHeight = parseInt(document.getElementById("heightText").innerText);
@@ -138,22 +141,23 @@ function submitInput() {
     }
 
     // top rank
-    if (topRankUpdate <= topRank){
-        for (var i = 0; i < gdata.length; i ++){
-            for (var j in categories){
-                gdata[i]["words"][categories[j]]=gdata[i]["words"][categories[j]].slice(0, topRankUpdate);
+    if (topRankUpdate <= topRank) {
+        for (var i = 0; i < gdata.length; i++) {
+            for (var j in categories) {
+                gdata[i]["words"][categories[j]] = gdata[i]["words"][categories[j]].slice(0, topRankUpdate);
             }
         }
     }
     else {
-        for (var i = 1; i < totalData.length; i ++){        // start 1 for sudden
-            for (var j in categories){
-                gdata[i-1]["words"][categories[j]]=totalData[i]["words"][categories[j]].slice(0, topRankUpdate);
+        for (var i = 1; i < totalData.length; i++) {        // start 1 for sudden
+            for (var j in categories) {
+                gdata[i - 1]["words"][categories[j]] = totalData[i]["words"][categories[j]].slice(0, topRankUpdate);
             }
         }
         gdata = tfidf(gdata);
     }
     console.log("input submitted");
+    console.log(gdata);
 
     // var q = d3.queue();
     // q.defer(progressing)
@@ -215,19 +219,25 @@ function updateData(error) {
 
     xGridlinesGroup.attr("id", "gridLines")
         .attr('transform', 'translate(' +
-            (margins.left - globalWidth/24)
+            (margins.left - globalWidth / 24)
             + ',' + (globalHeight + margins.top + axisPadding + legendHeight + margins.bottom + offsetLegend) + ')');
 
     var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-globalHeight - axisPadding - legendHeight - margins.bottom, 0, 0).tickFormat(''));
     styleGridlineNodes(gridlineNodes);
 
     // build legend
-    legendGroup.attr('transform', 'translate(' + margins.left + ',' + (globalHeight+margins.top+offsetLegend) + ')');
+    legendGroup.attr('transform', 'translate(' + margins.left + ',' + (globalHeight + margins.top + offsetLegend) + ')');
     var area = d3.svg.area()
         .interpolate("cardinal")
-        .x(function(d){return (d.x);})
-        .y0(function(d){return d.y0;})
-        .y1(function(d){return (d.y0 + d.y); });
+        .x(function (d) {
+            return (d.x);
+        })
+        .y0(function (d) {
+            return d.y0;
+        })
+        .y1(function (d) {
+            return (d.y0 + d.y);
+        });
 
     mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
 
@@ -296,52 +306,53 @@ function updateData(error) {
         });
     }
     else drawWordsUpdate();
-    function drawWordsUpdate(){
-    var texts = d3.select("#mainsvg").selectAll('.word').data(allWordsUpdate, d => d.id);
 
-    texts.exit()
-        .transition()
-        .duration(1000).remove();
+    function drawWordsUpdate() {
+        var texts = d3.select("#mainsvg").selectAll('.word').data(allWordsUpdate, d => d.id);
 
-    texts.transition()
-        .duration(1000)
-        .attr({
-            transform: function (d) {
-                return 'translate(' + d.x + ', ' + d.y + ')rotate(' + d.rotate + ')';
-            }
-        })
-        .select("text")
-        .text(function (d) {
-            return d.text;
-        })
-        .attr({
-            'font-size': function (d) {
-                return d.fontSize;
-            },
-            fill: function (d) {
-                return color(d.topicIndex);
-            },
-            'fill-opacity': function (d) {
-                return opacity(d.sudden)
-            },
-            'text-anchor': 'middle',
-            'alignment-baseline': 'middle',
-            topic: function (d) {
-                return d.topic;
-            },
-            visibility: function (d) {
-                return d.placed ? ("visible") : ("hidden");
-            }
-        });
+        texts.exit()
+            .remove();
 
-        texts.enter().append('g')
+        texts.transition()
+            .duration(1000)
             .attr({
                 transform: function (d) {
                     return 'translate(' + d.x + ', ' + d.y + ')rotate(' + d.rotate + ')';
                 }
             })
-            .transition()
-            .duration(1000)
+            .select("text")
+            .text(function (d) {
+                return d.text;
+            })
+            .attr({
+                'font-size': function (d) {
+                    return d.fontSize;
+                },
+                fill: function (d) {
+                    return color(d.topicIndex);
+                },
+                'fill-opacity': function (d) {
+                    return opacity(d.sudden)
+                },
+                'text-anchor': 'middle',
+                'alignment-baseline': 'middle',
+                topic: function (d) {
+                    return d.topic;
+                },
+                visibility: function (d) {
+                    return d.placed ? ("visible") : ("hidden");
+                }
+            });
+
+
+        texts.enter()
+            .append("g")
+            .attr({
+                transform: function (d) {
+                    return 'translate(' + d.x + ', ' + d.y + ')rotate(' + d.rotate + ')';
+                }
+            })
+            .attr("class", "word")
             .append("text")
             .text(function (d) {
                 return d.text;
@@ -365,78 +376,118 @@ function updateData(error) {
                     return d.placed ? ("visible") : ("hidden");
                 }
             });
+
+        var prevColor;
+        // --- Highlight when mouse enter ---
+        mainGroup.selectAll('text').on('mouseenter', function () {  // hover above the word -> select this
+            var thisText = d3.select(this);
+            thisText.style('cursor', 'pointer');
+            prevColor = thisText.attr('fill');
+
+            var text = thisText.text();
+            var topic = thisText.attr('topic');
+            var allTexts = mainGroup.selectAll('text').filter(t => {
+                return t && t.text === text && t.topic === topic;
+            });
+            allTexts.attr({
+                stroke: prevColor,
+                fill: prevColor,
+                'stroke-width': 1.5
+            });
+        });
+
+        // --- Lowlight when mouse out ---
+        mainGroup.selectAll('text').on('mouseout', function () {
+            var thisText = d3.select(this);
+            thisText.style('cursor', 'default');
+            var text = thisText.text();
+            var topic = thisText.attr('topic');
+            var allTexts = mainGroup.selectAll('text').filter(t => {
+                return t && !t.cloned && t.text === text && t.topic === topic;
+            });
+            allTexts.attr({
+                stroke: 'none',
+                'stroke-width': '0'
+            });
+        });
 // Get layer path
-    var lineCardinal = d3.svg.line()
-        .x(function(d) { return d.x; })
-        .y(function(d) { return d.y; })
-        .interpolate("cardinal");
+        var lineCardinal = d3.svg.line()
+            .x(function (d) {
+                return d.x;
+            })
+            .y(function (d) {
+                return d.y;
+            })
+            .interpolate("cardinal");
 
-    var boundary = [];
-    for (var i = 0; i < newboxes.layers[0].length; i ++){
-        var tempPoint = Object.assign({}, newboxes.layers[0][i]);
-        tempPoint.y = tempPoint.y0;
-        boundary.push(tempPoint);
+        var boundary = [];
+        for (var i = 0; i < newboxes.layers[0].length; i++) {
+            var tempPoint = Object.assign({}, newboxes.layers[0][i]);
+            tempPoint.y = tempPoint.y0;
+            boundary.push(tempPoint);
+        }
+
+        for (var i = newboxes.layers[newboxes.layers.length - 1].length - 1; i >= 0; i--) {
+            var tempPoint2 = Object.assign({}, newboxes.layers[newboxes.layers.length - 1][i]);
+            tempPoint2.y = tempPoint2.y + tempPoint2.y0;
+            boundary.push(tempPoint2);
+        }       // Add next (8) elements
+
+        var lenb = boundary.length;
+
+        // Get the string for path
+
+        var combined = lineCardinal(boundary.slice(0, lenb / 2))
+            + "L"
+            + lineCardinal(boundary.slice(lenb / 2, lenb))
+                .substring(1, lineCardinal(boundary.slice(lenb / 2, lenb)).length)
+            + "Z";
+
+        var topics = newboxes.topics;
+        mainGroup.selectAll('path')
+            .data(newboxes.layers)
+            .enter()
+            .append('path')
+            .attr('d', area)
+            .style('fill', function (d, i) {
+                return color(i);
+            })
+            .attr({
+                'fill-opacity': 0,      // = 1 if full color
+                // stroke: 'black',
+                'stroke-width': 0.3,
+                topic: function (d, i) {
+                    return topics[i];
+                }
+            });
+        // ============= Get LAYER PATH ==============
+        var layerPath = mainGroup.selectAll("path").append("path")
+            .attr("d", combined)
+            .attr({
+                'fill-opacity': 0.1,
+                'stroke-opacity': 0,
+            });
+
+        var metValue = [getTfidf(allWordsUpdate).toFixed(2),
+            getCompactness(allWordsUpdate, layerPath)[0].toFixed(2),
+            getCompactness(allWordsUpdate, layerPath)[1].toFixed(2),
+            getDisplayRate(allWordsUpdate, maxFreq)[0].toFixed(2),
+            getDisplayRate(allWordsUpdate, maxFreq)[1].toFixed(3)];
+
+        metric2.selectAll(".metricValue").remove();
+        metric2.selectAll(".metricValue")
+            .data(metValue)
+            .enter()
+            .append("text")
+            .text(d => d)
+            .attr("class", "metricValue metricDisplay")
+            .attr("x", "0")
+            .attr("y", (d, i) => 43 + 36 * i)
+            .attr("font-weight", "bold");
+
+
     }
-
-    for (var i = newboxes.layers[newboxes.layers.length-1].length-1; i >= 0; i --){
-        var tempPoint2 = Object.assign({}, newboxes.layers[newboxes.layers.length-1][i]);
-        tempPoint2.y = tempPoint2.y + tempPoint2.y0;
-        boundary.push(tempPoint2);
-    }       // Add next (8) elements
-
-    var lenb = boundary.length;
-
-    // Get the string for path
-
-    var combined = lineCardinal( boundary.slice(0,lenb/2))
-        + "L"
-        + lineCardinal( boundary.slice(lenb/2, lenb))
-            .substring(1,lineCardinal( boundary.slice(lenb/2, lenb)).length)
-        + "Z";
-
-    var topics = newboxes.topics;
-    mainGroup.selectAll('path')
-        .data(newboxes.layers)
-        .enter()
-        .append('path')
-        .attr('d', area)
-        .style('fill', function (d, i) {
-            return color(i);
-        })
-        .attr({
-            'fill-opacity': 0,      // = 1 if full color
-            // stroke: 'black',
-            'stroke-width': 0.3,
-            topic: function(d, i){return topics[i];}
-        });
-    // ============= Get LAYER PATH ==============
-    var layerPath = mainGroup.selectAll("path").append("path")
-        .attr("d", combined )
-        .attr({
-            'fill-opacity': 0.1,
-            'stroke-opacity': 0,
-        });
-
-    var metValue = [getTfidf(allWordsUpdate).toFixed(2),
-        getCompactness(allWordsUpdate, layerPath)[0].toFixed(2),
-        getCompactness(allWordsUpdate, layerPath)[1].toFixed(2),
-        getDisplayRate(allWordsUpdate, maxFreq)[0].toFixed(2),
-        getDisplayRate(allWordsUpdate, maxFreq)[1].toFixed(3)];
-
-    metric2.selectAll(".metricValue").remove();
-    metric2.selectAll(".metricValue")
-        .data(metValue)
-        .enter()
-        .append("text")
-        .text(d => d)
-        .attr("class", "metricValue metricDisplay")
-        .attr("x", "0")
-        .attr("y", (d, i) => 43 + 36 * i)
-        .attr("font-weight", "bold");
-
-
-
-}}
+}
 
 
 // d3.select("#heightSlider")
