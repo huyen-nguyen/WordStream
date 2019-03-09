@@ -6,14 +6,13 @@ Demo: https://nnhuyen.github.io/WordStream/
 
 Video: 
 
-[![WS](https://img.youtube.com/vi/DwaDMPhi2Ec/0.jpg)](https://www.youtube.com/watch?v=DwaDMPhi2Ec "Everything Is AWESOME")
+[![WS](https://github.com/nnhuyen/WordStream/blob/master/images/Huffington.png)](https://www.youtube.com/watch?v=DwaDMPhi2Ec "Everything Is AWESOME")
 
 *WordStream* is a visualization technique for demonstrating the evolution of a topic over time. This is a hybrid 
 technique from Wordle and StreamGraph, which conveys textual data with both global and local perpsectives. Global trends
  is described by the total stream, in which thickness represents amount of interest/concern in that specific 
  timepoint. Local trend is retrieved from an individual stream. 
- 
-![ScreenShot](https://github.com/nnhuyen/WordStream/blob/master/images/Huffington.png)
+
 
 Timeline is shown from 
 left to right, in the bottom of the interface. The categories for textual data are color-encoded, for example:
