@@ -5,7 +5,8 @@ Demo: https://nnhuyen.github.io/WordStream/
 
 
 Video: 
-[![Everything Is AWESOME](https://img.youtube.com/vi/DwaDMPhi2Ec/0.jpg)](https://www.youtube.com/watch?v=DwaDMPhi2Ec "Everything Is AWESOME")
+
+[![WS](https://img.youtube.com/vi/DwaDMPhi2Ec/0.jpg)](https://www.youtube.com/watch?v=DwaDMPhi2Ec "Everything Is AWESOME")
 
 *WordStream* is a visualization technique for demonstrating the evolution of a topic over time. This is a hybrid 
 technique from Wordle and StreamGraph, which conveys textual data with both global and local perpsectives. Global trends
