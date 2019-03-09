@@ -28,7 +28,7 @@ attention](https://www.cs.uic.edu/~tdang/TimeArcs/EuroVis2016/TimeArcs_Dang_Euro
 appearance. A word's sudden attention is a function of frequency, which is big when the previous timestep has small 
 frequency and this current timestep has high frequency. 
 
-![ScreenShot](https://github.com/nnhuyen/WordStream/blob/master/media/highligh.png)
+![ScreenShot](https://github.com/nnhuyen/WordStream/blob/master/media/highlight.png)
 
 WordStream shows the remarkable topics by emphasizing them with font size and opacity.  
 
