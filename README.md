@@ -4,7 +4,7 @@ Demo: https://nnhuyen.github.io/WordStream/
 
 
 
-Video: 
+Video: https://www.youtube.com/watch?v=DwaDMPhi2Ec
 
 [![WS](https://github.com/nnhuyen/WordStream/blob/master/images/Huffington.png)](https://www.youtube.com/watch?v=DwaDMPhi2Ec "Everything Is AWESOME")
 
