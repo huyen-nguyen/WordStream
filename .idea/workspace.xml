@@ -2,16 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="140e1f28-6c0b-46d1-b831-903931873018" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/javascripts/mainorg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/d3.layout.wordstreamorg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/loaddataorg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Description" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/displayRate.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/EmptyWheel.tsv" beforeDir="false" afterPath="$PROJECT_DIR$/data/EmptyWheel.tsv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo.html" beforeDir="false" afterPath="$PROJECT_DIR$/demo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascripts/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/init.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascripts/quantum.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/quantum.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascripts/update.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/d3.layout.wordstream.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/d3.layout.wordstream.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/d3.slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/d3.slider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/loaddata.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/loaddata.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/WSvideo.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/media/ws.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputExtreme.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/wordcloud.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/wordcloud.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/timeArcs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/achemedeanspiral.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/achemedeanspiral.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/buildboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/buildboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/finalboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/finalboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/sprite.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/sprite.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/testbuildboxes.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/testbuildboxes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/testgetsprite.html" beforeDir="false" afterPath="$PROJECT_DIR$/test/testgetsprite.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,12 +34,31 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/test/wordcloud.html">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="67">
+                    <caret line="77" column="14" lean-forward="true" selection-start-line="77" selection-start-column="14" selection-end-line="77" selection-end-column="14" />
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-785812493">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="25" />
-          <entry key="project.open.time.0" value="3" />
+          <entry key="project.open.time.0" value="4" />
           <entry key="project.open.time.1" value="8" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
@@ -48,22 +79,22 @@
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.78" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="33" />
+          <entry key="project.opened" value="34" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="241" />
-          <entry key="html" value="2919" />
-          <entry key="js" value="6926" />
+          <entry key="css" value="389" />
+          <entry key="html" value="3126" />
+          <entry key="js" value="7863" />
           <entry key="md" value="2171" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CSS" value="241" />
-          <entry key="HTML" value="2919" />
-          <entry key="JavaScript" value="6926" />
+          <entry key="CSS" value="389" />
+          <entry key="HTML" value="3126" />
+          <entry key="JavaScript" value="7863" />
           <entry key="Markdown" value="2171" />
         </counts>
       </usages-collector>
@@ -71,27 +102,27 @@
         <counts>
           <entry key="293" value="1" />
           <entry key="Description" value="2" />
-          <entry key="css" value="15" />
+          <entry key="css" value="20" />
           <entry key="csv" value="3" />
-          <entry key="html" value="13" />
-          <entry key="js" value="62" />
+          <entry key="html" value="18" />
+          <entry key="js" value="79" />
           <entry key="json" value="8" />
           <entry key="md" value="2" />
           <entry key="png" value="4" />
-          <entry key="tsv" value="8" />
+          <entry key="tsv" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="15" />
+          <entry key="CSS" value="20" />
           <entry key="CSV" value="3" />
-          <entry key="HTML" value="13" />
+          <entry key="HTML" value="18" />
           <entry key="Image" value="4" />
           <entry key="JSON" value="7" />
-          <entry key="JavaScript" value="63" />
+          <entry key="JavaScript" value="80" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="TSV" value="8" />
+          <entry key="TSV" value="10" />
           <entry key="tsconfig" value="1" />
         </counts>
       </usages-collector>
@@ -100,46 +131,37 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/javascripts/mainorg.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="836">
+              <caret line="104" column="16" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="697">
+              <caret line="72" column="14" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
+        <entry file="file://$PROJECT_DIR$/javascripts/quantum.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-393">
-              <caret line="65" column="32" lean-forward="true" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/demo.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="145" column="44" lean-forward="true" selection-start-line="145" selection-start-column="44" selection-end-line="145" selection-end-column="44" />
+            <state relative-caret-position="400">
+              <caret line="36" column="7" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/wordcloud.html">
+        <entry file="file://$PROJECT_DIR$/javascripts/init.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1272">
-              <caret line="51" column="24" lean-forward="true" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/Huffington.tsv">
-          <provider selected="true" editor-type-id="LargeFileEditor">
-            <state relative-caret-position="250">
-              <caret line="4" column="144" selection-start-line="4" selection-start-column="138" selection-end-line="4" selection-end-column="144" />
+            <state relative-caret-position="-64">
+              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -147,8 +169,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascripts/update.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+            <state relative-caret-position="120">
+              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/d3.slider.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="101">
+              <caret line="88" column="68" lean-forward="true" selection-start-line="88" selection-start-column="68" selection-end-line="88" selection-end-column="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/demo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="87">
+              <caret line="76" column="63" lean-forward="true" selection-start-line="76" selection-start-column="63" selection-end-line="76" selection-end-column="63" />
+              <folding>
+                <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -166,18 +209,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>809</find>
-      <find>roun</find>
-      <find>35</find>
-      <find>200</find>
-      <find>numtake</find>
-      <find>d3</find>
-      <find>computelin</find>
-      <find>submit</find>
-      <find>sudden</find>
-      <find>opac</find>
-      <find>�</find>
-      <find>fre</find>
       <find>font</find>
       <find>janetzko</find>
       <find>fontscale</find>
@@ -188,7 +219,6 @@
       <find>data</find>
       <find>15</find>
       <find>value</find>
-      <find>color</find>
       <find>legend</find>
       <find>689</find>
       <find>border</find>
@@ -196,6 +226,19 @@
       <find>_child</find>
       <find>datasetsSelect_child</find>
       <find>sil</find>
+      <find>data da</find>
+      <find>allw</find>
+      <find>placing w</find>
+      <find>getconte</find>
+      <find>guant</find>
+      <find>guant��namo</find>
+      <find>color</find>
+      <find>angles</find>
+      <find>holde</find>
+      <find>rank</find>
+      <find>conso</find>
+      <find>var</find>
+      <find>svg</find>
     </findStrings>
     <replaceStrings>
       <replace>data</replace>
@@ -208,6 +251,8 @@
       <replace>angleVariance</replace>
       <replace>suddenScale</replace>
       <replace>d3v4</replace>
+      <replace>guantanamo</replace>
+      <replace>let</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -226,11 +271,9 @@
         <option value="$PROJECT_DIR$/timeArcs.html" />
         <option value="$PROJECT_DIR$/data/FactCheck.tsv" />
         <option value="$PROJECT_DIR$/javascripts/mainlet.js" />
-        <option value="$PROJECT_DIR$/data/EmptyWheel.tsv" />
         <option value="$PROJECT_DIR$/test/sprite.html" />
         <option value="$PROJECT_DIR$/javascripts/selection.js" />
         <option value="$PROJECT_DIR$/javascripts/input.js" />
-        <option value="$PROJECT_DIR$/javascripts/init.js" />
         <option value="$PROJECT_DIR$/test/data.html" />
         <option value="$PROJECT_DIR$/javascripts/mainTA.js" />
         <option value="$PROJECT_DIR$/javascripts/saveFriesCards.js" />
@@ -243,21 +286,25 @@
         <option value="$PROJECT_DIR$/styles/msdropdown/dd.css" />
         <option value="$PROJECT_DIR$/styles/d3.slider.css" />
         <option value="$PROJECT_DIR$/lib/d3.v4.min.js" />
-        <option value="$PROJECT_DIR$/javascripts/quantum.js" />
         <option value="$PROJECT_DIR$/data/VIS_papers.tsv" />
         <option value="$PROJECT_DIR$/lib/d3.layout.wordstreamSd.js" />
         <option value="$PROJECT_DIR$/lib/progressbar.min.js" />
         <option value="$PROJECT_DIR$/lib/d3-queue.v3.min.js" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/test/wordcloud.html" />
+        <option value="$PROJECT_DIR$/test.html" />
         <option value="$PROJECT_DIR$/styles/main.css" />
-        <option value="$PROJECT_DIR$/lib/d3.slider.js" />
-        <option value="$PROJECT_DIR$/demo.html" />
+        <option value="$PROJECT_DIR$/lib/loaddataorg.js" />
+        <option value="$PROJECT_DIR$/data/EmptyWheel.tsv" />
         <option value="$PROJECT_DIR$/lib/d3.layout.wordstream.js" />
+        <option value="$PROJECT_DIR$/lib/loaddata.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/javascripts/init.js" />
+        <option value="$PROJECT_DIR$/lib/d3.slider.js" />
         <option value="$PROJECT_DIR$/javascripts/update.js" />
         <option value="$PROJECT_DIR$/javascripts/main.js" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/test/wordcloud.html" />
-        <option value="$PROJECT_DIR$/lib/loaddata.js" />
+        <option value="$PROJECT_DIR$/demo.html" />
+        <option value="$PROJECT_DIR$/javascripts/quantum.js" />
       </list>
     </option>
   </component>
@@ -268,10 +315,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1213" />
-    <option name="y" value="248" />
-    <option name="width" value="1355" />
-    <option name="height" value="1417" />
+    <option name="x" value="1199" />
+    <option name="y" value="23" />
+    <option name="width" value="1262" />
+    <option name="height" value="1416" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -295,6 +342,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -307,11 +355,30 @@
               <item name="WordStream" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="WordStream" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WordStream" type="462c0819:PsiDirectoryNode" />
+              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WordStream" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WordStream" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WordStream" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WordStream" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WordStream" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WordStream" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -323,19 +390,19 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib" />
-      <recent name="$PROJECT_DIR$/data" />
-      <recent name="$PROJECT_DIR$/javascripts" />
-      <recent name="$PROJECT_DIR$/styles" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/media" />
       <recent name="$PROJECT_DIR$/images" />
       <recent name="$PROJECT_DIR$/images2/datasetThumnails" />
       <recent name="$PROJECT_DIR$/images2/QuantumComputing" />
       <recent name="$PROJECT_DIR$/javascripts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/javascripts" />
+      <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/styles" />
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -366,14 +433,14 @@
     <configuration name="links.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/javascripts/links.js" working-dir="$PROJECT_DIR$/javascripts">
       <method v="2" />
     </configuration>
-    <configuration name="main.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="main.js" working-dir="$PROJECT_DIR$/javascripts">
+    <configuration name="mainorg.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/javascripts/mainorg.js" working-dir="$PROJECT_DIR$/javascripts">
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="JavaScript Debug.data.html" />
       <item itemvalue="JavaScript Debug.index.html" />
       <item itemvalue="Node.js.links.js" />
-      <item itemvalue="Node.js.main.js" />
+      <item itemvalue="Node.js.mainorg.js" />
       <item itemvalue="JavaScript Debug.demo.html" />
       <item itemvalue="JavaScript Debug.wordcloud.html" />
     </list>
@@ -383,7 +450,7 @@
         <item itemvalue="JavaScript Debug.wordcloud.html" />
         <item itemvalue="JavaScript Debug.demo.html" />
         <item itemvalue="JavaScript Debug.demo.html" />
-        <item itemvalue="Node.js.main.js" />
+        <item itemvalue="Node.js.mainorg.js" />
       </list>
     </recent_temporary>
   </component>
@@ -450,17 +517,19 @@
       <workItem from="1552154448739" duration="919000" />
       <workItem from="1552166025612" duration="342000" />
       <workItem from="1552171632884" duration="4136000" />
+      <workItem from="1552246607081" duration="21384000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="590196000" />
+    <option name="totallyTimeSpent" value="611580000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1213" y="248" width="1355" height="1417" extended-state="0" />
+    <frame x="1199" y="23" width="1262" height="1416" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.9419404" visible="true" weight="0.17991005" />
-      <window_info id="Structure" order="1" sideWeight="0.058059588" side_tool="true" visible="true" weight="0.17991005" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.9411765" visible="true" weight="0.1764706" />
+      <window_info id="Structure" order="1" sideWeight="0.05882353" side_tool="true" weight="0.24725275" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32849503" />
@@ -478,13 +547,13 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15409836" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.9411765" visible="true" weight="0.1764706" />
+      <window_info id="Structure" order="1" sideWeight="0.05882353" side_tool="true" weight="0.24725275" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3291874" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32849503" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.26661575" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.19327731" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.2169595" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -504,27 +573,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/javascripts/jquery/tester.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/av.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/main-update.js" />
-    <entry file="file://$PROJECT_DIR$/javascripts/jquery/jquery-1.9.0.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1151">
-          <caret line="2" column="26069" selection-start-line="2" selection-start-column="26069" selection-end-line="2" selection-end-column="26069" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/d3-tip.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/../TimeArcs/Text/myscripts/mainTA.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
@@ -568,13 +616,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/util.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3672">
-          <caret line="153" column="9" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images2/datasetThumnails/Huffington.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -593,20 +634,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/images/flow.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/d3.v4.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="1" column="262" selection-start-line="1" selection-start-column="262" selection-end-line="1" selection-end-column="262" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/quantum.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8304">
-          <caret line="346" column="31" selection-start-line="346" selection-start-column="31" selection-end-line="346" selection-end-column="31" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/QuantumComputing.csv">
       <provider selected="true" editor-type-id="text-editor" />
@@ -650,13 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/styles/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="194" column="12" selection-start-line="194" selection-start-column="12" selection-end-line="194" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/d3.layout.cloud.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="624">
@@ -664,31 +684,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/d3.layout.wordstream.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="970">
-          <caret line="59" column="34" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/init.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/d3.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret column="5165" selection-start-column="5165" selection-end-column="5165" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/d3.slider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="125" column="40" lean-forward="true" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -730,13 +729,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/styles/d3.slider.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -750,15 +742,13 @@
     <entry file="file://$PROJECT_DIR$/media/highlight.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/update.js">
+    <entry file="file://$PROJECT_DIR$/Description" />
+    <entry file="file://$PROJECT_DIR$/javascripts/util.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        <state relative-caret-position="3672">
+          <caret line="153" column="9" selection-start-line="153" selection-start-column="9" selection-end-line="153" selection-end-column="9" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Description">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/data/Huffington.tsv">
       <provider selected="true" editor-type-id="LargeFileEditor">
@@ -767,38 +757,143 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="30" column="57" lean-forward="true" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+        <state relative-caret-position="600">
+          <caret line="25" lean-forward="true" selection-start-line="24" selection-end-line="25" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#b#0;n#a#0;n#li#0;n#ul#0;n#nav#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#a#0;n#li#1;n#ul#0;n#nav#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#1130#1136#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/loaddataorg.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="72" column="55" selection-start-line="72" selection-start-column="55" selection-end-line="72" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/wordcloud.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1272">
-          <caret line="51" column="24" lean-forward="true" selection-start-line="51" selection-start-column="24" selection-end-line="51" selection-end-column="24" />
+        <state relative-caret-position="67">
+          <caret line="77" column="14" lean-forward="true" selection-start-line="77" selection-start-column="14" selection-end-line="77" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/main.js">
+    <entry file="file://$PROJECT_DIR$/data/EmptyWheel.tsv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="199093">
+          <caret line="2487" column="94" selection-start-line="2487" selection-start-column="94" selection-end-line="2487" selection-end-column="94" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+          <folding>
+            <element signature="n#style#0;n#iframe#0;n#center#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/d3.layout.wordstream.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13176">
+          <caret line="547" column="68" selection-start-line="547" selection-start-column="68" selection-end-line="547" selection-end-column="68" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/d3.slider.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="271" lean-forward="true" selection-start-line="271" selection-end-line="271" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-393">
-          <caret line="65" column="32" lean-forward="true" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
+        <state relative-caret-position="405">
+          <caret line="126" column="13" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascripts/mainorg.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="104" column="16" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/d3.v4.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="1" column="262" selection-start-line="1" selection-start-column="262" selection-end-line="1" selection-end-column="262" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/d3.layout.wordstreamorg.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1053">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4464">
+          <caret line="186" column="15" selection-start-line="186" selection-start-column="15" selection-end-line="186" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascripts/update.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascripts/init.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-64">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascripts/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="72" column="14" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/d3.slider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="88" column="68" lean-forward="true" selection-start-line="88" selection-start-column="68" selection-end-line="88" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascripts/quantum.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="36" column="7" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="145" column="44" lean-forward="true" selection-start-line="145" selection-start-column="44" selection-end-line="145" selection-end-column="44" />
+        <state relative-caret-position="87">
+          <caret line="76" column="63" lean-forward="true" selection-start-line="76" selection-start-column="63" selection-end-line="76" selection-end-column="63" />
+          <folding>
+            <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

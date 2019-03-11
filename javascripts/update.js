@@ -2,38 +2,14 @@ var globalWidth = initWidth,
     globalHeight = initHeight,
     globalMinFont = initMinFont,
     globalMaxFont = initMaxFont,
-    globalFlag = initFlag
-
+    globalFlag = initFlag,
+    globalTop = initTop;
 ;
 var color = d3.scale.category10();
-var axis = d3.svg.axis().ticks(4);
-var axisFont = d3.svg.axis().tickValues([0, 25, 50, 75, 100]);
+
 // var verticalAxis = d3.svg.axis().orient("left").ticks(5);
 
-d3.select('#widthSlider').call(d3.slider()
-    .axis(axis)
-    .value([0, initWidth])
-    .min(0)
-    .max(2500)
-    .step(20)
-    .on("slide", function (evt, value) {
-        d3.select('#widthText').text(value[1]);
-    }))
-;
-d3.select('#heightSlider').call(d3.slider()
-    .axis(axis)
-    .value([0, initHeight])
-    .min(0)
-    .max(2500)
-    .step(20)
-    .on("slide", function (evt, value) {
-        d3.select('#heightText').text(value[1]);
-    }))
-;
-d3.select('#fontSlider').call(d3.slider().axis(axisFont).value([initMinFont, initMaxFont]).on("slide", function (evt, value) {
-    d3.select('#fontMin').text(value[0].toFixed(0));
-    d3.select('#fontMax').text(value[1].toFixed(0));
-}));
+
 
 // // draw line
 // var frontier = d3.select("#cp").append("line")
@@ -44,33 +20,6 @@ d3.select('#fontSlider').call(d3.slider().axis(axisFont).value([initMinFont, ini
 //     .attr("y2", 350)
 //     .attr("class", "frontier");
 
-function updateTopRank() {
-
-    d3.select(".holderCP").append("span")
-        .attr("id", "topRankText")
-        .attr("class", "topRankText topRank textSlider");
-
-    d3.select(".holderCP").append("div")
-        .attr("id", "topRankSlider")
-        .attr("class", "topRankAxis topRank slider");
-
-    d3.select("#topRankText").text(topRank);
-
-    d3.select('#topRankSlider').call(d3.slider()
-        .axis(axis)
-        .value([0, topRank])
-        .min(0)
-        .max(50)
-        .step(5)
-        .on("slide", function (evt, value) {
-            d3.select('#topRankText').text(value[1]);
-        }))
-        .on("mouseup", function () {
-            submitInput(updateData);
-        })
-    ;
-}
-
 function showRelationship() {
     let isRel = document.getElementById("rel").checked;
     console.log(isRel);
@@ -80,45 +29,12 @@ function showRelationship() {
     else d3.selectAll(".connection").transition().duration(200).attr("opacity", 0);
 }
 
-function progressing() {
-    var bar = new ProgressBar.Line(progressBar, {
-        strokeWidth: 4,
-        easing: 'easeInOut',
-        //duration: 1400,
-        color: '#FFEA82',
-        trailColor: '#eee',
-        trailWidth: 1,
-        svgStyle: {width: '100%', height: '100%'},
-        text: {
-            style: {
-                // Text color.
-                // Default: same as stroke color (options.color)
-                color: '#999',
-                position: 'absolute',
-                right: '0',
-                top: '30px',
-                padding: 0,
-                margin: 0,
-                transform: null
-            },
-            autoStyleContainer: false
-        },
-        from: {color: '#FFEA82'},
-        to: {color: '#ED6A5A'},
-        step: (state, bar) => {
-            bar.setText(Math.round(bar.value() * 100) + ' %');
-        }
-    });
-
-    bar.animate(1.0);  // Number from 0.0 to 1.0
-}
-
 function submitInput(updateData) {
     globalWidth = parseInt(document.getElementById("widthText").innerText);
     globalHeight = parseInt(document.getElementById("heightText").innerText);
     globalMinFont = parseInt(document.getElementById("fontMin").innerText);
     globalMaxFont = parseInt(document.getElementById("fontMax").innerText);
-    topRankUpdate = parseInt(document.getElementById("topRankText").innerText);
+    globalTop = parseInt(document.getElementById("topRankText").innerText);
     let isFlow = document.getElementById("flow").checked;
     let isAv = document.getElementById("av").checked;
     if (isFlow && isAv) {
@@ -141,7 +57,7 @@ function submitInput(updateData) {
     }
 
     // top rank
-    var temp = getTop(totalData, topRankUpdate).slice(1);
+
     var data = tfidf(temp);
 
     console.log("input submitted");
