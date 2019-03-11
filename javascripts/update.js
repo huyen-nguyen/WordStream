@@ -1,25 +1,3 @@
-var globalWidth = initWidth,
-    globalHeight = initHeight,
-    globalMinFont = initMinFont,
-    globalMaxFont = initMaxFont,
-    globalFlag = initFlag,
-    globalTop = initTop;
-;
-var color = d3.scale.category10();
-
-// var verticalAxis = d3.svg.axis().orient("left").ticks(5);
-
-
-
-// // draw line
-// var frontier = d3.select("#cp").append("line")
-//     .attr("id", "frontier")
-//     .attr("x1", 170)
-//     .attr("x2", 170)
-//     .attr("y1", 300)
-//     .attr("y2", 350)
-//     .attr("class", "frontier");
-
 function showRelationship() {
     let isRel = document.getElementById("rel").checked;
     console.log(isRel);
@@ -57,46 +35,37 @@ function submitInput(updateData) {
     }
 
     // top rank
-
-    var data = tfidf(temp);
-
     console.log("input submitted");
-    console.log(data);
 
-    updateData(data);
+    updateData(globalData);
 }
 
-var up = [];
-
-function updateData(data) {
-    var offsetLegend = -10;
-    var axisPadding = 10;
-    var margins = {left: 20, top: 20, right: 10, bottom: 30};
-
-    var ws = d3.layout.wordStream()
+function updateData() {
+    let font = "Arial";
+    let interpolation = "cardinal";
+    let axisPadding = 10;
+    let margins = {left: 20, top: 20, right: 10, bottom: 30};
+    let ws = d3.layout.wordStream()
         .size([globalWidth, globalHeight])
-        .interpolate("cardinal")
-        .fontScale(d3.scale.log())
+        .interpolate(interpolation)
+        .fontScale(d3.scale.linear())
         .minFontSize(globalMinFont)
         .maxFontSize(globalMaxFont)
-        .data(data)
-        .flag(globalFlag);
-
-    var newboxes = ws.boxes(),
-        minFreq = ws.minFreq(),
-        maxFreq = ws.maxFreq(),
-        minSud = ws.minSud(),
-        maxSud = ws.maxSud();
-
-    var legendFontSize = 20;
-    var legendHeight = newboxes.topics.length * legendFontSize;
+        .flag(globalFlag)
+        .data(globalData)
+        .font(font);
+    let newboxes = ws.boxes();
+    let minSud = ws.minSud();
+    let maxSud = ws.maxSud();
+    const legendFontSize = 20;
+    let legendHeight = newboxes.topics.length * legendFontSize;
 
     d3.select("#mainsvg")
         .transition()
         .duration(300)
         .attr({
             width: globalWidth + margins.left + margins.top,
-            height: globalHeight + +margins.top + margins.bottom + axisPadding + offsetLegend + legendHeight
+            height: globalHeight + +margins.top + margins.bottom + axisPadding + legendHeight
         });
 
     // d3.select("#mainsvg").selectAll("*").remove();
@@ -109,7 +78,7 @@ function updateData(data) {
     var xAxis = d3.svg.axis().orient('bottom').scale(xAxisScale);
 
     axisGroup
-        .attr('transform', 'translate(' + (margins.left) + ',' + (globalHeight + margins.top + axisPadding + legendHeight + offsetLegend) + ')');
+        .attr('transform', 'translate(' + (margins.left) + ',' + (globalHeight + margins.top + axisPadding + legendHeight) + ')');
 
     var axisNodes = axisGroup.call(xAxis);
     styleAxis(axisNodes);
@@ -121,13 +90,13 @@ function updateData(data) {
     xGridlinesGroup.attr("id", "gridLines")
         .attr('transform', 'translate(' +
             (margins.left - globalWidth / 24)
-            + ',' + (globalHeight + margins.top + axisPadding + legendHeight + margins.bottom + offsetLegend) + ')');
+            + ',' + (globalHeight + margins.top + axisPadding + legendHeight + margins.bottom) + ')');
 
     var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-globalHeight - axisPadding - legendHeight - margins.bottom, 0, 0).tickFormat(''));
     styleGridlineNodes(gridlineNodes);
 
     // build legend
-    legendGroup.attr('transform', 'translate(' + margins.left + ',' + (globalHeight + margins.top + offsetLegend) + ')');
+    legendGroup.attr('transform', 'translate(' + margins.left + ',' + (globalHeight + margins.top) + ')');
     var area = d3.svg.area()
         .interpolate("cardinal")
         .x(function (d) {
@@ -150,14 +119,9 @@ function updateData(data) {
         });
     });
 
-    up = JSON.parse(JSON.stringify(allWordsUpdate));
-    var opacity = d3.scale.log()
-        .domain([minSud, maxSud])
-        .range([0.4, 1]);
-
     if (fileName.indexOf("Huffington") >= 0) {
         d3.json("data/linksHuff2012.json", function (error, rawLinks) {
-            const threshold = 10;
+            const threshold = 5;
             const links = rawLinks.filter(d => d.weight > threshold);
 
             links.forEach(d => {
@@ -202,7 +166,6 @@ function updateData(data) {
                     "stroke-opacity": d => opacScale(d.weight),
                     "stroke-width": d => lineScale(d.weight)
                 });
-
             drawWordsUpdate();
         });
     }
@@ -230,7 +193,7 @@ function updateData(data) {
                     return d.fontSize;
                 },
                 fill: function (d) {
-                    return color(d.topicIndex);
+                    return color(categories.indexOf(d.topic));
                 },
                 'fill-opacity': function (d) {
                     return opacity(d.sudden)
@@ -362,29 +325,29 @@ function updateData(data) {
                 }
             });
         // ============= Get LAYER PATH ==============
-        var layerPath = mainGroup.selectAll("path").append("path")
-            .attr("d", combined)
-            .attr({
-                'fill-opacity': 0.1,
-                'stroke-opacity': 0,
-            });
-
-        var metValue = [getTfidf(allWordsUpdate).toFixed(2),
-            getCompactness(allWordsUpdate, layerPath)[0].toFixed(2),
-            getCompactness(allWordsUpdate, layerPath)[1].toFixed(2),
-            getDisplayRate(allWordsUpdate, maxFreq)[0].toFixed(2),
-            getDisplayRate(allWordsUpdate, maxFreq)[1].toFixed(3)];
-
-        metric2.selectAll(".metricValue").remove();
-        metric2.selectAll(".metricValue")
-            .data(metValue)
-            .enter()
-            .append("text")
-            .text(d => d)
-            .attr("class", "metricValue metricDisplay")
-            .attr("x", "0")
-            .attr("y", (d, i) => 43 + 36 * i)
-            .attr("font-weight", "bold");
+        // var layerPath = mainGroup.selectAll("path").append("path")
+        //     .attr("d", combined)
+        //     .attr({
+        //         'fill-opacity': 0.1,
+        //         'stroke-opacity': 0,
+        //     });
+        //
+        // var metValue = [getTfidf(allWordsUpdate).toFixed(2),
+        //     getCompactness(allWordsUpdate, layerPath)[0].toFixed(2),
+        //     getCompactness(allWordsUpdate, layerPath)[1].toFixed(2),
+        //     getDisplayRate(allWordsUpdate, maxFreq)[0].toFixed(2),
+        //     getDisplayRate(allWordsUpdate, maxFreq)[1].toFixed(3)];
+        //
+        // metric2.selectAll(".metricValue").remove();
+        // metric2.selectAll(".metricValue")
+        //     .data(metValue)
+        //     .enter()
+        //     .append("text")
+        //     .text(d => d)
+        //     .attr("class", "metricValue metricDisplay")
+        //     .attr("x", "0")
+        //     .attr("y", (d, i) => 43 + 36 * i)
+        //     .attr("font-weight", "bold");
 
 
     }

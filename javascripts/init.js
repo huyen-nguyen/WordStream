@@ -1,10 +1,22 @@
 const initWidth = 1500,
     initHeight = 500,
-    initMinFont = 10,
+    initMinFont = 14,
     initMaxFont = 36,
     initFlag = "none",// none / fa/ f / a
-    initTop = 40;
+    initTop = 30;
+const maxWidth = 1500, maxHeight = 1500, maxTop = 40;
 
+var globalWidth = initWidth,
+    globalHeight = initHeight,
+    globalMinFont = initMinFont,
+    globalMaxFont = initMaxFont,
+    globalFlag = initFlag,
+    globalTop = initTop,
+    globalData;
+
+var mainGroup, axisGroup, xGridlinesGroup, opacScale, legendGroup, opacity;
+
+const color = d3.scale.category10();
 const axis = d3.svg.axis().ticks(4);
 const axisFont = d3.svg.axis().tickValues([0, 25, 50, 75, 100]);
 
@@ -12,7 +24,7 @@ d3.select('#widthSlider').call(d3.slider()
     .axis(axis)
     .value([0, initWidth])
     .min(0)
-    .max(2500)
+    .max(maxWidth)
     .step(20)
     .on("slide", function (evt, value) {
         d3.select('#widthText').text(value[1]);
@@ -22,7 +34,7 @@ d3.select('#heightSlider').call(d3.slider()
     .axis(axis)
     .value([0, initHeight])
     .min(0)
-    .max(2500)
+    .max(maxHeight)
     .step(20)
     .on("slide", function (evt, value) {
         d3.select('#heightText').text(value[1]);
@@ -37,7 +49,7 @@ d3.select('#topRankSlider').call(d3.slider()
     .axis(axis)
     .value([0, initTop])
     .min(0)
-    .max(50)
+    .max(maxTop)
     .step(5)
     .on("slide", function (evt, value) {
         d3.select('#topRankText').text(value[1]);
