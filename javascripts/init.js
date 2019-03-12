@@ -6,7 +6,7 @@ const initWidth = 1500,
     initTop = 30;
 const maxWidth = 1500, maxHeight = 1500, maxTop = 40;
 
-var globalWidth = initWidth,
+let globalWidth = initWidth,
     globalHeight = initHeight,
     globalMinFont = initMinFont,
     globalMaxFont = initMaxFont,
@@ -14,7 +14,9 @@ var globalWidth = initWidth,
     globalTop = initTop,
     globalData;
 
-var mainGroup, axisGroup, xGridlinesGroup, opacScale, legendGroup, opacity;
+let allW;
+
+let mainGroup, axisGroup, xGridlinesGroup, opacScale, legendGroup, opacity;
 
 const color = d3.scale.category10();
 const axis = d3.svg.axis().ticks(4);
@@ -82,8 +84,6 @@ d3.select("body")
     .enter().append("td")
     .style("border", "1px black solid")
     .style("padding", "10px")
-    .on("mouseover", function(){d3.select(this).style("background-color", "aliceblue")})
-    .on("mouseout", function(){d3.select(this).style("background-color", "white")})
     .text(function(d){return d;})
     .style("font-size", "13px");
 
@@ -92,4 +92,3 @@ let metric2 = d3.select("body").append("svg")
     .attr("height", 300)
     .attr("class","metricSVG2")
     .attr("id","metricSVG2");
-

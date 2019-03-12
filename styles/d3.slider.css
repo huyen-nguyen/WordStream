@@ -313,3 +313,9 @@ input:checked + .toggle:before {
     top: 355px;
     left: 30px;
 }
+.computeMetric {
+    z-index: 100;
+    position: absolute;
+    top: 425px;
+    left: 200px;
+}

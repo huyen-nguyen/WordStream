@@ -54,11 +54,13 @@ function updateData() {
         .flag(globalFlag)
         .data(globalData)
         .font(font);
-    let newboxes = ws.boxes();
+    const newboxes = ws.boxes();
     let minSud = ws.minSud();
     let maxSud = ws.maxSud();
     const legendFontSize = 20;
     let legendHeight = newboxes.topics.length * legendFontSize;
+
+    mainGroup = d3.select("#mainsvg");
 
     d3.select("#mainsvg")
         .transition()
@@ -97,8 +99,9 @@ function updateData() {
 
     // build legend
     legendGroup.attr('transform', 'translate(' + margins.left + ',' + (globalHeight + margins.top) + ')');
-    var area = d3.svg.area()
-        .interpolate("cardinal")
+
+    let area = d3.svg.area()
+        .interpolate(interpolation)
         .x(function (d) {
             return (d.x);
         })
@@ -109,8 +112,22 @@ function updateData() {
             return (d.y0 + d.y);
         });
 
-    mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
-
+    let topics = newboxes.topics;
+    mainGroup.selectAll(".curve")
+        .data(newboxes.layers)
+        .attr("d", area)
+        .style('fill', function (d, i) {
+            console.log(newboxes.layers[i]);
+            return color(i);
+        })
+        .attr({
+            'fill-opacity': 0,
+            stroke: 'black',
+            'stroke-width': 0,
+            topic: function (d, i) {
+                return topics[i];
+            }
+        });
     // ARRAY OF ALL WORDS
     var allWordsUpdate = [];
     d3.map(newboxes.data, function (row) {
@@ -119,6 +136,7 @@ function updateData() {
         });
     });
 
+    allW = JSON.parse(JSON.stringify(allWordsUpdate));
     if (fileName.indexOf("Huffington") >= 0) {
         d3.json("data/linksHuff2012.json", function (error, rawLinks) {
             const threshold = 5;
@@ -172,7 +190,7 @@ function updateData() {
     else drawWordsUpdate();
 
     function drawWordsUpdate() {
-        var texts = d3.select("#mainsvg").selectAll('.word').data(allWordsUpdate, d => d.id);
+        var texts = mainGroup.selectAll('.word').data(allWordsUpdate, d => d.id);
 
         texts.exit()
             .remove();
@@ -185,29 +203,11 @@ function updateData() {
                 }
             })
             .select("text")
-            .text(function (d) {
-                return d.text;
-            })
             .attr({
-                'font-size': function (d) {
-                    return d.fontSize;
-                },
-                fill: function (d) {
-                    return color(categories.indexOf(d.topic));
-                },
-                'fill-opacity': function (d) {
-                    return opacity(d.sudden)
-                },
-                'text-anchor': 'middle',
-                'alignment-baseline': 'middle',
-                topic: function (d) {
-                    return d.topic;
-                },
                 visibility: function (d) {
                     return d.placed ? ("visible") : ("hidden");
                 }
             });
-
 
         texts.enter()
             .append("g")
@@ -241,89 +241,60 @@ function updateData() {
                 }
             });
 
-        var prevColor;
+        let prevColor;
         // --- Highlight when mouse enter ---
-        mainGroup.selectAll('text').on('mouseenter', function () {  // hover above the word -> select this
-            var thisText = d3.select(this);
-            thisText.style('cursor', 'pointer');
-            prevColor = thisText.attr('fill');
 
-            var text = thisText.text();
-            var topic = thisText.attr('topic');
-            var allTexts = mainGroup.selectAll('text').filter(t => {
-                return t && t.text === text && t.topic === topic;
-            });
-            allTexts.attr({
-                stroke: prevColor,
-                fill: prevColor,
-                'stroke-width': 1.5
-            });
-        });
 
-        // --- Lowlight when mouse out ---
-        mainGroup.selectAll('text').on('mouseout', function () {
-            var thisText = d3.select(this);
-            thisText.style('cursor', 'default');
-            var text = thisText.text();
-            var topic = thisText.attr('topic');
-            var allTexts = mainGroup.selectAll('text').filter(t => {
-                return t && !t.cloned && t.text === text && t.topic === topic;
-            });
-            allTexts.attr({
-                stroke: 'none',
-                'stroke-width': '0'
-            });
-        });
 // Get layer path
-        var lineCardinal = d3.svg.line()
-            .x(function (d) {
-                return d.x;
-            })
-            .y(function (d) {
-                return d.y;
-            })
-            .interpolate("cardinal");
-
-        var boundary = [];
-        for (var i = 0; i < newboxes.layers[0].length; i++) {
-            var tempPoint = Object.assign({}, newboxes.layers[0][i]);
-            tempPoint.y = tempPoint.y0;
-            boundary.push(tempPoint);
-        }
-
-        for (var i = newboxes.layers[newboxes.layers.length - 1].length - 1; i >= 0; i--) {
-            var tempPoint2 = Object.assign({}, newboxes.layers[newboxes.layers.length - 1][i]);
-            tempPoint2.y = tempPoint2.y + tempPoint2.y0;
-            boundary.push(tempPoint2);
-        }       // Add next (8) elements
-
-        var lenb = boundary.length;
-
-        // Get the string for path
-
-        var combined = lineCardinal(boundary.slice(0, lenb / 2))
-            + "L"
-            + lineCardinal(boundary.slice(lenb / 2, lenb))
-                .substring(1, lineCardinal(boundary.slice(lenb / 2, lenb)).length)
-            + "Z";
-
-        var topics = newboxes.topics;
-        mainGroup.selectAll('path')
-            .data(newboxes.layers)
-            .enter()
-            .append('path')
-            .attr('d', area)
-            .style('fill', function (d, i) {
-                return color(i);
-            })
-            .attr({
-                'fill-opacity': 0,      // = 1 if full color
-                // stroke: 'black',
-                'stroke-width': 0.3,
-                topic: function (d, i) {
-                    return topics[i];
-                }
-            });
+//         var lineCardinal = d3.svg.line()
+//             .x(function (d) {
+//                 return d.x;
+//             })
+//             .y(function (d) {
+//                 return d.y;
+//             })
+//             .interpolate("cardinal");
+//
+//         var boundary = [];
+//         for (var i = 0; i < newboxes.layers[0].length; i++) {
+//             var tempPoint = Object.assign({}, newboxes.layers[0][i]);
+//             tempPoint.y = tempPoint.y0;
+//             boundary.push(tempPoint);
+//         }
+//
+//         for (var i = newboxes.layers[newboxes.layers.length - 1].length - 1; i >= 0; i--) {
+//             var tempPoint2 = Object.assign({}, newboxes.layers[newboxes.layers.length - 1][i]);
+//             tempPoint2.y = tempPoint2.y + tempPoint2.y0;
+//             boundary.push(tempPoint2);
+//         }       // Add next (8) elements
+//
+//         var lenb = boundary.length;
+//
+//         // Get the string for path
+//
+//         var combined = lineCardinal(boundary.slice(0, lenb / 2))
+//             + "L"
+//             + lineCardinal(boundary.slice(lenb / 2, lenb))
+//                 .substring(1, lineCardinal(boundary.slice(lenb / 2, lenb)).length)
+//             + "Z";
+//
+//         var topics = newboxes.topics;
+//         mainGroup.selectAll('path')
+//             .data(newboxes.layers)
+//             .enter()
+//             .append('path')
+//             .attr('d', area)
+//             .style('fill', function (d, i) {
+//                 return color(i);
+//             })
+//             .attr({
+//                 'fill-opacity': 0,      // = 1 if full color
+//                 // stroke: 'black',
+//                 'stroke-width': 0.3,
+//                 topic: function (d, i) {
+//                     return topics[i];
+//                 }
+//             });
         // ============= Get LAYER PATH ==============
         // var layerPath = mainGroup.selectAll("path").append("path")
         //     .attr("d", combined)

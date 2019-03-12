@@ -145,7 +145,7 @@ function draw(data) {
     styleGridlineNodes(gridlineNodes);
     //Main group
     mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
-    let wordStreamG = mainGroup.append('g');
+    let wordStreamG = mainGroup.append('g').attr("id", "wordStreamG");
 
     let topics = boxes.topics;
     mainGroup.selectAll('path')
@@ -154,9 +154,11 @@ function draw(data) {
         .append('path')
         .attr('d', area)
         .style('fill', function (d, i) {
+            console.log(boxes.layers[i]);
             return color(i);
         })
         .attr({
+            "class": "curve",
             'fill-opacity': 0,
             stroke: 'black',
             'stroke-width': 0,
@@ -170,6 +172,7 @@ function draw(data) {
             allWords = allWords.concat(row.words[topic]);
         });
     });
+    allW = JSON.parse(JSON.stringify(allWords);
     let c20 = d3.scale.category20b();
     //Color based on the topic
     let topicColorMap = d3.scale.ordinal().domain(topics).range(c20.range());
@@ -358,7 +361,10 @@ function draw(data) {
             wordStreamG.append('path')
                 .datum(points)
                 .attr('d', area)
-                .style('fill', prevColor)
+                .style('fill', () => {
+                    console.log(prevColor);
+                    return prevColor
+                })
                 .attr({
                     'fill-opacity': prevColor,
                     stroke: 'black',
