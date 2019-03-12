@@ -145,7 +145,7 @@ function draw(data) {
     let gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-height - axisPadding - legendHeight - margins.bottom, 0, 0).tickFormat(''));
     styleGridlineNodes(gridlineNodes);
     //Main group
-    mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
+    mainGroup = svg.append('g').attr("id", "main").attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
     let wordStreamG = mainGroup.append('g').attr("id", "wordStreamG");
 
 // =============== Get BOUNDARY and LAYERPATH ===============
@@ -301,6 +301,7 @@ function draw(data) {
                 return d.text;
             })
             .attr({
+                "class": "textData",
                 'font-family': font,
                 'font-size': function (d) {
                     return d.fontSize;
@@ -320,6 +321,51 @@ function draw(data) {
                     return d.placed ? (placed ? "visible" : "hidden") : (placed ? "hidden" : "visible");
                 }
             });
+
+        mainGroup.selectAll(".connection").on("mouseover", function () {
+            var thisLink = d3.select(this);
+            thisLink.style('cursor', 'crosshair');
+            // in order to select by byid, the id must not have space
+            // var sourceText = mainGroup.select("#" + thisLink.data()[0].sourceID);
+            // var prevSourceColor = sourceText.attr("fill");
+            // var targetText = mainGroup.select("#" + thisLink.data()[0].targetID);
+            // var prevTargetColor = targetText.attr("fill");
+            //
+            // thisLink.attr("stroke-width", 4);
+            //
+            // sourceText.attr({
+            //     stroke: prevSourceColor,
+            //     fill: prevSourceColor,
+            //     'stroke-width': 1.5
+            // });
+            //
+            // targetText.attr({
+            //     stroke: prevTargetColor,
+            //     fill: prevTargetColor,
+            //     'stroke-width': 1.5
+            // });
+        });
+
+        // mainGroup.selectAll(".connection").on("mouseout", function () {
+        //     var thisLink = d3.select(this);
+        //     thisLink.style('cursor', 'crosshair');
+        //
+        //     var sourceText = mainGroup.select("#" + thisLink.data()[0].sourceID);
+        //     var targetText = mainGroup.select("#" + thisLink.data()[0].targetID);
+        //
+        //     thisLink.attr("stroke-width", d => opacScale(d.weight));
+        //
+        //     sourceText.attr({
+        //         stroke: 'none',
+        //         'stroke-width': 0
+        //     });
+        //
+        //     targetText.attr({
+        //         stroke: 'none',
+        //         'stroke-width':0
+        //     });
+        // });
+
         //Try
         let prevColor;
         //Highlight

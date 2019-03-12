@@ -19,7 +19,7 @@ function getTfidf() {
     });
     return sumTfidfDisplayed/sumTfidf;
 }
-
+let allWordsUpdate;
 function submitInput(updateData) {
     globalWidth = parseInt(document.getElementById("widthText").innerText);
     globalHeight = parseInt(document.getElementById("heightText").innerText);
@@ -48,8 +48,8 @@ function submitInput(updateData) {
     }
 
     // top rank
-    console.log("input submitted");
-
+    let data = JSON.parse(JSON.stringify(totalData));
+    globalData = getTop(data, categories, globalTop);
     updateData(globalData);
 }
 
@@ -163,7 +163,6 @@ function updateData() {
         .data(newboxes.layers)
         .attr("d", area)
         .style('fill', function (d, i) {
-            console.log(newboxes.layers[i]);
             return color(i);
         })
         .attr({
@@ -183,7 +182,7 @@ function updateData() {
         });
 
     // ARRAY OF ALL WORDS
-    var allWordsUpdate = [];
+    allWordsUpdate = [];
     d3.map(newboxes.data, function (row) {
         newboxes.topics.forEach(topic => {
             allWordsUpdate = allWordsUpdate.concat(row.words[topic]);
@@ -223,8 +222,22 @@ function updateData() {
                 .domain(d3.extent(visibleLinks, d => d.weight))
                 .range([0.5, 1]);
 
-            mainGroup.selectAll(".connection")
-                .data(visibleLinks)
+            let conn = mainGroup.selectAll(".connection").data(visibleLinks);
+
+            conn.exit().remove();
+            conn.attr("class", "connection")
+                .attr("opacity", 0)
+                .attr({
+                    "x1": d => d.sourceX,
+                    "y1": d => d.sourceY,
+                    "x2": d => d.targetX,
+                    "y2": d => d.targetY,
+                    "stroke": "#444444",
+                    "stroke-opacity": d => opacScale(d.weight),
+                    "stroke-width": d => lineScale(d.weight)
+                });
+
+            conn
                 .enter()
                 .append("line")
                 .attr("class", "connection")
@@ -244,7 +257,9 @@ function updateData() {
     else drawWordsUpdate();
 
     function drawWordsUpdate() {
-        var texts = mainGroup.selectAll('.word').data(allWordsUpdate, d => d.id);
+        let placed = true;
+        // mainGroup.selectAll('.word').remove();
+        var texts = mainGroup.select("#main").selectAll('.word').data(allWordsUpdate, d => d.id);
 
         texts.exit()
             .remove();
@@ -256,10 +271,11 @@ function updateData() {
                     return 'translate(' + d.x + ', ' + d.y + ')rotate(' + d.rotate + ')';
                 }
             })
-            .select("text")
+            .select(".textData")
+            .style('font-size', d => d.fontSize)
             .attr({
                 visibility: function (d) {
-                    return d.placed ? ("visible") : ("hidden");
+                    return d.placed ? (placed ? "visible" : "hidden") : (placed ? "hidden" : "visible");
                 }
             });
 
@@ -270,17 +286,17 @@ function updateData() {
                     return 'translate(' + d.x + ', ' + d.y + ')rotate(' + d.rotate + ')';
                 }
             })
-            .attr("class", "word")
+            .attr("class", "word new")
             .append("text")
             .text(function (d) {
                 return d.text;
             })
+            .style('font-size', d => d.fontSize)
             .attr({
-                'font-size': function (d) {
-                    return d.fontSize;
-                },
+                "class": "textData",
+
                 fill: function (d) {
-                    return color(d.topicIndex);
+                    return color(categories.indexOf(d.topic));
                 },
                 'fill-opacity': function (d) {
                     return opacity(d.sudden)
@@ -291,7 +307,7 @@ function updateData() {
                     return d.topic;
                 },
                 visibility: function (d) {
-                    return d.placed ? ("visible") : ("hidden");
+                    return d.placed ? (placed ? "visible" : "hidden") : (placed ? "hidden" : "visible");
                 }
             });
 
@@ -299,121 +315,7 @@ function updateData() {
         // --- Highlight when mouse enter ---
 
 
-// Get layer path
-//         var lineCardinal = d3.svg.line()
-//             .x(function (d) {
-//                 return d.x;
-//             })
-//             .y(function (d) {
-//                 return d.y;
-//             })
-//             .interpolate("cardinal");
-//
-//         var boundary = [];
-//         for (var i = 0; i < newboxes.layers[0].length; i++) {
-//             var tempPoint = Object.assign({}, newboxes.layers[0][i]);
-//             tempPoint.y = tempPoint.y0;
-//             boundary.push(tempPoint);
-//         }
-//
-//         for (var i = newboxes.layers[newboxes.layers.length - 1].length - 1; i >= 0; i--) {
-//             var tempPoint2 = Object.assign({}, newboxes.layers[newboxes.layers.length - 1][i]);
-//             tempPoint2.y = tempPoint2.y + tempPoint2.y0;
-//             boundary.push(tempPoint2);
-//         }       // Add next (8) elements
-//
-//         var lenb = boundary.length;
-//
-//         // Get the string for path
-//
-//         var combined = lineCardinal(boundary.slice(0, lenb / 2))
-//             + "L"
-//             + lineCardinal(boundary.slice(lenb / 2, lenb))
-//                 .substring(1, lineCardinal(boundary.slice(lenb / 2, lenb)).length)
-//             + "Z";
-//
-//         var topics = newboxes.topics;
-//         mainGroup.selectAll('path')
-//             .data(newboxes.layers)
-//             .enter()
-//             .append('path')
-//             .attr('d', area)
-//             .style('fill', function (d, i) {
-//                 return color(i);
-//             })
-//             .attr({
-//                 'fill-opacity': 0,      // = 1 if full color
-//                 // stroke: 'black',
-//                 'stroke-width': 0.3,
-//                 topic: function (d, i) {
-//                     return topics[i];
-//                 }
-//             });
-        // ============= Get LAYER PATH ==============
-        // var layerPath = mainGroup.selectAll("path").append("path")
-        //     .attr("d", combined)
-        //     .attr({
-        //         'fill-opacity': 0.1,
-        //         'stroke-opacity': 0,
-        //     });
-        //
-        // var metValue = [getTfidf(allWordsUpdate).toFixed(2),
-        //     getCompactness(allWordsUpdate, layerPath)[0].toFixed(2),
-        //     getCompactness(allWordsUpdate, layerPath)[1].toFixed(2),
-        //     getDisplayRate(allWordsUpdate, maxFreq)[0].toFixed(2),
-        //     getDisplayRate(allWordsUpdate, maxFreq)[1].toFixed(3)];
-        //
-        // metric2.selectAll(".metricValue").remove();
-        // metric2.selectAll(".metricValue")
-        //     .data(metValue)
-        //     .enter()
-        //     .append("text")
-        //     .text(d => d)
-        //     .attr("class", "metricValue metricDisplay")
-        //     .attr("x", "0")
-        //     .attr("y", (d, i) => 43 + 36 * i)
-        //     .attr("font-weight", "bold");
-
 
     }
 }
 
-
-// d3.select("#heightSlider")
-//     .attr("id","test")
-//     .call(d3.slider()
-//     .axis(verticalAxis)
-//     .value(800)
-//     .min(600)
-//     .max(1200)
-//     .step(100)
-//     .orientation("vertical")
-//     .on("slide", function (evt, value) {
-//         d3.select('#heightText').text(value);
-//     }))
-// ;
-// metric.selectAll("rect")
-//     .data(metricLine)
-//     .enter()
-//     .append("rect")
-//     .attr("id", "metric" + function(d){
-//         return d
-//     })
-//     .attr("class",".metricRect")
-//     .attr("x","20")
-//     .attr("y",(d,i) => 50*i+40)
-//     .attr("rx","5")
-//     .attr("ry","5")
-//     .attr("width","320")
-//     .attr("height","36")
-//     .style("fill","#eeeeee")
-//     .attr("stroke","#8f8f8f");
-
-// metric.selectAll(".metricText")
-//     .data(metricName)
-//     .enter()
-//     .append("text")
-//     .text(d => d)
-//     .attr("class","metricDisplay")
-//     .attr("x","33")
-//     .attr("y",(d,i) =>i*50);

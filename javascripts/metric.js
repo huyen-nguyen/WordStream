@@ -3,7 +3,7 @@ function computeMetric() {
         getCompactness(allW, layerPath)[0].toFixed(2),
         getCompactness(allW, layerPath)[1].toFixed(2),
         getDisplayRate(allW, maxFreq)[0].toFixed(2),
-        getDisplayRate(allW, maxFreq)[1].toFixed(3)];
+        getDisplayRate(allW, maxFreq)[1].toFixed(2)];
 
     metric2.selectAll(".metricValue").remove();
     metric2.selectAll(".metricValue")

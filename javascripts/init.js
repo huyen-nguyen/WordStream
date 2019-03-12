@@ -3,7 +3,7 @@ const initWidth = 1500,
     initMinFont = 14,
     initMaxFont = 36,
     initFlag = "none",// none / fa/ f / a
-    initTop = 30;
+    initTop = 25;
 
 let globalWidth = initWidth,
     globalHeight = initHeight,
