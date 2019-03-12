@@ -6,6 +6,19 @@ function showRelationship() {
     }
     else d3.selectAll(".connection").transition().duration(200).attr("opacity", 0);
 }
+function getTfidf() {
+    let tfidfed = tfidf(allW);
+    var sumTfidfDisplayed = 0;
+    var sumTfidf = 0;
+
+    tfidfed.forEach(function (d) {
+        sumTfidf += d.tf_idf;
+        if (d.placed){
+            sumTfidfDisplayed += d.tf_idf;
+        }
+    });
+    return sumTfidfDisplayed/sumTfidf;
+}
 
 function submitInput(updateData) {
     globalWidth = parseInt(document.getElementById("widthText").innerText);
@@ -112,6 +125,39 @@ function updateData() {
             return (d.y0 + d.y);
         });
 
+    const lineCardinal = d3.svg.line()
+        .x(function (d) {
+            return d.x;
+        })
+        .y(function (d) {
+            return d.y;
+        })
+        .interpolate("cardinal");
+
+    let boundary = [];
+    for (let i = 0; i < newboxes.layers[0].length; i++) {
+        let tempPoint = Object.assign({}, newboxes.layers[0][i]);
+        tempPoint.y = tempPoint.y0;
+        boundary.push(tempPoint);
+    }
+
+    for (let i = newboxes.layers[newboxes.layers.length - 1].length - 1; i >= 0; i--) {
+        let tempPoint2 = Object.assign({}, newboxes.layers[newboxes.layers.length - 1][i]);
+        tempPoint2.y = tempPoint2.y + tempPoint2.y0;
+        boundary.push(tempPoint2);
+    }       // Add next (8) elements
+
+    let lenb = boundary.length;
+
+    // Get the string for path
+
+    let combined = lineCardinal(boundary.slice(0, lenb / 2))
+        + "L"
+        + lineCardinal(boundary.slice(lenb / 2, lenb))
+            .substring(1, lineCardinal(boundary.slice(lenb / 2, lenb)).length)
+        + "Z";
+
+    // draw curves
     let topics = newboxes.topics;
     mainGroup.selectAll(".curve")
         .data(newboxes.layers)
@@ -128,6 +174,14 @@ function updateData() {
                 return topics[i];
             }
         });
+
+    layerPath = mainGroup.selectAll("path").append("path")
+        .attr("d", combined)
+        .attr({
+            'fill-opacity': 0,
+            'stroke-opacity': 0,
+        });
+
     // ARRAY OF ALL WORDS
     var allWordsUpdate = [];
     d3.map(newboxes.data, function (row) {

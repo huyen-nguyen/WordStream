@@ -16,7 +16,7 @@ let globalWidth = initWidth,
 
 let allW;
 
-let mainGroup, axisGroup, xGridlinesGroup, opacScale, legendGroup, opacity;
+let mainGroup, axisGroup, xGridlinesGroup, opacScale, legendGroup, opacity, layerPath, maxFreq;
 
 const color = d3.scale.category10();
 const axis = d3.svg.axis().ticks(4);

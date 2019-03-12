@@ -104,6 +104,7 @@ function draw(data) {
     let boxes = ws.boxes();
     let minSud = ws.minSud();
     let maxSud = ws.maxSud();
+    maxFreq = ws.maxFreq();
 
     //Display data
     let legendFontSize = 12;
@@ -147,6 +148,40 @@ function draw(data) {
     mainGroup = svg.append('g').attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
     let wordStreamG = mainGroup.append('g').attr("id", "wordStreamG");
 
+// =============== Get BOUNDARY and LAYERPATH ===============
+    const lineCardinal = d3.svg.line()
+        .x(function (d) {
+            return d.x;
+        })
+        .y(function (d) {
+            return d.y;
+        })
+        .interpolate("cardinal");
+
+    let boundary = [];
+    for (let i = 0; i < boxes.layers[0].length; i++) {
+        let tempPoint = Object.assign({}, boxes.layers[0][i]);
+        tempPoint.y = tempPoint.y0;
+        boundary.push(tempPoint);
+    }
+
+    for (let i = boxes.layers[boxes.layers.length - 1].length - 1; i >= 0; i--) {
+        let tempPoint2 = Object.assign({}, boxes.layers[boxes.layers.length - 1][i]);
+        tempPoint2.y = tempPoint2.y + tempPoint2.y0;
+        boundary.push(tempPoint2);
+    }       // Add next (8) elements
+
+    let lenb = boundary.length;
+
+    // Get the string for path
+
+    let combined = lineCardinal(boundary.slice(0, lenb / 2))
+        + "L"
+        + lineCardinal(boundary.slice(lenb / 2, lenb))
+            .substring(1, lineCardinal(boundary.slice(lenb / 2, lenb)).length)
+        + "Z";
+
+    // draw curves
     let topics = boxes.topics;
     mainGroup.selectAll('path')
         .data(boxes.layers)
@@ -154,7 +189,6 @@ function draw(data) {
         .append('path')
         .attr('d', area)
         .style('fill', function (d, i) {
-            console.log(boxes.layers[i]);
             return color(i);
         })
         .attr({
@@ -166,13 +200,23 @@ function draw(data) {
                 return topics[i];
             }
         });
+
+    // ============= Get LAYER PATH ==============
+
+    layerPath = mainGroup.selectAll("path").append("path")
+        .attr("d", combined)
+        .attr({
+            'fill-opacity': 0,
+            'stroke-opacity': 0,
+        });
+
     let allWords = [];
     d3.map(boxes.data, function (row) {
         boxes.topics.forEach(topic => {
             allWords = allWords.concat(row.words[topic]);
         });
     });
-    allW = JSON.parse(JSON.stringify(allWords);
+    allW = JSON.parse(JSON.stringify(allWords));
     let c20 = d3.scale.category20b();
     //Color based on the topic
     let topicColorMap = d3.scale.ordinal().domain(topics).range(c20.range());
@@ -361,10 +405,7 @@ function draw(data) {
             wordStreamG.append('path')
                 .datum(points)
                 .attr('d', area)
-                .style('fill', () => {
-                    console.log(prevColor);
-                    return prevColor
-                })
+                .style('fill', prevColor)
                 .attr({
                     'fill-opacity': prevColor,
                     stroke: 'black',
@@ -422,27 +463,28 @@ function draw(data) {
         spinner.stop();
     };
 }
-    function styleAxis(axisNodes) {
-        axisNodes.selectAll('.domain').attr({
-            fill: 'none'
-        });
-        axisNodes.selectAll('.tick line').attr({
-            fill: 'none',
-        });
-        axisNodes.selectAll('.tick text').attr({
-            'font-family': 'serif',
-            'font-size': 10
-        });
-    }
 
-    function styleGridlineNodes(gridlineNodes) {
-        gridlineNodes.selectAll('.domain').attr({
-            fill: 'none',
-            stroke: 'none'
-        });
-        gridlineNodes.selectAll('.tick line').attr({
-            fill: 'none',
-            'stroke-width': 0.7,
-            stroke: 'lightgray'
-        });
-    }
+function styleAxis(axisNodes) {
+    axisNodes.selectAll('.domain').attr({
+        fill: 'none'
+    });
+    axisNodes.selectAll('.tick line').attr({
+        fill: 'none',
+    });
+    axisNodes.selectAll('.tick text').attr({
+        'font-family': 'serif',
+        'font-size': 10
+    });
+}
+
+function styleGridlineNodes(gridlineNodes) {
+    gridlineNodes.selectAll('.domain').attr({
+        fill: 'none',
+        stroke: 'none'
+    });
+    gridlineNodes.selectAll('.tick line').attr({
+        fill: 'none',
+        'stroke-width': 0.7,
+        stroke: 'lightgray'
+    });
+}
