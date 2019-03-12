@@ -72,6 +72,7 @@ function loadData() {
     else if (fileName.indexOf("QuantumComputing") >= 0) {
         fileName = "data/" + fileName + ".tsv"; // Add data folder path
         categories = ["Unknown citation", "Have citation", "Affiliations", "Author"];
+        initTop = 15;
         loadQuantumComputing(draw, initTop);
     }
     else {

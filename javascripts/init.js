@@ -2,8 +2,9 @@ const initWidth = 1500,
     initHeight = 500,
     initMinFont = 14,
     initMaxFont = 36,
-    initFlag = "none",// none / fa/ f / a
-    initTop = 25;
+    initFlag = "none";// none / fa/ f / a
+
+let initTop = 15;
 
 let globalWidth = initWidth,
     globalHeight = initHeight,

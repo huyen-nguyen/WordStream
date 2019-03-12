@@ -44,7 +44,7 @@ function submitInput(updateData) {
 
     else if (!isFlow && !isAv) {
         console.log("None");
-        globalFlag = "none"
+        globalFlag = "n";
     }
 
     // top rank
