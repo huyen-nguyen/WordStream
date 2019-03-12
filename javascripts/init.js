@@ -4,7 +4,6 @@ const initWidth = 1500,
     initMaxFont = 36,
     initFlag = "none",// none / fa/ f / a
     initTop = 30;
-const maxWidth = 1500, maxHeight = 1500, maxTop = 40;
 
 let globalWidth = initWidth,
     globalHeight = initHeight,

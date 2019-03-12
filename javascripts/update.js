@@ -104,7 +104,7 @@ function updateData() {
 
     xGridlinesGroup.attr("id", "gridLines")
         .attr('transform', 'translate(' +
-            (margins.left - globalWidth / 24)
+            (margins.left - globalWidth / newboxes.data.length / 2)
             + ',' + (globalHeight + margins.top + axisPadding + legendHeight + margins.bottom) + ')');
 
     var gridlineNodes = xGridlinesGroup.call(xGridlinesAxis.tickSize(-globalHeight - axisPadding - legendHeight - margins.bottom, 0, 0).tickFormat(''));

@@ -1,7 +1,6 @@
-const width = globalWidth, height = globalHeight;
 let svg = d3.select("body").append('svg').attr({
-    width: width,
-    height: height,
+    width: globalWidth,
+    height: globalHeight,
     id: "mainsvg"
 });
 // let fileList = ["WikiNews","Huffington","CrooksAndLiars","EmptyWheel","Esquire","FactCheck"
@@ -89,6 +88,7 @@ function loadNewData(event) {
 
 function draw(data) {
     //Layout data
+    let width = globalWidth, height = globalHeight;
     let font = "Arial";
     let interpolation = "cardinal";
     let axisPadding = 10;
@@ -231,7 +231,7 @@ function draw(data) {
         .range(c20.range());
     opacity = d3.scale.log()
         .domain([minSud, maxSud])
-        .range([0.2, 1]);
+        .range([0.4, 1]);
 
     if (fileName.indexOf("Huffington") >= 0) {
         d3.json("data/linksHuff2012.json", function (error, rawLinks) {
