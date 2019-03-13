@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="140e1f28-6c0b-46d1-b831-903931873018" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javascripts/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/init.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascripts/metric.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/metric.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javascripts/update.js" beforeDir="false" afterPath="$PROJECT_DIR$/javascripts/update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/d3.slider.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/d3.slider.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/main.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,8 +24,8 @@
     <session id="-785812493">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="25" />
-          <entry key="project.open.time.0" value="4" />
+          <entry key="project.closed" value="26" />
+          <entry key="project.open.time.0" value="5" />
           <entry key="project.open.time.1" value="8" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
@@ -40,14 +46,14 @@
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.78" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="34" />
+          <entry key="project.opened" value="35" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="417" />
           <entry key="html" value="3200" />
-          <entry key="js" value="10119" />
+          <entry key="js" value="10121" />
           <entry key="md" value="2171" />
         </counts>
       </usages-collector>
@@ -55,7 +61,7 @@
         <counts>
           <entry key="CSS" value="417" />
           <entry key="HTML" value="3200" />
-          <entry key="JavaScript" value="10119" />
+          <entry key="JavaScript" value="10121" />
           <entry key="Markdown" value="2171" />
         </counts>
       </usages-collector>
@@ -66,7 +72,7 @@
           <entry key="css" value="23" />
           <entry key="csv" value="3" />
           <entry key="html" value="20" />
-          <entry key="js" value="98" />
+          <entry key="js" value="99" />
           <entry key="json" value="10" />
           <entry key="md" value="2" />
           <entry key="png" value="4" />
@@ -80,7 +86,7 @@
           <entry key="HTML" value="20" />
           <entry key="Image" value="4" />
           <entry key="JSON" value="9" />
-          <entry key="JavaScript" value="99" />
+          <entry key="JavaScript" value="100" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="TSV" value="11" />
@@ -109,11 +115,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/javascripts/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2112">
-              <caret line="85" column="53" lean-forward="true" selection-start-line="85" selection-start-column="53" selection-end-line="85" selection-end-column="53" />
+            <state relative-caret-position="48">
+              <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -121,8 +130,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javascripts/update.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7992">
+            <state relative-caret-position="1181">
               <caret line="330" column="24" selection-start-line="330" selection-start-column="24" selection-end-line="330" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/javascripts/metric.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="87">
+              <caret line="65" column="58" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -130,7 +148,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/d3.layout.wordstream.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8361">
+            <state relative-caret-position="480">
               <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -139,11 +157,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="27" column="7" lean-forward="true" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+            <state relative-caret-position="212">
+              <caret line="34" column="18" lean-forward="true" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -151,7 +169,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/FactCheck.tsv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142632">
+            <state relative-caret-position="25272">
               <caret line="873" column="334" selection-start-line="873" selection-start-column="334" selection-end-line="873" selection-end-column="334" />
             </state>
           </provider>
@@ -185,7 +203,6 @@
       <find>rank</find>
       <find>var</find>
       <find>svg</find>
-      <find>conso</find>
       <find>offsetLegend</find>
       <find>trayvon</find>
       <find>newbo</find>
@@ -200,6 +217,7 @@
       <find>opaci</find>
       <find>‰</find>
       <find>mainGroup</find>
+      <find>conso</find>
     </findStrings>
     <replaceStrings>
       <replace>data</replace>
@@ -263,13 +281,13 @@
         <option value="$PROJECT_DIR$/styles/d3.slider.css" />
         <option value="$PROJECT_DIR$/lib/metric.js" />
         <option value="$PROJECT_DIR$/demo.html" />
-        <option value="$PROJECT_DIR$/javascripts/metric.js" />
         <option value="$PROJECT_DIR$/lib/loaddata.js" />
         <option value="$PROJECT_DIR$/lib/d3.layout.wordstream.js" />
-        <option value="$PROJECT_DIR$/javascripts/main.js" />
         <option value="$PROJECT_DIR$/data/FactCheck.tsv" />
         <option value="$PROJECT_DIR$/javascripts/update.js" />
         <option value="$PROJECT_DIR$/javascripts/init.js" />
+        <option value="$PROJECT_DIR$/javascripts/metric.js" />
+        <option value="$PROJECT_DIR$/javascripts/main.js" />
       </list>
     </option>
   </component>
@@ -280,8 +298,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1273" />
-    <option name="y" value="24" />
+    <option name="x" value="-12" />
+    <option name="y" value="23" />
     <option name="width" value="1284" />
     <option name="height" value="1416" />
   </component>
@@ -314,11 +332,6 @@
             <path>
               <item name="WordStream" type="b2602c69:ProjectViewProjectNode" />
               <item name="WordStream" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WordStream" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WordStream" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WordStream" type="b2602c69:ProjectViewProjectNode" />
@@ -482,15 +495,16 @@
       <workItem from="1552154448739" duration="919000" />
       <workItem from="1552166025612" duration="342000" />
       <workItem from="1552171632884" duration="4136000" />
-      <workItem from="1552246607081" duration="62570000" />
+      <workItem from="1552246607081" duration="63280000" />
+      <workItem from="1552438615757" duration="1769000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="652766000" />
+    <option name="totallyTimeSpent" value="655245000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1273" y="24" width="1284" height="1416" extended-state="0" />
+    <frame x="-12" y="23" width="1284" height="1416" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.9411765" visible="true" weight="0.17339668" />
@@ -499,7 +513,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32849503" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.26661575" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.21636085" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.21636085" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -536,18 +550,6 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/javascripts/metric.js</url>
-          <line>86</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/javascripts/saveFriesCards.js">
@@ -716,18 +718,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="25" lean-forward="true" selection-start-line="24" selection-end-line="25" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#b#0;n#a#0;n#li#0;n#ul#0;n#nav#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#a#0;n#li#1;n#ul#0;n#nav#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#1130#1136#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/test.html" />
     <entry file="file://$PROJECT_DIR$/lib/loaddataorg.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
@@ -822,23 +813,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/metric.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="138" column="32" lean-forward="true" selection-start-line="138" selection-start-column="32" selection-end-line="138" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/FactCheck.tsv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142632">
-          <caret line="873" column="334" selection-start-line="873" selection-start-column="334" selection-end-line="873" selection-end-column="334" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/d3.layout.wordstream.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8361">
+        <state relative-caret-position="480">
           <caret line="20" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -846,24 +823,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/update.js">
+    <entry file="file://$PROJECT_DIR$/data/FactCheck.tsv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7992">
-          <caret line="330" column="24" selection-start-line="330" selection-start-column="24" selection-end-line="330" selection-end-column="24" />
+        <state relative-caret-position="25272">
+          <caret line="873" column="334" selection-start-line="873" selection-start-column="334" selection-end-line="873" selection-end-column="334" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
+    <entry file="file://$PROJECT_DIR$/javascripts/metric.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="51" selection-start-column="51" selection-end-column="51" />
+        <state relative-caret-position="87">
+          <caret line="65" column="58" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javascripts/main.js">
+    <entry file="file://$PROJECT_DIR$/demo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2112">
-          <caret line="85" column="53" lean-forward="true" selection-start-line="85" selection-start-column="53" selection-end-line="85" selection-end-column="53" />
+        <state relative-caret-position="212">
+          <caret line="34" column="18" lean-forward="true" selection-start-line="34" selection-start-column="18" selection-end-line="34" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -874,10 +851,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demo.html">
+    <entry file="file://$PROJECT_DIR$/lib/loaddata.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="27" column="7" lean-forward="true" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+        <state>
+          <caret column="51" selection-start-column="51" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascripts/update.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1181">
+          <caret line="330" column="24" selection-start-line="330" selection-start-column="24" selection-end-line="330" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascripts/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
