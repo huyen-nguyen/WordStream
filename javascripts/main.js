@@ -122,9 +122,6 @@ function draw(data) {
             .maxFontSize(globalMaxFont)
             .data(data)
             .flag(globalFlag)
-        // .font(font)
-        // .interpolate(interpolation)
-        // .fontScale(d3.scale.linear())
     ;
     var boxes = ws.boxes();
     var minSud = ws.minSud();
@@ -586,7 +583,7 @@ function styleAxis(axisNodes) {
     });
     axisNodes.selectAll('.tick text').attr({
         'font-family': 'serif',
-        'font-size': 10
+        'font-size': 15
     });
 }
 

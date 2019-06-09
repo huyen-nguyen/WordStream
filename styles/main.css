@@ -304,6 +304,18 @@ a.button:hover{
 }
 
 .ticky {
-    font-size: 10px;
+    font-size: 15px;
 }
 
+/*---------------- Example page-----------------*/
+a.notDecorate{
+    text-decoration: none;
+}
+
+a.linkSource{
+    color: #a56448;
+}
+footer.example{
+    color: #471e20;
+    background-color: #dac7b1!important;
+}
